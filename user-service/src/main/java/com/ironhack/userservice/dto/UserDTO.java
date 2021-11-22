@@ -1,0 +1,26 @@
+package com.ironhack.userservice.dto;
+
+import com.ironhack.userservice.enums.Role;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import javax.validation.constraints.Email;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+public class UserDTO {
+
+    private String name;
+    private String username;
+    private String password;
+    @Email
+    private String email;
+    private String location;
+    private String bio;
+    private String pictureUrl;
+
+}
