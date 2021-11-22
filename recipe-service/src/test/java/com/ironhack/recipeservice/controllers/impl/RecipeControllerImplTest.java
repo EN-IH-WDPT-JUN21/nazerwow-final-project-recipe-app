@@ -9,6 +9,7 @@ import com.ironhack.recipeservice.enums.Cuisine;
 import com.ironhack.recipeservice.enums.Diet;
 import com.ironhack.recipeservice.enums.Measurement;
 import com.ironhack.recipeservice.repositories.RecipeRepository;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,6 +70,12 @@ class RecipeControllerImplTest {
         );
         recipeRepository.saveAll(List.of(recipe1, recipe2));
     }
+
+    @AfterEach
+    void tearDown() {
+        recipeRepository.deleteAll();
+    }
+
 
     @Test
     void findAll_Valid() throws Exception {
