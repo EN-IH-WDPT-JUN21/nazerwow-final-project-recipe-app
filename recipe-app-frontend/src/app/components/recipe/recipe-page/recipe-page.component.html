@@ -1,0 +1,17 @@
+<p>{{recipeDTO.id}}</p>
+<p>{{recipeDTO.name}}</p>
+<p *ngFor="let ingredient of recipeDTO.ingredients">
+    {{ingredient.name}}
+    {{ingredient.quantity}}
+    {{ingredient.measurement}}
+</p>
+<p *ngFor="let step of recipeDTO.method">
+    {{step}}
+</p>
+<p>{{recipeDTO.authorId}}</p>
+<p>{{recipeDTO.cuisine}}</p>
+<p *ngFor="let diet of recipeDTO.diets">
+    {{diet}}
+</p>
+<p>{{recipeDTO.createdDate}}</p>
+<p>{{recipeDTO.editedDate}}</p>

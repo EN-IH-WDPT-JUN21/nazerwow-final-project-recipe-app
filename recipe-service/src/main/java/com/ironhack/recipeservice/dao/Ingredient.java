@@ -16,16 +16,8 @@ import javax.persistence.Embeddable;
 @Setter
 public class Ingredient {
 
-    private Long id;
-
     private String name;
     private double quantity;
     private Measurement measurement;
-
-    public Ingredient(String name, double quantity, Measurement measurement) {
-        this.name = name;
-        this.quantity = quantity;
-        this.measurement = measurement;
-    }
 
 }
