@@ -4,6 +4,7 @@ import { EnumService } from './../../../services/enum.service';
 import { Component, OnInit } from '@angular/core';
 import { MatChip } from '@angular/material/chips';
 import { Router } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-recipe-browser',
@@ -103,7 +104,9 @@ export class RecipeBrowserComponent implements OnInit {
   }
 
   reloadPage(): void {
+    if(this.filterActive){
     window.location.reload();
   }
+}
   
 }

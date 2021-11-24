@@ -1,5 +1,7 @@
 <div class="page">
-    <app-recipe-search (recipeNameOutput)="filterByName($event)" [recipeList]="recipeList"></app-recipe-search>
+    <div class="search">
+        <app-recipe-search (recipeNameOutput)="filterByName($event)" [recipeList]="recipeList"></app-recipe-search>
+    </div>
     <div class="filter-chips d-flex justify-content-center">
         <mat-chip-list aria-label="Dietary Requirements" class="p-2" [multiple]="true" [selectable]="true">
             <mat-chip color="warn" [selected]="!filterActive" (click)="reloadPage()" >All</mat-chip>
