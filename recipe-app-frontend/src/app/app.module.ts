@@ -12,6 +12,10 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { RecipeCardComponent } from './components/recipe/recipe-page/recipe-card/recipe-card.component';
+import { RecipeInstructionsComponent } from './components/recipe/recipe-page/recipe-instructions/recipe-instructions.component';
+import { RecipeListItemComponent } from './components/recipe/recipe-list/recipe-list-item/recipe-list-item.component';
+import { RecipeBrowserComponent } from './components/recipe/recipe-browser/recipe-browser.component';
 
 
 @NgModule({
@@ -20,7 +24,11 @@ import { HttpClientModule } from '@angular/common/http';
     HeaderComponent,
     FooterComponent,
     RecipePageComponent,
-    RecipeListComponent
+    RecipeListComponent,
+    RecipeCardComponent,
+    RecipeInstructionsComponent,
+    RecipeListItemComponent,
+    RecipeBrowserComponent
   ],
   imports: [
     BrowserModule,

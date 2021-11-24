@@ -3,11 +3,13 @@ import { Ingredient, IngredientDTO } from "./ingredient.model";
 
 export class Recipe {
 
-    constructor(
+     constructor(
         private _id: number,
         private _name: String,
         private _ingredients: Ingredient[],
         private _method: string[],
+        private _prepTime: string,
+        private _cookingTime: string,
         private _authorId: number,
         private _cuisine: string,
         private _diets: string[],
@@ -15,6 +17,19 @@ export class Recipe {
         private _editedDate: Date
     ){}
 
+
+    public get cookingTime(): string {
+        return this._cookingTime;
+    }
+    public set cookingTime(value: string) {
+        this._cookingTime = value;
+    }
+    public get prepTime(): string {
+        return this._prepTime;
+    }
+    public set prepTime(value: string) {
+        this._prepTime = value;
+    }
     public get editedDate(): Date {
         return this._editedDate;
     }
@@ -69,7 +84,6 @@ export class Recipe {
     public set id(value: number) {
         this._id = value;
     }
-
 }
 
 export interface RecipeDTO {
@@ -77,6 +91,8 @@ export interface RecipeDTO {
   name: string,
   ingredients : IngredientDTO[],
     method : string[],
+    prepTime: number,
+    cookingTime: number,
    authorId : number,
    cuisine :  string ,
    diets : string[],

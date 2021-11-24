@@ -1,0 +1,11 @@
+.filter-chips {
+    padding: 5px;
+}
+
+.mat-chip:hover {
+    cursor: pointer;
+}
+
+.page {
+    min-height: 900px;
+}

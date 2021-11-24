@@ -1,4 +1,4 @@
-import { RecipeDTO } from '../models/recipe.model';
+import { RecipeDTO } from 'src/app/models/recipe.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -33,6 +33,14 @@ export class RecipeService {
 
   editRecipe(RecipeDTO: RecipeDTO): Observable<any> {
     return this.http.put(`${this.baseUrl + "/" + RecipeDTO.id}`, RecipeDTO)
+  }
+
+  recipeList!:RecipeDTO[];
+  returnAllRecipes(): RecipeDTO[] {
+    this.getAllRecipes().subscribe(result => {
+      this.recipeList = result;
+    });
+    return this.recipeList;    
   }
 
 }
