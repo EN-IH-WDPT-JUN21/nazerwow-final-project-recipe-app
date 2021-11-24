@@ -1,1 +1,7 @@
-<p>recipe-list works!</p>
+ <div>
+    <div *ngFor="let recipe of recipeList" class="p-2">
+        <app-recipe-list-item [recipe]="recipe"></app-recipe-list-item>
+    </div>
+    <div *ngIf="recipeList.length <= 0"> <h1> NO RECIPES FOUND</h1> No Recipes Found :[ </div>
+ </div>
+

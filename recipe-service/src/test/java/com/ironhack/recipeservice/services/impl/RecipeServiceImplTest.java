@@ -44,6 +44,8 @@ class RecipeServiceImplTest {
                 "Test Recipe1",
                 List.of(ingredient1,ingredient2,ingredient3),
                 method,
+                10,
+                20,
                 1L,
                 Cuisine.BRITISH,
                 List.of(Diet.GLUTEN_FREE)
@@ -112,6 +114,8 @@ class RecipeServiceImplTest {
                 "Test Recipe2",
                 List.of(ingredient2, ingredient3),
                 method,
+                10,
+                20,
                 2L,
                 Cuisine.CARIBBEAN,
                 List.of(Diet.VEGETARIAN, Diet.GLUTEN_FREE)
@@ -128,6 +132,8 @@ class RecipeServiceImplTest {
                 "Test Recipe2",
                 List.of(ingredient2, ingredient3),
                 method,
+                10,
+                20,
                 2L,
                 Cuisine.CARIBBEAN,
                 List.of(Diet.VEGETARIAN, Diet.GLUTEN_FREE)
@@ -147,6 +153,8 @@ class RecipeServiceImplTest {
                 "Test Recipe2",
                 List.of(ingredient2, ingredient3),
                 method,
+                10,
+                20,
                 2L,
                 Cuisine.CARIBBEAN,
                 List.of(Diet.VEGETARIAN, Diet.GLUTEN_FREE)
@@ -166,6 +174,8 @@ class RecipeServiceImplTest {
                 "Test Recipe2",
                 List.of(ingredient2, ingredient3),
                 method,
+                10,
+                20,
                 2L,
                 Cuisine.CARIBBEAN,
                 List.of(Diet.VEGETARIAN, Diet.GLUTEN_FREE)
@@ -191,6 +201,8 @@ class RecipeServiceImplTest {
                 null,
                 null,
                 null,
+                null,
+                null,
                 null
         );
         recipeService.updateRecipe(recipe1.getId(), recipeDTO);
@@ -206,6 +218,8 @@ class RecipeServiceImplTest {
     @Test
     void updateRecipe_ThrowsException() {
         RecipeDTO recipeDTO = new RecipeDTO(
+                null,
+                null,
                 null,
                 null,
                 null,

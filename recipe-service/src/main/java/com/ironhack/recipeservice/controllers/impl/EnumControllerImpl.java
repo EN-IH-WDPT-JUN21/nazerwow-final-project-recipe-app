@@ -5,11 +5,9 @@ import com.ironhack.recipeservice.enums.Cuisine;
 import com.ironhack.recipeservice.enums.Diet;
 import com.ironhack.recipeservice.enums.Measurement;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/v1")
 public class EnumControllerImpl implements EnumController {

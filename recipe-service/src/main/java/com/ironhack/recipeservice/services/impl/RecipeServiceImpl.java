@@ -72,6 +72,8 @@ public class RecipeServiceImpl implements RecipeService {
                 createRecipeDTO.getName(),
                 createRecipeDTO.getIngredients(),
                 createRecipeDTO.getMethod(),
+                createRecipeDTO.getPrepTime(),
+                createRecipeDTO.getCookingTime(),
                 createRecipeDTO.getAuthorId(),
                 createRecipeDTO.getCuisine(),
                 createRecipeDTO.getDiets()

@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.List;
 
 @NoArgsConstructor
@@ -23,16 +22,20 @@ public class RecipeDTO {
     private String name;
     private List<Ingredient> ingredients;
     private List<String> method;
+    private Integer prepTime;
+    private Integer cookingTime;
     private Long authorId;
     @Enumerated(EnumType.STRING)
     private Cuisine cuisine;
     @Enumerated(EnumType.STRING)
     private List<Diet> diets;
 
-    public RecipeDTO(String name, List<Ingredient> ingredients, List<String> method, Long authorId, Cuisine cuisine, List<Diet> diets) {
+    public RecipeDTO(String name, List<Ingredient> ingredients, List<String> method, Integer prepTime, Integer cookingTime, Long authorId, Cuisine cuisine, List<Diet> diets) {
         this.name = name;
         this.ingredients = ingredients;
         this.method = method;
+        this.prepTime = prepTime;
+        this.cookingTime = cookingTime;
         this.authorId = authorId;
         this.cuisine = cuisine;
         this.diets = diets;

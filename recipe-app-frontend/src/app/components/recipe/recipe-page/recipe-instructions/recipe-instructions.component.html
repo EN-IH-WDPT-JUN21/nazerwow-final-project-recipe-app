@@ -1,0 +1,17 @@
+<mat-card class="d-flex justify-content-around">
+    <div class="p-2 ingredients">
+        <h1>Ingredients</h1>
+        <ul>
+            <li *ngFor="let ingredient of recipe.ingredients">
+                {{ingredient.quantity}}{{ingredient.measurement | lowercase}} {{ingredient.name}}
+            </li>
+        </ul>
+    </div>
+    <div class = "p-2">
+        <h1>Method</h1>
+        <div *ngFor="let step of recipe.method; let i = index">
+            Step {{i+1}}:
+            <p>{{step}}</p> 
+        </div>
+    </div>
+</mat-card>
