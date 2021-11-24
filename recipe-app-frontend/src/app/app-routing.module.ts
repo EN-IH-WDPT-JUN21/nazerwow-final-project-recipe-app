@@ -12,6 +12,10 @@ const routes: Routes = [
   {
     path: 'recipes',
     component: RecipeBrowserComponent
+  },
+  {
+    path: '',
+    component: RecipeBrowserComponent
   }
 ];
 

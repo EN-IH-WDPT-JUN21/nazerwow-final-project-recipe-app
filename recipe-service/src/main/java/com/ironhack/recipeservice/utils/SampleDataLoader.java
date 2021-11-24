@@ -64,7 +64,7 @@ public class SampleDataLoader implements CommandLineRunner {
                 List.of(Diet.VEGETARIAN)
         );
         Recipe recipe4 = new Recipe(
-                "Test Recipe1",
+                "Test Beef Steak",
                 List.of(ingredient1,ingredient2,ingredient3, ingredient4, ingredient5, ingredient6, ingredient7),
                 method,
                 10,
@@ -74,7 +74,7 @@ public class SampleDataLoader implements CommandLineRunner {
                 List.of(Diet.VEGAN)
         );
         Recipe recipe5 = new Recipe(
-                "Test Recipe1",
+                "Test Lamb Chops",
                 List.of(ingredient1,ingredient2,ingredient3, ingredient8, ingredient9, ingredient4),
                 method,
                 10,
@@ -84,7 +84,7 @@ public class SampleDataLoader implements CommandLineRunner {
                 List.of(Diet.GLUTEN_FREE)
         );
         Recipe recipe6 = new Recipe(
-                "Test Recipe1",
+                "Test Salmon",
                 List.of(ingredient1,ingredient2,ingredient3, ingredient7, ingredient8),
                 method,
                 15,
@@ -94,7 +94,7 @@ public class SampleDataLoader implements CommandLineRunner {
                 List.of()
         );
         Recipe recipe7 = new Recipe(
-                "Test Recipe1",
+                "Test Beef Stroganoff",
                 List.of(ingredient1,ingredient2,ingredient3, ingredient4, ingredient5),
                 method,
                 2,
