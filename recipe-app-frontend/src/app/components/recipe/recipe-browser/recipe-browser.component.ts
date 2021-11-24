@@ -95,6 +95,13 @@ export class RecipeBrowserComponent implements OnInit {
     }
   }
 
+  filterByName(recipeName: any){
+    this.filteredRecipeList = this.recipeList.filter((recipe => recipe.name.toLowerCase().includes(recipeName)));
+    if(recipeName == ''){
+      this.filteredRecipeList = this.recipeList;
+    }
+  }
+
   reloadPage(): void {
     window.location.reload();
   }

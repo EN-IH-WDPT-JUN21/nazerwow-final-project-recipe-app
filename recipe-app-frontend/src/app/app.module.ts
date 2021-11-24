@@ -10,12 +10,13 @@ import { RecipePageComponent } from './components/recipe/recipe-page/recipe-page
 import { RecipeListComponent } from './components/recipe/recipe-list/recipe-list.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RecipeCardComponent } from './components/recipe/recipe-page/recipe-card/recipe-card.component';
 import { RecipeInstructionsComponent } from './components/recipe/recipe-page/recipe-instructions/recipe-instructions.component';
 import { RecipeListItemComponent } from './components/recipe/recipe-list/recipe-list-item/recipe-list-item.component';
 import { RecipeBrowserComponent } from './components/recipe/recipe-browser/recipe-browser.component';
+import { RecipeSearchComponent } from './components/recipe/recipe-search/recipe-search.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { RecipeBrowserComponent } from './components/recipe/recipe-browser/recip
     RecipeCardComponent,
     RecipeInstructionsComponent,
     RecipeListItemComponent,
-    RecipeBrowserComponent
+    RecipeBrowserComponent,
+    RecipeSearchComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +39,8 @@ import { RecipeBrowserComponent } from './components/recipe/recipe-browser/recip
     BrowserAnimationsModule,
     AngularMaterialModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
