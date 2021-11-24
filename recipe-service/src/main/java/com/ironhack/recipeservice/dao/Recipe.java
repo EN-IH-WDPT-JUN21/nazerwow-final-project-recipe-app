@@ -31,6 +31,8 @@ public class Recipe {
     @ElementCollection()
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<String> method;
+    private Integer prepTime;
+    private Integer cookingTime;
     private Long authorId;
     @Enumerated(EnumType.STRING)
     private Cuisine cuisine;
@@ -43,10 +45,12 @@ public class Recipe {
     private LocalDate createdDate = LocalDate.now();
     private LocalDate editedDate = LocalDate.now();
 
-    public Recipe(String name, List<Ingredient> ingredients, List<String> method, Long authorId, Cuisine cuisine, List<Diet> diets) {
+    public Recipe(String name, List<Ingredient> ingredients, List<String> method, Integer prepTime, Integer cookingTime, Long authorId, Cuisine cuisine, List<Diet> diets) {
         this.name = name;
         this.ingredients = ingredients;
         this.method = method;
+        this.prepTime = prepTime;
+        this.cookingTime = cookingTime;
         this.authorId = authorId;
         this.cuisine = cuisine;
         this.diets = diets;

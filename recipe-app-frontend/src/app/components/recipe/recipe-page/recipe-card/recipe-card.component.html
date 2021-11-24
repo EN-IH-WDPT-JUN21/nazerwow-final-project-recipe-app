@@ -1,0 +1,20 @@
+<mat-card>
+    <mat-card-title-group class="d-flex justify-content-around">
+            <mat-card-title class="title">{{recipe.name}}</mat-card-title>
+            <mat-card-subtitle>
+                <a> by: {{recipe.authorId}} </a> <br><br>
+                <div class="recipe-info">
+                    <p><strong>Ingredients: </strong> {{recipe.ingredients?.length}} </p>
+                    <p><strong>Prep Time: </strong>{{recipe.prepTime}} mins</p>
+                    <p><strong>Cooking Time: </strong> {{recipe.cookingTime}} mins</p>
+                    <mat-chip-list aria-label="Dietary Requirements">
+                        <mat-chip color="accent" selected>{{recipe.cuisine | titlecase}}</mat-chip>
+                        <mat-chip color="primary" selected *ngFor="let diet of recipe.diets">{{diet | titlecase}}</mat-chip>
+                    </mat-chip-list>
+                </div>
+            </mat-card-subtitle>
+            <div class="image">
+                <img class="img-fluid rounded" src="https://material.angular.io/assets/img/examples/shiba2.jpg">
+            </div>
+    </mat-card-title-group>
+</mat-card>

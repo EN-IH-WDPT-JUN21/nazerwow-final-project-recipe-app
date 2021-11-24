@@ -3,5 +3,11 @@ package com.ironhack.recipeservice.enums;
 public enum Diet {
     GLUTEN_FREE,
     VEGAN,
-    VEGETARIAN
+    VEGETARIAN,
+    DAIRY_FREE,
+    LACTOSE_FREE,
+    HALAL,
+    KOSHER,
+    KETO,
+    LOW_CARB
 }

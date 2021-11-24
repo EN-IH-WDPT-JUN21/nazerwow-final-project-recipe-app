@@ -25,6 +25,8 @@ public class CreateRecipeDTO {
     private List<Ingredient> ingredients;
     @NotNull
     private List<String> method;
+    private Integer prepTime;
+    private Integer cookingTime;
     @NotNull
     private Long authorId;
     @NotNull

@@ -56,6 +56,8 @@ class RecipeControllerImplTest {
                 "Test Recipe1",
                 List.of(ingredient1,ingredient2,ingredient3),
                 method,
+                10,
+                20,
                 1L,
                 Cuisine.BRITISH,
                 List.of(Diet.GLUTEN_FREE)
@@ -64,6 +66,8 @@ class RecipeControllerImplTest {
                 "Test Recipe2",
                 List.of(ingredient1,ingredient2,ingredient3),
                 method,
+                10,
+                20,
                 1L,
                 Cuisine.AFRICAN,
                 List.of(Diet.VEGAN)
@@ -120,6 +124,8 @@ class RecipeControllerImplTest {
                 "Test Recipe3",
                 List.of(ingredient1),
                 List.of("MethodTest1", "MethodTest2"),
+                10,
+                35,
                 1L,
                 Cuisine.KOREAN,
                 List.of(Diet.VEGETARIAN, Diet.GLUTEN_FREE)
@@ -142,6 +148,8 @@ class RecipeControllerImplTest {
                 null,
                 null,
                 null,
+                null,
+                null,
                 null
         );
         String body = objectMapper.writeValueAsString(createRecipeDTO);
@@ -159,6 +167,8 @@ class RecipeControllerImplTest {
                 "Test Recipe3",
                 List.of(ingredient1),
                 List.of("MethodTest1", "MethodTest2"),
+                10,
+                30,
                 1L,
                 Cuisine.KOREAN,
                 List.of(Diet.VEGETARIAN, Diet.GLUTEN_FREE)
@@ -182,6 +192,8 @@ class RecipeControllerImplTest {
                 "Test Recipe3",
                 List.of(ingredient1),
                 List.of("MethodTest1", "MethodTest2"),
+                1,
+                23,
                 1L,
                 Cuisine.KOREAN,
                 List.of(Diet.VEGETARIAN, Diet.GLUTEN_FREE)

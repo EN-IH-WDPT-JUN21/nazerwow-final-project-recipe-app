@@ -7,13 +7,12 @@ import com.ironhack.recipeservice.dto.RecipeDTO;
 import com.ironhack.recipeservice.services.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/v1/recipes")
 public class RecipeControllerImpl implements RecipeController {
