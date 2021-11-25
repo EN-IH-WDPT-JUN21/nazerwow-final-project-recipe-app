@@ -1,10 +1,11 @@
+import { RecipeSearchComponent } from './../recipe-search/recipe-search.component';
 import { RecipeService } from './../../../services/recipe.service';
 import { RecipeDTO } from 'src/app/models/recipe.model';
 import { EnumService } from './../../../services/enum.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatChip } from '@angular/material/chips';
 import { Router } from '@angular/router';
-import { filter } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-recipe-browser',
@@ -21,6 +22,8 @@ export class RecipeBrowserComponent implements OnInit {
   filterList: string[];
   filterActive: boolean = false;
   filteredRecipeList!: RecipeDTO[];
+
+  @ViewChild(RecipeSearchComponent) recipeSearchComponent!: RecipeSearchComponent;
 
   constructor(private enumService:EnumService,
     private recipeService:RecipeService,
@@ -85,8 +88,12 @@ export class RecipeBrowserComponent implements OnInit {
   getAllRecipes():void{
     this.recipeService.getAllRecipes().subscribe(result => {
       this.recipeList = result;
-      this.filteredRecipeList = this.recipeList;
+      this.populateFilteredList();
     })
+  }
+
+  public populateFilteredList():void {
+    this.filteredRecipeList = this.recipeList;
   }
 
   private filterRecipeList(): void {
@@ -97,10 +104,9 @@ export class RecipeBrowserComponent implements OnInit {
   }
 
   filterByName(recipeName: any){
-    this.filteredRecipeList = this.recipeList.filter((recipe => recipe.name.toLowerCase().includes(recipeName)));
-    if(recipeName == ''){
-      this.filteredRecipeList = this.recipeList;
-    }
+    this.recipeSearchComponent.filteredRecipeList.subscribe(recipes => {
+      this.filteredRecipeList = recipes
+    })
   }
 
   reloadPage(): void {
@@ -108,5 +114,10 @@ export class RecipeBrowserComponent implements OnInit {
     window.location.reload();
   }
 }
+
+  reloadListAndFilter():void{
+    this.populateFilteredList();
+    this.filterRecipeList();
+  }
   
 }

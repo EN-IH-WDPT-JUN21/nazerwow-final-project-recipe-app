@@ -1,6 +1,6 @@
 <div class="page">
     <div class="search">
-        <app-recipe-search (recipeNameOutput)="filterByName($event)" [recipeList]="recipeList"></app-recipe-search>
+        <app-recipe-search [recipeList]="filteredRecipeList" (click)="filterByName($event)" (deleteOutput)="reloadListAndFilter()"></app-recipe-search>
     </div>
     <div class="filter-chips d-flex justify-content-center">
         <mat-chip-list aria-label="Dietary Requirements" class="p-2" [multiple]="true" [selectable]="true">

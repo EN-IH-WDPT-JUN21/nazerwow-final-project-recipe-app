@@ -23,6 +23,7 @@ export class RecipeSearchComponent implements OnInit {
   recipeId!: number;
 
   @Output() recipeNameOutput: EventEmitter<string> = new EventEmitter();
+  @Output() deleteOutput: EventEmitter<string> = new EventEmitter();
 
   constructor(private recipeService:RecipeService) {
     this.recipeSearch = new FormControl('');
@@ -56,6 +57,10 @@ export class RecipeSearchComponent implements OnInit {
   sendRecipeName(): void {
     this.recipeNameOutput.emit(this.recipeSearch.value.toLowerCase().trim());
     console.log(this.recipeSearch.value);
+  }
+
+  delete():void {
+    this.deleteOutput.emit("Delete");
   }
 
 }
