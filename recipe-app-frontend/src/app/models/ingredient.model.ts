@@ -2,7 +2,7 @@ export class Ingredient {
 
     constructor(
         private _name: string,
-        private _quantiy: number,
+        private _quantity: number,
         private _measurement: string,
     ){}
 
@@ -12,11 +12,11 @@ export class Ingredient {
     public set measurement(value: string) {
         this._measurement = value;
     }
-    public get quantiy(): number {
-        return this._quantiy;
+    public get quantity(): number {
+        return this._quantity;
     }
-    public set quantiy(value: number) {
-        this._quantiy = value;
+    public set quantity(value: number) {
+        this._quantity = value;
     }
     public get name(): string {
         return this._name;
@@ -25,10 +25,19 @@ export class Ingredient {
         this._name = value;
     }
 
+    public convertToDTO(): IngredientDTO {
+        const ingredientDTO: IngredientDTO = {
+            name: this.name,
+            quantity: this.quantity,
+            measurement: this.measurement
+        }
+        return ingredientDTO;
+    }
+
 }
 
 export interface IngredientDTO {
-    recipeId:number;
+    recipeId?:any;
     name:string;
     quantity:number;
     measurement:string;

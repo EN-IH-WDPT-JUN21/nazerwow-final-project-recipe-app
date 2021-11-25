@@ -4,43 +4,28 @@ import { Ingredient, IngredientDTO } from "./ingredient.model";
 export class Recipe {
 
      constructor(
-        private _id: number,
-        private _name: String,
+        private _name: string,
         private _ingredients: Ingredient[],
         private _method: string[],
-        private _prepTime: string,
-        private _cookingTime: string,
+        private _prepTime: number,
+        private _cookingTime: number,
         private _authorId: number,
         private _cuisine: string,
         private _diets: string[],
-        private _createdDate: Date,
-        private _editedDate: Date
     ){}
 
 
-    public get cookingTime(): string {
+    public get cookingTime(): number {
         return this._cookingTime;
     }
-    public set cookingTime(value: string) {
+    public set cookingTime(value: number) {
         this._cookingTime = value;
     }
-    public get prepTime(): string {
+    public get prepTime(): number {
         return this._prepTime;
     }
-    public set prepTime(value: string) {
+    public set prepTime(value: number) {
         this._prepTime = value;
-    }
-    public get editedDate(): Date {
-        return this._editedDate;
-    }
-    public set editedDate(value: Date) {
-        this._editedDate = value;
-    }
-    public get createdDate(): Date {
-        return this._createdDate;
-    }
-    public set createdDate(value: Date) {
-        this._createdDate = value;
     }
     public get diets(): string[] {
         return this._diets;
@@ -72,22 +57,30 @@ export class Recipe {
     public set ingredients(value: Ingredient[]) {
         this._ingredients = value;
     }
-    public get name(): String {
+    public get name(): string {
         return this._name;
     }
-    public set name(value: String) {
+    public set name(value: string) {
         this._name = value;
     }
-    public get id(): number {
-        return this._id;
-    }
-    public set id(value: number) {
-        this._id = value;
+
+    public convertToDTO(): RecipeDTO {
+        const recipeDTO: RecipeDTO = {
+            name: this.name,
+            ingredients: this.ingredients,
+            method: this.method,
+            prepTime: this.prepTime,
+            cookingTime: this.cookingTime,
+            authorId: this.authorId,
+            cuisine: this.cuisine,
+            diets: this.diets
+        }
+        return recipeDTO;
     }
 }
 
 export interface RecipeDTO {
-  id: number,
+  id?: number,
   name: string,
   ingredients : IngredientDTO[],
     method : string[],
@@ -96,6 +89,6 @@ export interface RecipeDTO {
    authorId : number,
    cuisine :  string ,
    diets : string[],
-   createdDate :  Date,
-   editedDate :  Date 
+   createdDate ?:  Date,
+   editedDate ?:  Date 
 }

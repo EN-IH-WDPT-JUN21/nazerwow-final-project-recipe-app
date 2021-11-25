@@ -1,4 +1,5 @@
 <div class="page">
+    <app-add-recipe-form></app-add-recipe-form>
     <div class="search">
         <app-recipe-search [recipeList]="filteredRecipeList" (click)="filterByName($event)" (deleteOutput)="reloadListAndFilter()"></app-recipe-search>
     </div>
