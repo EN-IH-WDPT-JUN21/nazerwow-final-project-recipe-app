@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 public interface RecipeController {
+
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     List<Recipe> findAll();
