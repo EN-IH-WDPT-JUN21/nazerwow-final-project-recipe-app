@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class RecipeService {
 
-  readonly baseUrl: string = "http://localhost:8100/api/v1/recipes"
+  readonly baseUrl: string = "http://localhost:8000/api/v1/recipes"
 
   constructor(
     private http: HttpClient
@@ -23,6 +23,10 @@ export class RecipeService {
     return this.http.get<any>(this.baseUrl + "/" + id);
   }
 
+  getRecipesByUserId(userId:number): Observable<any> {
+    return this.http.get<any>(this.baseUrl + "/user/" + userId);
+  }
+
   addRecipe(recipeDTO: RecipeDTO): Observable<any> {
     return this.http.post(`${this.baseUrl}`, recipeDTO);
   }
@@ -34,6 +38,7 @@ export class RecipeService {
   editRecipe(RecipeDTO: RecipeDTO): Observable<any> {
     return this.http.put(`${this.baseUrl + "/" + RecipeDTO.id}`, RecipeDTO)
   }
+
 
   recipeList!:RecipeDTO[];
   returnAllRecipes(): RecipeDTO[] {

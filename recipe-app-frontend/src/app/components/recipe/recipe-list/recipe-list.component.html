@@ -1,6 +1,6 @@
  <div>
     <div *ngFor="let recipe of recipeList" class="p-2">
-        <app-recipe-list-item [recipe]="recipe"></app-recipe-list-item>
+        <app-recipe-list-item [recipe]="recipe" [authorId]="recipe.authorId"></app-recipe-list-item>
     </div>
     <div *ngIf="recipeList.length <= 0"> 
         <h1> Ooops... We don't have any of those recipes yet... </h1> 

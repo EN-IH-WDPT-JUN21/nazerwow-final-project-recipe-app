@@ -44,6 +44,13 @@ public class RecipeServiceImpl implements RecipeService {
         return recipeRepository.save(updateRecipeWithRecipeDTO(recipeDTO, recipe));
     }
 
+    @Override
+    public List<Recipe> findByUserId(Long id) {
+        List<Recipe> recipeList = recipeRepository.findByAuthorId(id);
+        if(recipeList.size() == 0) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "This user has no favourite recipes saved");
+        return recipeList;
+    }
+
     private Recipe updateRecipeWithRecipeDTO(RecipeDTO recipeDTO, Recipe recipe) {
         if (recipeDTO.getName() != null) {
             recipe.setName(recipeDTO.getName());

@@ -19,7 +19,10 @@ import { RecipeSearchComponent } from './components/recipe/recipe-search/recipe-
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddRecipeFormComponent } from './components/recipe/add-recipe-form/add-recipe-form.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
+import { UserPageComponent } from './components/user/user-page/user-page.component';
+import { UserDetailsComponent } from './components/user/user-details/user-details.component';
+import { UserFavouritesComponent } from './components/user/user-favourites/user-favourites.component';
+import { UserOwnRecipeComponent } from './components/user/user-own-recipe/user-own-recipe.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +36,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     RecipeListItemComponent,
     RecipeBrowserComponent,
     RecipeSearchComponent,
-    AddRecipeFormComponent
+    AddRecipeFormComponent,
+    UserPageComponent,
+    UserDetailsComponent,
+    UserFavouritesComponent,
+    UserOwnRecipeComponent
   ],
   imports: [
     BrowserModule,

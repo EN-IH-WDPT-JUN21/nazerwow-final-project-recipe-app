@@ -153,7 +153,8 @@ class UserControllerImplTest {
                 "new@email.com",
                 "newLocation",
                 "newBio",
-                "newUrl"
+                "newUrl",
+                List.of(Role.USER)
         );
         String body = objectMapper.writeValueAsString(userDTO);
         MvcResult result = mockMvc.perform(put("/api/v1/users/" + user1.getId())
@@ -180,7 +181,8 @@ class UserControllerImplTest {
                 "new@email.com",
                 "newLocation",
                 "newBio",
-                "newUrl"
+                "newUrl",
+                List.of(Role.USER)
         );
         String body = objectMapper.writeValueAsString(userDTO);
         MvcResult result = mockMvc.perform(put("/api/v1/users/" + user1.getId())

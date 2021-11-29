@@ -230,4 +230,15 @@ class RecipeServiceImplTest {
         assertThrows(ResponseStatusException.class, () ->  recipeService.updateRecipe(recipe1.getId() - 60L,
                 recipeDTO));
     }
+
+    @Test
+    void findByUserId_valid() {
+        var recipeFound = recipeService.findByUserId(recipe1.getAuthorId());
+        assertEquals(recipe1.getName(), recipeFound.get(0).getName());
+    }
+
+    @Test
+    void findByUserId_Invalid() {
+        assertThrows(ResponseStatusException.class, () -> recipeService.findByUserId(recipe1.getAuthorId() - 65L));
+    }
 }

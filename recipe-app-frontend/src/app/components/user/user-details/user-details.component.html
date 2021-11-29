@@ -1,0 +1,16 @@
+<mat-card>
+    <mat-card-title-group class="d-flex justify-content-around">
+        <mat-card-title class="title">{{user.name}}</mat-card-title>
+        <mat-card-subtitle>
+            <div class="user-info">
+                <br>
+                <p><strong>email: </strong> {{user.email}} </p>
+                <p><strong>location: </strong>{{user.location}} mins</p>
+                <p><strong>Bio: </strong> {{user.bio}} mins</p>
+            </div>
+        </mat-card-subtitle>
+        <div class="image">
+            <img class="img-fluid rounded" src="{{user.pictureUrl}}">
+        </div>
+    </mat-card-title-group>
+</mat-card>

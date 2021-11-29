@@ -30,4 +30,8 @@ public interface RecipeController {
     @ResponseStatus(HttpStatus.ACCEPTED)
     Recipe updateRecipe(@PathVariable(name = "id") Long id,
                         @RequestBody RecipeDTO recipeDTO);
+
+    @GetMapping("/user/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Recipe> findByUserId(@PathVariable(name = "id") Long id);
 }

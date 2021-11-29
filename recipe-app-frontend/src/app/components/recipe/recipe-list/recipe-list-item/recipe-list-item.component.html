@@ -1,4 +1,4 @@
-<mat-card class="default-hover">
+<mat-card class="default-hover" [routerLink]="['/recipes/', recipe.id ]">
     <div class="d-flex">
     <div class="p-2">
         <img class="rounded float-left small-image img-fluid" src="https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg" alt="">
@@ -12,7 +12,7 @@
     </div>
     <div class="p-2">
         <h1 class="title">{{recipe.name}}</h1>
-        <h4>by: {{recipe.authorId}}</h4>
+        <h4>by: {{user.name}}</h4>
     </div>
     </div>
     <mat-chip-list aria-label="Dietary Requirements">

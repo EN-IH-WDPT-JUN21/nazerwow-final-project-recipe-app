@@ -146,7 +146,8 @@ class UserServiceImplTest {
                 "new@email.com",
                 "newLocation",
                 "newBio",
-                "newUrl"
+                "newUrl",
+                List.of(Role.USER)
         );
         var userListBefore = userServiceImpl.findAll().size();
         User user = userServiceImpl.updateUser(user1.getId(), userDTO);
@@ -166,7 +167,8 @@ class UserServiceImplTest {
                 "new@email.com",
                 "newLocation",
                 "newBio",
-                "newUrl"
+                "newUrl",
+                List.of(Role.USER)
         );
         User updatedUser = userServiceImpl.updateUser(user1.getId(), userDTO);
         assertEquals(userDTO.getName(), updatedUser.getName());
@@ -191,6 +193,7 @@ class UserServiceImplTest {
                 null,
                 null,
                 null,
+                null,
                 null
         );
         userServiceImpl.updateUser(user1.getId(), userDTO);
@@ -208,6 +211,7 @@ class UserServiceImplTest {
     @Test
     void updateUser_ThrowsException() {
         UserDTO userDTO = new UserDTO(
+                null,
                 null,
                 null,
                 null,
