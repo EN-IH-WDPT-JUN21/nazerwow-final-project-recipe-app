@@ -1,6 +1,7 @@
 <div class="page">
+    <button mat-raised-button color="primary" [routerLink]="['/recipes/']">Back</button>
     <div class = "title-card">
-        <app-recipe-card [recipe]="recipeDTO"></app-recipe-card>
+        <app-recipe-card [recipe]="recipeDTO" [user]="user"></app-recipe-card>
     </div>
     <div class = instructions-card>
         <app-recipe-instructions [recipe]="recipeDTO"></app-recipe-instructions>

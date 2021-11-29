@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/v1/recipes")
 public class RecipeControllerImpl implements RecipeController {
@@ -31,6 +32,13 @@ public class RecipeControllerImpl implements RecipeController {
     @ResponseStatus(HttpStatus.OK)
     public Recipe findById(@PathVariable(name = "id") Long id){
         return recipeService.findById(id);
+    }
+
+    @Override
+    @GetMapping("/user/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Recipe> findByUserId(@PathVariable(name = "id") Long id){
+        return recipeService.findByUserId(id);
     }
 
     @Override
@@ -54,4 +62,6 @@ public class RecipeControllerImpl implements RecipeController {
                                @RequestBody @Valid RecipeDTO recipeDTO){
         return recipeService.updateRecipe(id, recipeDTO);
     }
+
+
 }

@@ -19,7 +19,8 @@ public class WebSecurityConfig {
                 .authorizeExchange()
                 .pathMatchers(HttpMethod.OPTIONS).permitAll()
                 .pathMatchers("/login/**").permitAll()
-                .pathMatchers(HttpMethod.GET, "/api/v1/recipes").permitAll()
+                .pathMatchers(HttpMethod.GET, "/api/v1/recipes/**").permitAll()
+                .pathMatchers(HttpMethod.GET, "/api/v1/users/**").permitAll()
                 .pathMatchers("/api/v1/favourites").hasAnyRole("ROLE_USER", "ROLE_ADMIN")
                 .anyExchange().authenticated()
                 .and().build();

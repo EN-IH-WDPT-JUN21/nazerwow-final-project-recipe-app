@@ -23,6 +23,6 @@ public class UserDTO {
     private String location;
     private String bio;
     private String pictureUrl;
-    private List<Role> role;
+    private List<Role> roles;
 
 }

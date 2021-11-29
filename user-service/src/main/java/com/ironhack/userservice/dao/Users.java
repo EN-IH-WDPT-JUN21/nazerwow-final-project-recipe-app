@@ -28,7 +28,7 @@ public abstract class Users {
     private String password;
     @ElementCollection()
     @LazyCollection(LazyCollectionOption.FALSE)
-    private List<Role> role;
+    private List<Role> roles;
     private LocalDate createdDate = LocalDate.now();
     private LocalDate editedDate = LocalDate.now();
 
@@ -36,6 +36,6 @@ public abstract class Users {
         this.name = name;
         this.username = username;
         this.password = password;
-        this.role = role;
+        this.roles = role;
     }
 }

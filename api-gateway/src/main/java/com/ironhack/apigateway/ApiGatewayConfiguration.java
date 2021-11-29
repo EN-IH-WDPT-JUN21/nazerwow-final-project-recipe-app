@@ -13,7 +13,6 @@ public class ApiGatewayConfiguration {
         return builder.routes()
                 // User Service
                 .route(p -> p.path("/api/v1/recipes/**")
-                        .filters(f -> f.)
                         .uri("lb://recipe-service"))
                 .route(p -> p.path("/api/v1/users/**")
                         .uri("lb://user-service"))
