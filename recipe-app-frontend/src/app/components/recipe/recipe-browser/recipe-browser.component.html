@@ -1,7 +1,9 @@
 <div class="page">
-    <app-add-recipe-form></app-add-recipe-form>
-    <div class="search">
-        <app-recipe-search [recipeList]="filteredRecipeList" (click)="filterByName($event)" (deleteOutput)="reloadListAndFilter()"></app-recipe-search>
+    <div class="d-flex justify-content-center align-items-center">
+        <div class="search">
+            <app-recipe-search [recipeList]="filteredRecipeList" (click)="filterByName($event)" (deleteOutput)="reloadListAndFilter()"></app-recipe-search>
+        </div>
+        <button mat-fab color="primary" (click)="loadAddForm()">+</button>
     </div>
     <div class="filter-chips d-flex justify-content-center">
         <mat-chip-list aria-label="Dietary Requirements" class="p-2" [multiple]="true" [selectable]="true">

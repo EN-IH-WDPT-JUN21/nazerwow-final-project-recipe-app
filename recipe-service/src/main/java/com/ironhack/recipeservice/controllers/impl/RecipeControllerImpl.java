@@ -49,7 +49,7 @@ public class RecipeControllerImpl implements RecipeController {
     }
 
     @Override
-    @PutMapping("{id}")
+    @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public Recipe updateRecipe(@PathVariable(name = "id") Long id,
                                @RequestBody @Valid RecipeDTO recipeDTO){

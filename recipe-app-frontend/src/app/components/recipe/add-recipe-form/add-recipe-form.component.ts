@@ -1,9 +1,9 @@
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, Form, FormArray, FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Ingredient, IngredientDTO } from './../../../models/ingredient.model';
 import { RecipeService } from './../../../services/recipe.service';
 import { EnumService } from './../../../services/enum.service';
-import { Component, OnInit } from '@angular/core';
-import { Recipe } from 'src/app/models/recipe.model';
+import { Component, Input, OnInit } from '@angular/core';
+import { Recipe, RecipeDTO } from 'src/app/models/recipe.model';
 
 @Component({
   selector: 'app-add-recipe-form',
@@ -15,6 +15,12 @@ export class AddRecipeFormComponent implements OnInit {
   dietList!: string[];
   cuisineList!: string[];
   measurementList!: string[];
+
+  addForm: boolean = true;
+
+  @Input()
+  recipeDTO!: RecipeDTO;
+
   recipe!:Recipe;
 
   recipeForm!: FormGroup;
@@ -24,7 +30,7 @@ export class AddRecipeFormComponent implements OnInit {
   ingredientName!: FormControl;
   ingredientQuantity!: FormControl;
   ingredientMeasurement!: FormControl;
-  method!: FormArray;
+  method!: FormArray
   prepTime!: FormControl;
   cookingTime!: FormControl;
   authorId!: FormControl;
@@ -36,7 +42,8 @@ export class AddRecipeFormComponent implements OnInit {
 
 
   constructor(private enumService: EnumService,
-    private recipeService: RecipeService) {
+    private recipeService: RecipeService,
+    private formBuilder: FormBuilder) {
        this.name = new FormControl('', [Validators.required]);
        this.ingredients = new FormArray([], [Validators.required]);
        this.ingredientName = new FormControl('', [Validators.required]);
@@ -45,23 +52,23 @@ export class AddRecipeFormComponent implements OnInit {
        this.method = new FormArray([], [Validators.required]);
        this.prepTime = new FormControl('', [Validators.required, Validators.min(0)]);
        this.cookingTime = new FormControl('', [Validators.required, Validators.min(0)]);
-       this.authorId = new FormControl('', [Validators.required]);
        this.cuisine = new FormControl('', [Validators.required]);
        this.diets = new FormArray([], [Validators.required]);
+       
+       this.ingredient = new FormGroup({
+         name: this.ingredientName,
+         quantity: this.ingredientQuantity,
+         measurement: this.ingredientMeasurement
+       })
+
        this.recipeForm = new FormGroup({
          name: this.name,
          ingredients: this.ingredients,
          method: this.method,
          prepTime: this.prepTime,
          cookingTime: this.cookingTime,
-         authorId: this.authorId,
          cuisine: this.cuisine,
          diets: this.diets
-       })
-       this.ingredient = new FormGroup({
-         name: this.ingredientName,
-         quantity: this.ingredientQuantity,
-         measurement: this.ingredientMeasurement
        })
      }
 
@@ -69,6 +76,16 @@ export class AddRecipeFormComponent implements OnInit {
     this.getDiets();
     this.getCuisines();
     this.getMeasurements();
+  }
+
+  ngAfterViewInit(): void {
+    this.addOrEdit();
+  }
+
+  onSubmit(){
+    // console.log(this.recipeDTO);
+    // this.addNewRecipeToDatabase(this.createRecipeDTOFromForm());
+    this.fillFormToEdit();
   }
 
   addIngredient(): void {
@@ -96,22 +113,77 @@ export class AddRecipeFormComponent implements OnInit {
     this.method.removeAt(index);
   }
 
-  getDiets(): void{
+  addOrEdit(): void {
+    if(this.recipeDTO != null){
+      this.addForm = false;
+      this.fillFormToEdit();
+      console.log("did we get here")
+    } else {
+      this.addForm = true;
+    }
+  }
+
+  fillFormToEdit():void {
+
+    for(let diet in this.recipeDTO.diets){
+      this.addDiet()
+    }
+    for(let step in this.recipeDTO.method){
+      this.addStep();
+    }
+    this.recipeForm.patchValue(this.recipeDTO);
+    this.patchFromArray();
+  }
+
+  patchFromArray(): void {
+      let ctrl = <FormArray>this.recipeForm.controls.ingredients;
+      this.recipeDTO.ingredients.forEach(ingredient => {
+        ctrl.push( this.formBuilder.group({
+          name: ingredient.name,
+          quantity: ingredient.quantity,
+          measurement: ingredient.measurement
+        }))
+      })
+    }
+
+
+  private getDiets(): void{
     this.enumService.getAllDiets().subscribe(diets => {
       this.dietList = diets;
     })
   }
 
-  getCuisines(): void {
+  private getCuisines(): void {
     this.enumService.getAllCuisines().subscribe(cuisines => {
       this.cuisineList = cuisines;
     })
   }
 
-  getMeasurements():void {
+  private getMeasurements():void {
     this.enumService.getAllMeasurements().subscribe(measurements => {
       this.measurementList = measurements;
     })
+  }
+
+  private addNewRecipeToDatabase(recipeDTO: RecipeDTO) {
+    this.recipeService.addRecipe(recipeDTO).subscribe(result => {
+      console.log(result);
+    });
+  }
+
+  private createRecipeDTOFromForm() {
+    this.recipe = new Recipe(
+      this.name.value,
+      this.ingredients.value,
+      this.method.value,
+      this.prepTime.value,
+      this.cookingTime.value,
+      1,
+      this.cuisine.value,
+      this.diets.value
+    );
+    const recipeDTO = this.recipe.convertToDTO();
+    return recipeDTO;
   }
 
 }

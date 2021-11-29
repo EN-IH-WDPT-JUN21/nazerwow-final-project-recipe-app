@@ -18,6 +18,7 @@ import { RecipeBrowserComponent } from './components/recipe/recipe-browser/recip
 import { RecipeSearchComponent } from './components/recipe/recipe-search/recipe-search.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddRecipeFormComponent } from './components/recipe/add-recipe-form/add-recipe-form.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { AddRecipeFormComponent } from './components/recipe/add-recipe-form/add-
     AngularMaterialModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

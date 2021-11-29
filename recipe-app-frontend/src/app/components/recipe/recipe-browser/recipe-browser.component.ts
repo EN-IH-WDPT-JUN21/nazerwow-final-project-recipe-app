@@ -1,3 +1,4 @@
+import { AddRecipeFormComponent } from './../add-recipe-form/add-recipe-form.component';
 import { RecipeSearchComponent } from './../recipe-search/recipe-search.component';
 import { RecipeService } from './../../../services/recipe.service';
 import { RecipeDTO } from 'src/app/models/recipe.model';
@@ -6,6 +7,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatChip } from '@angular/material/chips';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-recipe-browser',
@@ -27,7 +29,8 @@ export class RecipeBrowserComponent implements OnInit {
 
   constructor(private enumService:EnumService,
     private recipeService:RecipeService,
-    private router:Router) {
+    private router:Router,
+    private dialog:MatDialog) {
     this.filterList = [],
     this.recipeList = []
    }
@@ -67,12 +70,9 @@ export class RecipeBrowserComponent implements OnInit {
     if (chip.selected) {
       this.filterList.push(chip.value);
       this.filterRecipeList();
-      console.log("here")
     } else {
       let index: number = this.filterList.indexOf(chip.value);
-      console.log(index);
       this.filterList.splice(index, 1);
-      console.log(this.filterList)
       this.filterRecipeList();
     }
   }
@@ -118,6 +118,13 @@ export class RecipeBrowserComponent implements OnInit {
   reloadListAndFilter():void{
     this.populateFilteredList();
     this.filterRecipeList();
+  }
+
+  loadAddForm(): void {
+    const dialogRef = this.dialog.open(AddRecipeFormComponent, { autoFocus: false, height: '80vh', width: '80vw'});
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('Dialog result: %{result}');
+    })
   }
   
 }
