@@ -17,6 +17,8 @@ import { RecipeListItemComponent } from './components/recipe/recipe-list/recipe-
 import { RecipeBrowserComponent } from './components/recipe/recipe-browser/recipe-browser.component';
 import { RecipeSearchComponent } from './components/recipe/recipe-search/recipe-search.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AddRecipeFormComponent } from './components/recipe/add-recipe-form/add-recipe-form.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -30,7 +32,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     RecipeInstructionsComponent,
     RecipeListItemComponent,
     RecipeBrowserComponent,
-    RecipeSearchComponent
+    RecipeSearchComponent,
+    AddRecipeFormComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +43,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AngularMaterialModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

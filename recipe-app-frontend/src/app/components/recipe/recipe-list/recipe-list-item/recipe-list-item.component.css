@@ -5,13 +5,10 @@
 
 .title {
     margin-bottom: 0px;
+    margin-right: 1px;
 }
 
 .mat-card {
     margin: 2px;
 }
 
-.mat-card:hover {
-  background-color: #f3e0ff ;
-  cursor: pointer;
-}
