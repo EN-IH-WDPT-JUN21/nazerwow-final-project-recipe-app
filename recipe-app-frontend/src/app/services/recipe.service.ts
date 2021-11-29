@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class RecipeService {
 
-  readonly baseUrl: string = "http://localhost:8100/api/v1/recipes"
+  readonly baseUrl: string = "http://localhost:8000/api/v1/recipes"
 
   constructor(
     private http: HttpClient
