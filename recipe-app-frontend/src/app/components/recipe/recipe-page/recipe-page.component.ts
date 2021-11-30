@@ -1,9 +1,11 @@
+import { MatDialog } from '@angular/material/dialog';
 import { UserService } from './../../../services/user.service';
 import { UserDTO } from './../../../models/user-model';
 import { RecipeService } from './../../../services/recipe.service';
 import { RecipeDTO } from '../../../models/recipe.model';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { AddRecipeFormComponent } from '../add-recipe-form/add-recipe-form.component';
 
 @Component({
   selector: 'app-recipe-page',
@@ -17,7 +19,8 @@ export class RecipePageComponent implements OnInit {
 
   constructor(private recipeService:RecipeService,
     private activateRoute:ActivatedRoute,
-    private userService: UserService) { }
+    private userService: UserService,
+    private dialog: MatDialog) { }
 
   ngOnInit(): void {
     const recipeId:number = this.activateRoute.snapshot.params['recipeId'];
@@ -30,6 +33,14 @@ export class RecipePageComponent implements OnInit {
       this.userService.getUserById(this.recipeDTO.authorId).subscribe(result => {
         this.user = result;
       })
+    })
+  }
+
+  loadAddForm(): void {
+    const dialogRef = this.dialog.open(AddRecipeFormComponent, { autoFocus: false, height: '80vh', width: '80vw', data: this.recipeDTO });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('Dialog result: %{result}');
+      window.location.reload();
     })
   }
 

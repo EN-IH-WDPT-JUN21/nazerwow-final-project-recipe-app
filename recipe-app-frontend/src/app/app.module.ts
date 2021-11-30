@@ -23,6 +23,12 @@ import { UserPageComponent } from './components/user/user-page/user-page.compone
 import { UserDetailsComponent } from './components/user/user-details/user-details.component';
 import { UserFavouritesComponent } from './components/user/user-favourites/user-favourites.component';
 import { UserOwnRecipeComponent } from './components/user/user-own-recipe/user-own-recipe.component';
+import { UserFormComponent } from './components/user/user-form/user-form.component';
+import { DrawerComponent } from './components/drawer/drawer.component';
+import { HomeComponent } from './components/home/home.component';
+import { HomeSearchComponent } from './components/home/home-search/home-search.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+
 
 @NgModule({
   declarations: [
@@ -40,7 +46,11 @@ import { UserOwnRecipeComponent } from './components/user/user-own-recipe/user-o
     UserPageComponent,
     UserDetailsComponent,
     UserFavouritesComponent,
-    UserOwnRecipeComponent
+    UserOwnRecipeComponent,
+    UserFormComponent,
+    DrawerComponent,
+    HomeComponent,
+    HomeSearchComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +61,8 @@ import { UserOwnRecipeComponent } from './components/user/user-own-recipe/user-o
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    NgbModule
+    NgbModule,
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

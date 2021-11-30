@@ -1,3 +1,4 @@
+import { UserDTO } from './../models/user-model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -21,6 +22,14 @@ export class UserService {
 
   getUserById(id: number): Observable<any> {
     return this.http.get<any>(this.baseUrl + "/" + id);
+  }
+
+  addUser(userDTO: UserDTO): Observable<any> {
+    return this.http.post(`${this.baseUrl}`, userDTO);
+  }
+
+  editUser(UserDTO: UserDTO): Observable<any> {
+    return this.http.put(`${this.baseUrl + "/" + UserDTO.id}`, UserDTO)
   }
 
 }

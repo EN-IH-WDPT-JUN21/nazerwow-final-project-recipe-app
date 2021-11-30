@@ -12,18 +12,22 @@ export class UserFavouritesComponent implements OnInit {
   @Input()
   userId!: number;
 
-  favouriteRecipesList!: RecipeDTO[];
+  recipeList!: RecipeDTO[];
 
   panelOpenState: boolean = false;
 
   constructor(private favouritesService: FavouritesService) { }
 
   ngOnInit(): void {
+    this.getFavouriteRecipes();
   }
 
   getFavouriteRecipes(): void {
     this.favouritesService.getFavouriteRecipesByUserId(this.userId).subscribe(result => {
-      this.favouriteRecipesList = result;
+      this.recipeList = result;
+    },
+    error => {
+      console.log("User currently has no favourites");
     })
   }
 

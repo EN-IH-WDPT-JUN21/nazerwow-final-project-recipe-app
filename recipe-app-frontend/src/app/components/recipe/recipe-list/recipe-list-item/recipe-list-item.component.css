@@ -10,5 +10,6 @@
 
 .mat-card {
     margin: 2px;
+    min-width: 200px
 }
 
