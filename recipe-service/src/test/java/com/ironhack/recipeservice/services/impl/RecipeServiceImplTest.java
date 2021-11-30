@@ -48,7 +48,8 @@ class RecipeServiceImplTest {
                 20,
                 1L,
                 Cuisine.BRITISH,
-                List.of(Diet.GLUTEN_FREE)
+                List.of(Diet.GLUTEN_FREE),
+                "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg"
         );
         recipeRepository.save(recipe1);
     }
@@ -118,7 +119,8 @@ class RecipeServiceImplTest {
                 20,
                 2L,
                 Cuisine.CARIBBEAN,
-                List.of(Diet.VEGETARIAN, Diet.GLUTEN_FREE)
+                List.of(Diet.VEGETARIAN, Diet.GLUTEN_FREE),
+                "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg"
         );
         var recipeListBefore = recipeService.findAll().size();
         Recipe recipe = recipeService.addRecipe(createRecipeDTO);
@@ -136,7 +138,8 @@ class RecipeServiceImplTest {
                 20,
                 2L,
                 Cuisine.CARIBBEAN,
-                List.of(Diet.VEGETARIAN, Diet.GLUTEN_FREE)
+                List.of(Diet.VEGETARIAN, Diet.GLUTEN_FREE),
+                "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg"
         );
         Recipe recipe = recipeService.addRecipe(createRecipeDTO);
         assertEquals(createRecipeDTO.getName(), recipe.getName());
@@ -157,7 +160,8 @@ class RecipeServiceImplTest {
                 20,
                 2L,
                 Cuisine.CARIBBEAN,
-                List.of(Diet.VEGETARIAN, Diet.GLUTEN_FREE)
+                List.of(Diet.VEGETARIAN, Diet.GLUTEN_FREE),
+                "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg"
         );
         var recipeListBefore = recipeService.findAll().size();
         Recipe recipe = recipeService.updateRecipe(recipe1.getId(), recipeDTO);
@@ -178,7 +182,8 @@ class RecipeServiceImplTest {
                 20,
                 2L,
                 Cuisine.CARIBBEAN,
-                List.of(Diet.VEGETARIAN, Diet.GLUTEN_FREE)
+                List.of(Diet.VEGETARIAN, Diet.GLUTEN_FREE),
+                "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg"
         );
         recipeService.updateRecipe(recipe1.getId(), recipeDTO);
         Recipe updatedRecipe = recipeService.findById(recipe1.getId());
@@ -196,6 +201,7 @@ class RecipeServiceImplTest {
         recipeRepository.save(recipe1);
         Recipe originalRecipe = recipeService.findById(recipe1.getId());
         RecipeDTO recipeDTO = new RecipeDTO(
+                null,
                 null,
                 null,
                 null,
@@ -225,9 +231,21 @@ class RecipeServiceImplTest {
                 null,
                 null,
                 null,
+                null,
                 null
         );
         assertThrows(ResponseStatusException.class, () ->  recipeService.updateRecipe(recipe1.getId() - 60L,
                 recipeDTO));
+    }
+
+    @Test
+    void findByUserId_valid() {
+        var recipeFound = recipeService.findByUserId(recipe1.getAuthorId());
+        assertEquals(recipe1.getName(), recipeFound.get(0).getName());
+    }
+
+    @Test
+    void findByUserId_Invalid() {
+        assertThrows(ResponseStatusException.class, () -> recipeService.findByUserId(recipe1.getAuthorId() - 65L));
     }
 }

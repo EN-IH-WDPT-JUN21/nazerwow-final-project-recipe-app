@@ -153,7 +153,8 @@ class UserControllerImplTest {
                 "new@email.com",
                 "newLocation",
                 "newBio",
-                "newUrl"
+                "newUrl",
+                List.of(Role.USER)
         );
         String body = objectMapper.writeValueAsString(userDTO);
         MvcResult result = mockMvc.perform(put("/api/v1/users/" + user1.getId())
@@ -180,7 +181,8 @@ class UserControllerImplTest {
                 "new@email.com",
                 "newLocation",
                 "newBio",
-                "newUrl"
+                "newUrl",
+                List.of(Role.USER)
         );
         String body = objectMapper.writeValueAsString(userDTO);
         MvcResult result = mockMvc.perform(put("/api/v1/users/" + user1.getId())
@@ -195,6 +197,16 @@ class UserControllerImplTest {
         assertEquals(userDTO.getLocation(), updatedUser.getLocation());
         assertEquals(userDTO.getLocation(), updatedUser.getLocation());
         assertEquals(userDTO.getBio(), updatedUser.getBio());
+    }
+
+    @Test
+    void findByUsername() throws Exception {
+        MvcResult result = mockMvc.perform(get("/api/v1/users/username=" + user1.getUsername()))
+                .andExpect(status().isOk())
+                .andReturn();
+        assertTrue(result.getResponse().getContentAsString().contains("TestUser1"));
+        assertFalse(result.getResponse().getContentAsString().contains("TestUser2"));
+        assertTrue(result.getResponse().getContentAsString().contains("USER"));
     }
 
 }

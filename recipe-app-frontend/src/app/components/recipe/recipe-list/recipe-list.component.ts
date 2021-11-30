@@ -15,18 +15,16 @@ export class RecipeListComponent implements OnInit {
   @Input()
   filter!:string;
 
+  page: number = 1;
+
   constructor(private recipeService: RecipeService) { }
 
   ngOnInit(): void {
-    this.getAllRecipes();
+    
   }
 
-  getAllRecipes():void{
-    if(this.recipeList == null)
-    this.recipeService.getAllRecipes().subscribe(result => {
-      this.recipeList = result;
-    })
+  handlePageChange(event: number): void {
+    this.page = event;
   }
-
 
 }

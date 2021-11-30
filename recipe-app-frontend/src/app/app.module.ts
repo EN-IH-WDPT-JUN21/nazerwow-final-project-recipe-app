@@ -17,6 +17,17 @@ import { RecipeListItemComponent } from './components/recipe/recipe-list/recipe-
 import { RecipeBrowserComponent } from './components/recipe/recipe-browser/recipe-browser.component';
 import { RecipeSearchComponent } from './components/recipe/recipe-search/recipe-search.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AddRecipeFormComponent } from './components/recipe/add-recipe-form/add-recipe-form.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { UserPageComponent } from './components/user/user-page/user-page.component';
+import { UserDetailsComponent } from './components/user/user-details/user-details.component';
+import { UserFavouritesComponent } from './components/user/user-favourites/user-favourites.component';
+import { UserOwnRecipeComponent } from './components/user/user-own-recipe/user-own-recipe.component';
+import { UserFormComponent } from './components/user/user-form/user-form.component';
+import { DrawerComponent } from './components/drawer/drawer.component';
+import { HomeComponent } from './components/home/home.component';
+import { HomeSearchComponent } from './components/home/home-search/home-search.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 @NgModule({
@@ -30,7 +41,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     RecipeInstructionsComponent,
     RecipeListItemComponent,
     RecipeBrowserComponent,
-    RecipeSearchComponent
+    RecipeSearchComponent,
+    AddRecipeFormComponent,
+    UserPageComponent,
+    UserDetailsComponent,
+    UserFavouritesComponent,
+    UserOwnRecipeComponent,
+    UserFormComponent,
+    DrawerComponent,
+    HomeComponent,
+    HomeSearchComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +60,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AngularMaterialModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbModule,
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

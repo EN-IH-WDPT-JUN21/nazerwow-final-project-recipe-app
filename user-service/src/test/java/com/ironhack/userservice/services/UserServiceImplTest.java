@@ -5,7 +5,6 @@ import com.ironhack.userservice.dto.CreateUserDTO;
 import com.ironhack.userservice.dto.UserDTO;
 import com.ironhack.userservice.enums.Role;
 import com.ironhack.userservice.repositories.UserRepository;
-import com.ironhack.userservice.services.impl.UserServiceImpl;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,7 +23,7 @@ class UserServiceImplTest {
     @Autowired
     private UserRepository userRepository;
     @Autowired
-    private UserServiceImpl userServiceImpl;
+    private UserService userService;
 
     private User user1;
     private User user2;
@@ -63,38 +62,38 @@ class UserServiceImplTest {
 
     @Test
     void findAll_Valid() {
-        var repoSize = userServiceImpl.findAll().size();
+        var repoSize = userService.findAll().size();
         assertEquals(userList.size(), repoSize);
     }
 
     @Test
     void findById_Valid() {
-        var foundUser = userServiceImpl.findById(user1.getId());
+        var foundUser = userService.findById(user1.getId());
         assertEquals(user1.getName(), foundUser.getName());
     }
 
     @Test
     void findById_Invalid_ThrowsException() {
-        assertThrows(ResponseStatusException.class, () -> userServiceImpl.findById(user1.getId() - 50L));
+        assertThrows(ResponseStatusException.class, () -> userService.findById(user1.getId() - 50L));
     }
 
     @Test
     void deleteUser() {
-        var userListBefore = userServiceImpl.findAll().size();
-        userServiceImpl.deleteUser(user1.getId());
-        var userListAfter = userServiceImpl.findAll().size();
+        var userListBefore = userService.findAll().size();
+        userService.deleteUser(user1.getId());
+        var userListAfter = userService.findAll().size();
         assertEquals(userListBefore - 1, userListAfter);
     }
 
     @Test
     void deleteUser_ThrowsException() {
-        assertThrows(ResponseStatusException.class, () ->  userServiceImpl.deleteUser(user1.getId() - 60L));
+        assertThrows(ResponseStatusException.class, () ->  userService.deleteUser(user1.getId() - 60L));
     }
 
     @Test
     void deleteUser_ThrowsException2() {
-        userServiceImpl.deleteUser(user1.getId());
-        assertThrows(ResponseStatusException.class, () ->  userServiceImpl.deleteUser(user1.getId()));
+        userService.deleteUser(user1.getId());
+        assertThrows(ResponseStatusException.class, () ->  userService.deleteUser(user1.getId()));
     }
 
     @Test
@@ -108,9 +107,9 @@ class UserServiceImplTest {
                 "newBio",
                 "newUrl"
         );
-        var userListBefore = userServiceImpl.findAll().size();
-        User user = userServiceImpl.addUser(createUserDTO);
-        var userListAfter = userServiceImpl.findAll().size();
+        var userListBefore = userService.findAll().size();
+        User user = userService.addUser(createUserDTO);
+        var userListAfter = userService.findAll().size();
         assertEquals(userListBefore + 1, userListAfter);
     }
 
@@ -125,7 +124,7 @@ class UserServiceImplTest {
                 "newBio",
                 "newUrl"
         );
-        User user = userServiceImpl.addUser(createUserDTO);
+        User user = userService.addUser(createUserDTO);
         assertEquals(createUserDTO.getName(), user.getName());
         assertEquals(createUserDTO.getUsername(), user.getUsername());
         assertEquals(createUserDTO.getPassword(), user.getPassword());
@@ -146,11 +145,12 @@ class UserServiceImplTest {
                 "new@email.com",
                 "newLocation",
                 "newBio",
-                "newUrl"
+                "newUrl",
+                List.of(Role.USER)
         );
-        var userListBefore = userServiceImpl.findAll().size();
-        User user = userServiceImpl.updateUser(user1.getId(), userDTO);
-        var userListAfter = userServiceImpl.findAll().size();
+        var userListBefore = userService.findAll().size();
+        User user = userService.updateUser(user1.getId(), userDTO);
+        var userListAfter = userService.findAll().size();
         assertEquals(userListBefore, userListAfter);
     }
 
@@ -166,9 +166,10 @@ class UserServiceImplTest {
                 "new@email.com",
                 "newLocation",
                 "newBio",
-                "newUrl"
+                "newUrl",
+                List.of(Role.USER)
         );
-        User updatedUser = userServiceImpl.updateUser(user1.getId(), userDTO);
+        User updatedUser = userService.updateUser(user1.getId(), userDTO);
         assertEquals(userDTO.getName(), updatedUser.getName());
         assertEquals(userDTO.getUsername(), updatedUser.getUsername());
         assertEquals(userDTO.getPassword(), updatedUser.getPassword());
@@ -183,8 +184,9 @@ class UserServiceImplTest {
     void updateUser_Valid_TestNullFilter() {
         user1.setCreatedDate(LocalDate.now().minusYears(50L));
         userRepository.save(user1);
-        User originalUser = userServiceImpl.findById(user1.getId());
+        User originalUser = userService.findById(user1.getId());
         UserDTO userDTO = new UserDTO(
+                null,
                 null,
                 null,
                 null,
@@ -193,8 +195,8 @@ class UserServiceImplTest {
                 null,
                 null
         );
-        userServiceImpl.updateUser(user1.getId(), userDTO);
-        User updatedUser = userServiceImpl.findById(user1.getId());
+        userService.updateUser(user1.getId(), userDTO);
+        User updatedUser = userService.findById(user1.getId());
         assertEquals(originalUser.getName(), updatedUser.getName());
         assertEquals(originalUser.getUsername(), updatedUser.getUsername());
         assertEquals(originalUser.getPassword(), updatedUser.getPassword());
@@ -214,9 +216,16 @@ class UserServiceImplTest {
                 null,
                 null,
                 null,
+                null,
                 null
         );
-        assertThrows(ResponseStatusException.class, () ->  userServiceImpl.updateUser(user1.getId() - 60L,
+        assertThrows(ResponseStatusException.class, () ->  userService.updateUser(user1.getId() - 60L,
                 userDTO));
+    }
+
+    @Test
+    void findByUsername_Valid() {
+        var user = userService.findByUsername(user2.getUsername());
+        assertEquals(user.getUsername(), user2.getUsername());
     }
 }

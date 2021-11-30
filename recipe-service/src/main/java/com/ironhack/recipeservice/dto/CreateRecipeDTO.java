@@ -35,6 +35,7 @@ public class CreateRecipeDTO {
     @NotNull
     @Enumerated(EnumType.STRING)
     private List<Diet> diets;
+    private String imageUrl;
 
 
 

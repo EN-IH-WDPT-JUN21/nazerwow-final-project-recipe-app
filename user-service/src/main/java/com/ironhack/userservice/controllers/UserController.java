@@ -30,4 +30,9 @@ public interface UserController {
     @ResponseStatus(HttpStatus.ACCEPTED)
     User updateUser(@PathVariable(name = "id") Long id,
                     @RequestBody @Valid UserDTO userDTO);
+
+    @GetMapping("/username={username}")
+    @ResponseStatus(HttpStatus.OK)
+    User findByUsername(@PathVariable(name = "username") String username);
+
 }

@@ -50,6 +50,13 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(updateUserWithUserDTO(userDTO, user));
     }
 
+    @Override
+    public User findByUsername(String username) {
+        Optional<User> user = userRepository.findByUsername(username);
+        if (user.isEmpty()) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No User found with ID: " + username);
+        return user.get();
+    }
+
     private User updateUserWithUserDTO(UserDTO userDTO, User user) {
         if (userDTO.getName() != null) {
             user.setName(userDTO.getName());

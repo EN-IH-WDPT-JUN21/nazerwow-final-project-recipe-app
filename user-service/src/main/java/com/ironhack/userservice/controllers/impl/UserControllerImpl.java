@@ -3,7 +3,7 @@ package com.ironhack.userservice.controllers.impl;
 import com.ironhack.userservice.dao.User;
 import com.ironhack.userservice.dto.CreateUserDTO;
 import com.ironhack.userservice.dto.UserDTO;
-import com.ironhack.userservice.services.impl.UserServiceImpl;
+import com.ironhack.userservice.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -11,12 +11,13 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/v1/users")
 public class UserControllerImpl implements com.ironhack.userservice.controllers.UserController {
     
     @Autowired
-    private UserServiceImpl userServiceImpl;
+    private UserService userServiceImpl;
     
     
     @Override
@@ -34,7 +35,13 @@ public class UserControllerImpl implements com.ironhack.userservice.controllers.
         return userServiceImpl.findById(id);
     }
 
-    
+
+    @GetMapping("/username={username}")
+    @ResponseStatus(HttpStatus.OK)
+    public User findByUsername(@PathVariable(name = "username") String username){
+        return userServiceImpl.findByUsername(username);
+    }
+
     @Override
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)

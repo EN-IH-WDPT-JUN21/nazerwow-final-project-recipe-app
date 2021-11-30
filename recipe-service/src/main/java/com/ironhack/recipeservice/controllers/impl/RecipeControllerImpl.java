@@ -35,6 +35,13 @@ public class RecipeControllerImpl implements RecipeController {
     }
 
     @Override
+    @GetMapping("/user/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Recipe> findByUserId(@PathVariable(name = "id") Long id){
+        return recipeService.findByUserId(id);
+    }
+
+    @Override
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteRecipe(@PathVariable(name = "id") Long id){
@@ -49,10 +56,12 @@ public class RecipeControllerImpl implements RecipeController {
     }
 
     @Override
-    @PutMapping("{id}")
+    @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public Recipe updateRecipe(@PathVariable(name = "id") Long id,
                                @RequestBody @Valid RecipeDTO recipeDTO){
         return recipeService.updateRecipe(id, recipeDTO);
     }
+
+
 }

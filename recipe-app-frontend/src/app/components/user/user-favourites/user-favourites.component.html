@@ -1,0 +1,17 @@
+<mat-accordion>
+    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Favourite Recipes
+            </mat-panel-title>
+            <mat-panel-description>
+                <span *ngIf="recipeList == null">
+                    You currently have no favourites
+                </span>
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div *ngif="recipeList != null">
+            <app-recipe-list [recipeList]="recipeList"></app-recipe-list>
+        </div>
+    </mat-expansion-panel>
+</mat-accordion>
