@@ -1,3 +1,4 @@
+import { RecipeInstructionsComponent } from './../recipe-page/recipe-instructions/recipe-instructions.component';
 import { AddRecipeFormComponent } from './../add-recipe-form/add-recipe-form.component';
 import { RecipeSearchComponent } from './../recipe-search/recipe-search.component';
 import { RecipeService } from './../../../services/recipe.service';

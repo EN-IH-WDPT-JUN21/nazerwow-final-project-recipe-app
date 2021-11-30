@@ -53,7 +53,8 @@ public class SampleDataLoader implements CommandLineRunner {
                         faker.number().numberBetween(1L, 20L),
                         cuisines[faker.number().numberBetween(0, cuisines.length)],
                         List.of(diets[faker.number().numberBetween(0, diets.length)],
-                                diets[faker.number().numberBetween(0, diets.length)])))
+                                diets[faker.number().numberBetween(0, diets.length)]),
+                        "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg"))
                 .collect(Collectors.toList());
 
         recipeRepository.saveAll(sampleRecipes);

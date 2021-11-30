@@ -60,7 +60,8 @@ class RecipeControllerImplTest {
                 20,
                 1L,
                 Cuisine.BRITISH,
-                List.of(Diet.GLUTEN_FREE)
+                List.of(Diet.GLUTEN_FREE),
+                "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg"
         );
         recipe2 = new Recipe(
                 "Test Recipe2",
@@ -70,7 +71,8 @@ class RecipeControllerImplTest {
                 20,
                 1L,
                 Cuisine.AFRICAN,
-                List.of(Diet.VEGAN)
+                List.of(Diet.VEGAN),
+                "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg"
         );
         recipeRepository.saveAll(List.of(recipe1, recipe2));
     }
@@ -128,7 +130,8 @@ class RecipeControllerImplTest {
                 35,
                 1L,
                 Cuisine.KOREAN,
-                List.of(Diet.VEGETARIAN, Diet.GLUTEN_FREE)
+                List.of(Diet.VEGETARIAN, Diet.GLUTEN_FREE),
+                "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg"
         );
         String body = objectMapper.writeValueAsString(createRecipeDTO);
         mockMvc.perform(post("/api/v1/recipes")
@@ -150,7 +153,8 @@ class RecipeControllerImplTest {
                 null,
                 null,
                 null,
-                null
+                null,
+                "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg"
         );
         String body = objectMapper.writeValueAsString(createRecipeDTO);
         mockMvc.perform(post("/api/v1/recipes")
@@ -171,7 +175,8 @@ class RecipeControllerImplTest {
                 30,
                 1L,
                 Cuisine.KOREAN,
-                List.of(Diet.VEGETARIAN, Diet.GLUTEN_FREE)
+                List.of(Diet.VEGETARIAN, Diet.GLUTEN_FREE),
+                "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg"
         );
         String body = objectMapper.writeValueAsString(recipeDTO);
         MvcResult result = mockMvc.perform(put("/api/v1/recipes/" + recipe1.getId())
@@ -196,7 +201,8 @@ class RecipeControllerImplTest {
                 23,
                 1L,
                 Cuisine.KOREAN,
-                List.of(Diet.VEGETARIAN, Diet.GLUTEN_FREE)
+                List.of(Diet.VEGETARIAN, Diet.GLUTEN_FREE),
+                "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg"
         );
         String body = objectMapper.writeValueAsString(recipeDTO);
         MvcResult result = mockMvc.perform(put("/api/v1/recipes/" + recipe1.getId())

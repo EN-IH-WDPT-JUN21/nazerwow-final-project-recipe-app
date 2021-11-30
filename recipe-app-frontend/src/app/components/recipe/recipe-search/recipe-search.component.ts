@@ -14,7 +14,7 @@ export class RecipeSearchComponent implements OnInit {
 
   @Input()
   recipeList!:RecipeDTO[];
-
+  
   filteredRecipeList!: Observable<RecipeDTO[]>;
 
   recipeSearch: FormControl;
