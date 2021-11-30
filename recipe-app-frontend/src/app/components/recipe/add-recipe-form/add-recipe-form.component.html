@@ -1,4 +1,8 @@
+
+    <h1>Enter Recipe Details... </h1>
+
 <div class = "page d-flex justify-content-center flex-wrap">
+
 
     <form ngSubmit="onSubmit()" [formGroup]="recipeForm">    
         <mat-form-field appearance="fill">
@@ -93,6 +97,6 @@
             </div>
             <button mat-stroked-button color="primary" (click)="addStep()">Add Cooking Instruction</button>
              <br>
-            <button mat-stroked-button color="primary" type="submit" (click)="onSubmit()">Add Recipe</button>
+            <button [disabled]="recipeForm.invalid" mat-stroked-button color="primary" type="submit" (click)="onSubmit()">{{addFormButton}} Recipe</button>
     </form>
 </div>

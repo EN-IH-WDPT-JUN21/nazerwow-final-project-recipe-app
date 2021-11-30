@@ -86,7 +86,7 @@ export interface RecipeDTO {
   method : string[],
   prepTime: number,
   cookingTime: number,
-  authorId : number,
+  authorId: number,
   cuisine :  string ,
   diets : string[],
   createdDate ?:  Date,

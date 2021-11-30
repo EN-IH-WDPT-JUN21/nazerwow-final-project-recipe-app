@@ -1,3 +1,4 @@
+import { HomeComponent } from './components/home/home.component';
 import { UserDetailsComponent } from './components/user/user-details/user-details.component';
 import { RecipeBrowserComponent } from './components/recipe/recipe-browser/recipe-browser.component';
 import { RecipeListComponent } from './components/recipe/recipe-list/recipe-list.component';
@@ -21,7 +22,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    component: RecipeBrowserComponent
+    component: HomeComponent
   }
 ];
 

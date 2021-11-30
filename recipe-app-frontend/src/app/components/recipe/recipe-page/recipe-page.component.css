@@ -22,3 +22,7 @@ max-width: 1000px;
 button{
   margin: 5px;
 }
+
+.edit {
+  margin-left: auto;
+}

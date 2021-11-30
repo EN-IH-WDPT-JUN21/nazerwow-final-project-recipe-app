@@ -1,8 +1,9 @@
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AbstractControl, Form, FormArray, FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Ingredient, IngredientDTO } from './../../../models/ingredient.model';
 import { RecipeService } from './../../../services/recipe.service';
 import { EnumService } from './../../../services/enum.service';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import { Recipe, RecipeDTO } from 'src/app/models/recipe.model';
 
 @Component({
@@ -12,11 +13,14 @@ import { Recipe, RecipeDTO } from 'src/app/models/recipe.model';
 })
 export class AddRecipeFormComponent implements OnInit {
 
+  @Input()
+  title!: string;
   dietList!: string[];
   cuisineList!: string[];
   measurementList!: string[];
 
   addForm: boolean = true;
+  addFormButton: string = "Add";
 
   @Input()
   recipeDTO!: RecipeDTO;
@@ -43,7 +47,8 @@ export class AddRecipeFormComponent implements OnInit {
 
   constructor(private enumService: EnumService,
     private recipeService: RecipeService,
-    private formBuilder: FormBuilder) {
+    private formBuilder: FormBuilder,
+    @Inject(MAT_DIALOG_DATA) public data: RecipeDTO) {
        this.name = new FormControl('', [Validators.required]);
        this.ingredients = new FormArray([], [Validators.required]);
        this.ingredientName = new FormControl('', [Validators.required]);
@@ -76,6 +81,7 @@ export class AddRecipeFormComponent implements OnInit {
     this.getDiets();
     this.getCuisines();
     this.getMeasurements();
+    this.recipeDTO = this.data;
   }
 
   ngAfterViewInit(): void {
@@ -83,9 +89,11 @@ export class AddRecipeFormComponent implements OnInit {
   }
 
   onSubmit(){
-    // console.log(this.recipeDTO);
-    // this.addNewRecipeToDatabase(this.createRecipeDTOFromForm());
-    this.fillFormToEdit();
+    if(this.addForm){
+      this.addNewRecipeToDatabase();
+    } else {
+      this.editRecipeInDatabase();
+    }
   }
 
   addIngredient(): void {
@@ -116,15 +124,15 @@ export class AddRecipeFormComponent implements OnInit {
   addOrEdit(): void {
     if(this.recipeDTO != null){
       this.addForm = false;
+      this.addFormButton = "Confirm Edited"
       this.fillFormToEdit();
-      console.log("did we get here")
     } else {
       this.addForm = true;
+      this.addFormButton = "Add"
     }
   }
 
   fillFormToEdit():void {
-
     for(let diet in this.recipeDTO.diets){
       this.addDiet()
     }
@@ -165,25 +173,38 @@ export class AddRecipeFormComponent implements OnInit {
     })
   }
 
-  private addNewRecipeToDatabase(recipeDTO: RecipeDTO) {
-    this.recipeService.addRecipe(recipeDTO).subscribe(result => {
+  private addNewRecipeToDatabase() {
+    const newRecipe: RecipeDTO = this.createRecipeDTOFromForm();
+    this.recipeService.addRecipe(newRecipe).subscribe(result => {
+      console.log(result);
+    });
+  }
+
+  private editRecipeInDatabase() {
+    const editedRecipe: RecipeDTO = this.createRecipeDTOFromForm();
+    this.recipeService.editRecipe(editedRecipe).subscribe(result => {
       console.log(result);
     });
   }
 
   private createRecipeDTOFromForm() {
-    this.recipe = new Recipe(
-      this.name.value,
-      this.ingredients.value,
-      this.method.value,
-      this.prepTime.value,
-      this.cookingTime.value,
-      1,
-      this.cuisine.value,
-      this.diets.value
-    );
-    const recipeDTO = this.recipe.convertToDTO();
-    return recipeDTO;
+    let id: any;
+    if(this.recipeDTO == null){
+      id = 0;
+    } else {
+      id = this.recipeDTO.id
+    }
+    return {
+      id: id,
+      name: this.name.value,
+      ingredients : this.ingredients.value,
+      method : this.method.value,
+      prepTime: this.prepTime.value,
+      cookingTime: this.cookingTime.value,
+      authorId: 1,
+      cuisine :  this.cuisine.value ,
+      diets : this.diets.value,
+    };
   }
 
 }

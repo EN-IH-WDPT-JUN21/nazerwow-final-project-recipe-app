@@ -4,7 +4,7 @@ import { RecipeSearchComponent } from './../recipe-search/recipe-search.componen
 import { RecipeService } from './../../../services/recipe.service';
 import { RecipeDTO } from 'src/app/models/recipe.model';
 import { EnumService } from './../../../services/enum.service';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatChip } from '@angular/material/chips';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -20,6 +20,11 @@ export class RecipeBrowserComponent implements OnInit {
   cuisineList!:string[];
   dietList!:string[];
   measurementsList!:string[];
+
+  @Input()
+  showList: boolean = true
+  @Input()
+  showAddButton: boolean = true
 
   recipeList!: RecipeDTO[];
   filterList: string[];
@@ -122,7 +127,7 @@ export class RecipeBrowserComponent implements OnInit {
   }
 
   loadAddForm(): void {
-    const dialogRef = this.dialog.open(AddRecipeFormComponent, { autoFocus: false, height: '80vh', width: '80vw'});
+    const dialogRef = this.dialog.open(AddRecipeFormComponent, { autoFocus: false, height: '80vh', width: '80vw' });
     dialogRef.afterClosed().subscribe(result => {
       console.log('Dialog result: %{result}');
     })

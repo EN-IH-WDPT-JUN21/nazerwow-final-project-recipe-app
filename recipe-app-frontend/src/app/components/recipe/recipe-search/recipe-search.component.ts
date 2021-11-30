@@ -45,18 +45,22 @@ export class RecipeSearchComponent implements OnInit {
     if(this.recipeList == null)
     this.recipeService.getAllRecipes().subscribe(result => {
       this.recipeList = result;
+      this.filteredRecipeList = this.recipeForm.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter()),
+    )
     })
   }
 
   private _filter(): RecipeDTO[] {
     const filterValue:string = this.recipeSearch.value.toLowerCase().trim();
+    console.log(filterValue)
     return this.recipeList
-    .filter((recipe => recipe.name.toLowerCase().includes(filterValue) || recipe.cuisine.toLowerCase().includes(filterValue) || recipe.diets.filter((diet => diet.toLowerCase().includes(filterValue))).length > 0));
+    .filter(recipe => recipe.name.toLowerCase().includes(filterValue) || recipe.cuisine.toLowerCase().includes(filterValue) || recipe.diets.filter((diet => diet.toLowerCase().includes(filterValue))).length > 0);
   }
 
   sendRecipeName(): void {
     this.recipeNameOutput.emit(this.recipeSearch.value.toLowerCase().trim());
-    console.log(this.recipeSearch.value);
   }
 
   delete():void {

@@ -1,8 +1,17 @@
-<nav mat-tab-nav-bar style="background-color: #470058;">
-    <a mat-tab-link class="navbar-brand"><img class="nav-bar-logo" src="../../../assets/images/temp-logo.png"
-            alt=""></a>
-    <a mat-tab-link style="color: #ffffff;" [routerLink]="['/recipes/']"> Recipes </a>
-    <a mat-tab-link style="color: #ffffff;" > Users </a>
-    <a mat-tab-link style="color: #ffffff;" > Misc </a>
 
-</nav>
+    <mat-toolbar color="primary">
+        <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" (click)="menuClicked()">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <button mat-button>
+            <span class="title">The Recipe Box</span>
+        </button>
+        <span class="right-spacer"></span>
+        <button mat-button>
+           Log in
+        </button>
+        <button mat-button (click)="loadSignUpForm()">
+            Sign Up
+        </button>
+    </mat-toolbar>
+

@@ -1,6 +1,9 @@
+import { UserFormComponent } from './../user-form/user-form.component';
+import { MatDialog } from '@angular/material/dialog';
+import { UserOwnRecipeComponent } from './../user-own-recipe/user-own-recipe.component';
 import { ActivatedRoute } from '@angular/router';
 import { UserDTO } from './../../../models/user-model';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { Location } from '@angular/common'
 
@@ -28,9 +31,12 @@ export class UserPageComponent implements OnInit {
       this.user = result;
       })
     }
+    
 
     back(): void {
       this.location.back();
     }
+
+    
 
 }

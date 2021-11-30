@@ -16,9 +16,11 @@ export class UserOwnRecipeComponent implements OnInit {
 
   panelOpenState: boolean = false;
 
-  constructor(private recipeService: RecipeService) { }
+  constructor(private recipeService: RecipeService) {
+   }
 
   ngOnInit(): void {
+    this.getUsersOwnRecipes();
   }
 
 
