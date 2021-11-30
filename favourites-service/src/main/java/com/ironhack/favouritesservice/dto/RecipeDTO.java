@@ -9,6 +9,7 @@ import lombok.Setter;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import java.util.Date;
 import java.util.List;
 
 @NoArgsConstructor
@@ -29,8 +30,11 @@ public class RecipeDTO {
     private Cuisine cuisine;
     @Enumerated(EnumType.STRING)
     private List<Diet> diets;
+    private String imageUrl;
+    private Date createdDate;
+    private Date editedDate;
 
-    public RecipeDTO(String name, List<Ingredient> ingredients, List<String> method, Integer prepTime, Integer cookingTime, Long authorId, Cuisine cuisine, List<Diet> diets) {
+    public RecipeDTO(String name, List<Ingredient> ingredients, List<String> method, Integer prepTime, Integer cookingTime, Long authorId, Cuisine cuisine, List<Diet> diets, String imageUrl) {
         this.name = name;
         this.ingredients = ingredients;
         this.method = method;
@@ -39,6 +43,7 @@ public class RecipeDTO {
         this.authorId = authorId;
         this.cuisine = cuisine;
         this.diets = diets;
+        this.imageUrl = imageUrl;
     }
 }
 

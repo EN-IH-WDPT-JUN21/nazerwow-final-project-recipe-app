@@ -83,7 +83,8 @@ public class RecipeServiceImpl implements RecipeService {
                 createRecipeDTO.getCookingTime(),
                 createRecipeDTO.getAuthorId(),
                 createRecipeDTO.getCuisine(),
-                createRecipeDTO.getDiets()
+                createRecipeDTO.getDiets(),
+                createRecipeDTO.getImageUrl()
         );
     }
 

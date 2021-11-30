@@ -42,7 +42,6 @@ public class UserControllerImpl implements com.ironhack.userservice.controllers.
         return userServiceImpl.findByUsername(username);
     }
 
-    
     @Override
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
