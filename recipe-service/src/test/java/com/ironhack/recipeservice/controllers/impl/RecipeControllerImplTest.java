@@ -110,6 +110,28 @@ class RecipeControllerImplTest {
     }
 
     @Test
+    void findByUserId_Valid() throws Exception {
+        Recipe recipe3 = new Recipe(
+                "TestRecipe3",
+                List.of(ingredient1,ingredient2,ingredient3),
+                method,
+                10,
+                20,
+                2L,
+                Cuisine.AFRICAN,
+                List.of(Diet.VEGAN),
+                "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg"
+        );
+        recipeRepository.save(recipe3);
+        MvcResult result = mockMvc.perform(get("/api/v1/recipes/user/" + recipe1.getAuthorId()))
+                .andExpect(status().isOk())
+                .andReturn();
+        assertTrue(result.getResponse().getContentAsString().contains(recipe1.getName()));
+        assertTrue(result.getResponse().getContentAsString().contains(recipe2.getName()));
+        assertFalse(result.getResponse().getContentAsString().contains(recipe3.getName()));
+    }
+
+    @Test
     void deleteRecipe() throws Exception {
         var repoSizeBefore = recipeRepository.findAll().size();
         MvcResult result = mockMvc.perform(delete("/api/v1/recipes/" + recipe1.getId()))

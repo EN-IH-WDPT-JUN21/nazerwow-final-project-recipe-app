@@ -199,4 +199,14 @@ class UserControllerImplTest {
         assertEquals(userDTO.getBio(), updatedUser.getBio());
     }
 
+    @Test
+    void findByUsername() throws Exception {
+        MvcResult result = mockMvc.perform(get("/api/v1/users/username=" + user1.getUsername()))
+                .andExpect(status().isOk())
+                .andReturn();
+        assertTrue(result.getResponse().getContentAsString().contains("TestUser1"));
+        assertFalse(result.getResponse().getContentAsString().contains("TestUser2"));
+        assertTrue(result.getResponse().getContentAsString().contains("USER"));
+    }
+
 }
