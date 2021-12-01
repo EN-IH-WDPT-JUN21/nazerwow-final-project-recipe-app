@@ -29,6 +29,7 @@ import { HomeComponent } from './components/home/home.component';
 import { HomeSearchComponent } from './components/home/home-search/home-search.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FavouritesCarouselComponent } from './components/home/favourites-carousel/favourites-carousel.component';
+import { MdbCarouselModule } from 'mdb-angular-ui-kit/carousel';
 
 
 @NgModule({
@@ -64,7 +65,8 @@ import { FavouritesCarouselComponent } from './components/home/favourites-carous
     HttpClientModule,
     ReactiveFormsModule,
     NgbModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    MdbCarouselModule
   ],
   providers: [],
   bootstrap: [AppComponent]
