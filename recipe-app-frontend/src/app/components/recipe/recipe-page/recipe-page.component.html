@@ -1,6 +1,14 @@
 <div class="page">
+    <div class="d-flex">
+        <div>
+            <button mat-raised-button color="primary" [routerLink]="['/recipes/']">Back</button>
+        </div>
+        <div class="edit">
+            <button ml-auto  mat-raised-button color="primary" type="submit" (click)="loadAddForm()">Edit</button>
+        </div>
+    </div>
     <div class = "title-card">
-        <app-recipe-card [recipe]="recipeDTO"></app-recipe-card>
+        <app-recipe-card [recipe]="recipeDTO" [user]="user"></app-recipe-card>
     </div>
     <div class = instructions-card>
         <app-recipe-instructions [recipe]="recipeDTO"></app-recipe-instructions>

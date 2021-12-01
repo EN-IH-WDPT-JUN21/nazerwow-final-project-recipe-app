@@ -1,3 +1,5 @@
+import { UserService } from './../../../../services/user.service';
+import { UserDTO } from './../../../../models/user-model';
 import { RecipeDTO } from '../../../../models/recipe.model';
 import { Component, Input, OnInit } from '@angular/core';
 
@@ -10,10 +12,14 @@ export class RecipeCardComponent implements OnInit {
 
   @Input()
   recipe!:RecipeDTO;
+  
+  @Input()
+  user!:UserDTO
 
-  constructor() { }
+  constructor(private userService:UserService) { }
 
   ngOnInit(): void {
-  }
 
+  }
+  
 }

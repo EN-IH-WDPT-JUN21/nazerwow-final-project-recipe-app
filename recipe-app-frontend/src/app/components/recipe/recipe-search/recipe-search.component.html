@@ -1,12 +1,16 @@
-<form [formGroup]="recipeForm" (ngSubmit)="sendRecipeName()" >
+<form [formGroup]="recipeForm" (ngSubmit)="sendRecipeName()" class="search" >
     <mat-form-field class="search" appearance="fill">
         <mat-label>Search Recipes</mat-label>
-        <input type="text" matInput placeholder="Recipe Name..." formControlName="recipeSearch" [matAutocomplete]="auto" (keydown.backspace)="delete()" (keydown.delete)="delete()">
+        <input type="text" 
+        matInput 
+        formControlName="recipeSearch" 
+        [matAutocomplete]="auto" 
+        (keydown.backspace)="delete()" 
+        (keydown.delete)="delete()">
         <mat-autocomplete  #auto="matAutocomplete">
             <mat-option *ngFor="let recipe of filteredRecipeList | async" [value]="recipe.name">
                 {{recipe.name}}
             </mat-option>
         </mat-autocomplete>
     </mat-form-field>
-    <!-- <h6 *ngIf="!validPokemon && pokemonName.touched"><em>Invalid Pokemon Name</em></h6> -->
 </form>

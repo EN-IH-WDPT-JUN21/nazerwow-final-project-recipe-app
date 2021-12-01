@@ -1,0 +1,102 @@
+
+    <h1>Enter Recipe Details... </h1>
+
+<div class = "page d-flex justify-content-center flex-wrap">
+
+
+    <form ngSubmit="onSubmit()" [formGroup]="recipeForm">    
+        <mat-form-field appearance="fill">
+            <mat-label>Recipe Name</mat-label>
+            <input matInput formControlName="name" placeholder="recipe name...">
+            <mat-error *ngIf="name.invalid && name.touched">
+                Please enter a valid recipe name.
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Prep Time</mat-label>
+            <input type="number" matInput formControlName="prepTime" placeholder="Prep Time...">
+            <mat-error *ngIf="prepTime.invalid && prepTime.touched">
+                Please enter a valid preparation time
+            </mat-error>
+        </mat-form-field>
+        
+        <mat-form-field appearance="fill">
+            <mat-label>Cooking Time</mat-label>
+            <input type="number" matInput formControlName="cookingTime" placeholder="cooking Time...">
+            <mat-error *ngIf="cookingTime.invalid && cookingTime.touched">
+                Please enter a valid cooking time
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Select Cuisine</mat-label>
+            <mat-select formControlName="cuisine">
+                <mat-option *ngFor="let cuisine of cuisineList" [value]="cuisine">{{cuisine | titlecase}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="cuisine.invalid && cuisine.touched">
+                Please enter a cuisine
+            </mat-error>
+        </mat-form-field>
+         <br>
+         
+        <ng-container formArrayName="diets">
+            <div *ngFor="let _ of diets.controls; index as i">
+                <mat-form-field appearance="fill">
+                    <mat-label>Select Diets</mat-label>
+                    <mat-select [formControlName]="i">
+                        <mat-option *ngFor="let diet of dietList" [value]="diet">{{diet | titlecase}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <button mat-stroked-button color="primary" (click)="removeDiet(i)">Remove Diet</button>
+            </div>
+            <button mat-stroked-button color="primary" (click)="addDiet()">Add Diet</button>
+        </ng-container> 
+         <br>
+         
+        <ng-container class="ingredients" formArrayName="ingredients">
+            <div *ngFor="let _ of ingredients.controls; index as i">
+                <form [formGroupName]="i">
+                    <div>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Ingredient Name</mat-label>
+                            <input matInput formControlName="name" placeholder="ingredient name...">
+                            <mat-error *ngIf="ingredientName.invalid && ingredientName.touched">
+                                Please enter a valid ingredient name.
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Ingredient Quantity</mat-label>
+                            <input type="number" matInput formControlName="quantity" placeholder="Quantity...">
+                            <mat-error *ngIf="ingredientQuantity.invalid && ingredientQuantity.touched">
+                                Please enter a valid quantity
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Select Measurement</mat-label>
+                            <mat-select formControlName="measurement">
+                                <mat-option *ngFor="let measure of measurementList" [value]="measure">{{measure | titlecase}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <button mat-stroked-button color="primary" (click)="removeIngredient(i)">Remove Ingredient</button>
+                    </div>
+                </form>
+            </div>
+            <button mat-stroked-button color="primary" (click)="addIngredient()">Add Ingredient</button>    
+        </ng-container>
+             
+            <div class="method" formArrayName="method">
+                <div *ngFor="let _ of method.controls; index as i">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Step {{i + 1}}</mat-label>
+                        <textarea matInput [formControlName]="i" placeholder="step"></textarea>
+                        <mat-error *ngIf="method.invalid && method.touched">
+                            Please enter at least 1 valid instruction
+                        </mat-error>
+                    </mat-form-field>
+                    <button mat-stroked-button color="primary" (click)="removeStep(i)">Remove Step {{i + 1}}</button>
+                </div>
+            </div>
+            <button mat-stroked-button color="primary" (click)="addStep()">Add Cooking Instruction</button>
+             <br>
+            <button [disabled]="recipeForm.invalid" mat-stroked-button color="primary" type="submit" (click)="onSubmit()">{{addFormButton}} Recipe</button>
+    </form>
+</div>

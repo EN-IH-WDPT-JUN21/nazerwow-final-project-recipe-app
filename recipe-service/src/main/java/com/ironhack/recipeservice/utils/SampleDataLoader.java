@@ -1,109 +1,74 @@
 package com.ironhack.recipeservice.utils;
 
+import com.github.javafaker.Faker;
 import com.ironhack.recipeservice.dao.Ingredient;
 import com.ironhack.recipeservice.dao.Recipe;
 import com.ironhack.recipeservice.enums.Cuisine;
 import com.ironhack.recipeservice.enums.Diet;
 import com.ironhack.recipeservice.enums.Measurement;
 import com.ironhack.recipeservice.repositories.RecipeRepository;
+import com.netflix.discovery.converters.Auto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Component
 public class SampleDataLoader implements CommandLineRunner {
 
     @Autowired
-    RecipeRepository recipeRepository;
+    private RecipeRepository recipeRepository;
+    @Autowired
+    private Faker faker;
+
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
 
-        Ingredient ingredient1 = new Ingredient("Salt", 10, Measurement.G);
-        Ingredient ingredient2 = new Ingredient("Pepper", 10, Measurement.G);
-        Ingredient ingredient3 = new Ingredient("Chill Oil", 10, Measurement.ML);
-        Ingredient ingredient4 = new Ingredient("Cloves of Garlic", 3, null);
-        Ingredient ingredient5 = new Ingredient("Water", 100, Measurement.ML);
-        Ingredient ingredient6 = new Ingredient("Chill Powder", 10, Measurement.G);
-        Ingredient ingredient7 = new Ingredient("Chicken Stock", 10, Measurement.G);
-        Ingredient ingredient8 = new Ingredient("Paprika", 10, Measurement.G);
-        Ingredient ingredient9 = new Ingredient("Oregano", 10, Measurement.G);
-        List<String> method = List.of("This is step 1 of how to make the recipe. This is step 1 of how to make the recipe.",
-                "This is step 2 of how to make the recipe. This is step 2 of how to make the recipe.",
-                "This is step 3 of how to make the recipe. This is step 3 of how to make the recipe. This is step 3 of how to make the recipe.");
-        Recipe recipe1 = new Recipe(
-                "Test Recipe1",
-                List.of(ingredient1,ingredient2,ingredient3, ingredient4),
-                method,
-                5,
-                10,
-                1L,
-                Cuisine.BRITISH,
-                List.of(Diet.KETO, Diet.DAIRY_FREE, Diet.HALAL)
-        );
-        Recipe recipe2 = new Recipe(
-                "Test Recipe2",
-                List.of(ingredient1,ingredient2,ingredient3, ingredient5),
-                method,
-                5,
-                25,
-                1L,
-                Cuisine.AMERICAN,
-                List.of()
-        );
-        Recipe recipe3 = new Recipe(
-                "Creamy mushroom Linguine with Shallots and White wine Creamy mushroom Linguine with Shallots and White wine Creamy mushroom Linguine with Shallots and White wine ",
-                List.of(ingredient1,ingredient2,ingredient3, ingredient6, ingredient7, ingredient8, ingredient9),
-                method,
-                14,
-                20,
-                1L,
-                Cuisine.AFRICAN,
-                List.of(Diet.VEGETARIAN)
-        );
-        Recipe recipe4 = new Recipe(
-                "Test Beef Steak",
-                List.of(ingredient1,ingredient2,ingredient3, ingredient4, ingredient5, ingredient6, ingredient7),
-                method,
-                10,
-                45,
-                1L,
-                Cuisine.SPANISH,
-                List.of(Diet.VEGAN)
-        );
-        Recipe recipe5 = new Recipe(
-                "Test Lamb Chops",
-                List.of(ingredient1,ingredient2,ingredient3, ingredient8, ingredient9, ingredient4),
-                method,
-                10,
-                45,
-                1L,
-                Cuisine.KOREAN,
-                List.of(Diet.GLUTEN_FREE)
-        );
-        Recipe recipe6 = new Recipe(
-                "Test Salmon",
-                List.of(ingredient1,ingredient2,ingredient3, ingredient7, ingredient8),
-                method,
-                15,
-                60,
-                1L,
-                Cuisine.CHINESE,
-                List.of()
-        );
-        Recipe recipe7 = new Recipe(
-                "Test Beef Stroganoff",
-                List.of(ingredient1,ingredient2,ingredient3, ingredient4, ingredient5),
-                method,
-                2,
-                30,
-                1L,
-                Cuisine.JAPANESE,
-                List.of(Diet.GLUTEN_FREE)
-        );
+        Measurement[] measurementList = Measurement.class.getEnumConstants();
+        Cuisine[] cuisines = Cuisine.class.getEnumConstants();
+        Diet[] diets = Diet.class.getEnumConstants();
 
-        recipeRepository.saveAll(List.of(recipe1, recipe2, recipe3, recipe4, recipe5, recipe6, recipe7));
+        List<String> sampleMethod = IntStream.rangeClosed(1, 5)
+                .mapToObj(i -> faker.chuckNorris().fact()).collect(Collectors.toList());
+
+        List<Ingredient> sampleIngredients = IntStream.rangeClosed(1, 100)
+                .mapToObj(i -> new Ingredient(
+                        faker.food().ingredient(),
+                        faker.number().randomDigit(),
+                        measurementList[faker.number().numberBetween(0, measurementList.length)]
+                        )).collect(Collectors.toList());
+
+        List<Recipe> sampleRecipes = IntStream.rangeClosed(1, 100)
+                .mapToObj(i -> new Recipe(
+                        faker.food().dish(),
+                        randomIngredientList(sampleIngredients),
+                        sampleMethod,
+                        faker.number().numberBetween(0, 19),
+                        faker.number().numberBetween(10, 60),
+                        faker.number().numberBetween(1L, 20L),
+                        cuisines[faker.number().numberBetween(0, cuisines.length)],
+                        List.of(diets[faker.number().numberBetween(0, diets.length)],
+                                diets[faker.number().numberBetween(0, diets.length)]),
+                        "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg"))
+                .collect(Collectors.toList());
+
+        recipeRepository.saveAll(sampleRecipes);
+    }
+
+    private Ingredient randomIngredient(List<Ingredient> ingredientList) {
+        return ingredientList.get(faker.number().numberBetween(0, 99));
+    }
+
+    private List<Ingredient> randomIngredientList(List<Ingredient> ingredientList){
+        List<Ingredient> randomList = new ArrayList<>();
+        for(int i = 0; i < faker.number().numberBetween(2, 12); i ++){
+            randomList.add(randomIngredient(ingredientList));
+        }
+        return randomList;
     }
 }

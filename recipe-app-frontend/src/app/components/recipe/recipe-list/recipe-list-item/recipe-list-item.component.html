@@ -1,7 +1,7 @@
-<mat-card>
-    <div class="d-flex">
+<mat-card class="default-hover" [routerLink]="['/recipes/', recipe.id ]">
+    <div class="d-flex flex-wrap">
     <div class="p-2">
-        <img class="rounded float-left small-image" src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="">
+        <img class="rounded float-left small-image img-fluid" src="https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg" alt="">
         <p>Rating:</p>
     </div>
     <div class="p-2">
@@ -10,11 +10,11 @@
         <p>Prep Time: {{recipe.prepTime}} mins </p>
         <p>Cooking Time: {{recipe.cookingTime}} mins</p>
     </div>
-    <div class="p-2">
-        <h1 class="title">{{recipe.name}}</h1>
-        <h4>by: {{recipe.authorId}}</h4>
-    </div>
-    </div>
+</div>
+<div class="p-2">
+    <h1 class="title">{{recipe.name}}</h1>
+    <h4 [routerLink]="['/users/', user.id]">by: {{user.name}}</h4>
+</div>
     <mat-chip-list aria-label="Dietary Requirements">
         <mat-chip color="primary" selected *ngFor="let diet of recipe.diets">{{diet | titlecase}}</mat-chip>
         <mat-chip color="accent" selected>{{recipe.cuisine | titlecase}}</mat-chip>

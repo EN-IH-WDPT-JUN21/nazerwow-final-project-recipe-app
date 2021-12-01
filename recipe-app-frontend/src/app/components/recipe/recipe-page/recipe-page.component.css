@@ -18,3 +18,11 @@ max-width: 1000px;
   margin-right: auto;
   margin-bottom: 10px;
 }
+
+button{
+  margin: 5px;
+}
+
+.edit {
+  margin-left: auto;
+}
