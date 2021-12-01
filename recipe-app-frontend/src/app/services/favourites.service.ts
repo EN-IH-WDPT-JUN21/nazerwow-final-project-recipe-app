@@ -10,7 +10,7 @@ type NewType = Observable<any>;
 })
 export class FavouritesService {
 
-  readonly baseUrl: string = "http://localhost:7000/api/v1/favourites"
+  readonly baseUrl: string = "http://localhost:8300/api/v1/favourites"
 
   constructor(
     private http: HttpClient
@@ -27,6 +27,10 @@ export class FavouritesService {
 
   removeFromFavourites(id: number): Observable<any> {
     return this.http.delete(this.baseUrl + "/" + id)
+  }
+
+  getTop10FavouritedRecipes(): Observable<any> {
+    return this.http.get<any>(this.baseUrl + "/top10");
   }
 
 

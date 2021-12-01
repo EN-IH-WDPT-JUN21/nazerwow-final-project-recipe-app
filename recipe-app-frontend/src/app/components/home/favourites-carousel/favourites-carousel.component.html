@@ -1,1 +1,35 @@
-<p>favourites-carousel works!</p>
+<mat-card>
+
+    <div class="d-flex justify-content-center">
+        
+        <div class="text-box align-self-center">
+            <h1 class="a">Our</h1>
+            <h1 class="b">  Most</h1>
+            <h1 class="c">   Popular</h1>
+            <h1 class="d">    Recipes</h1>
+        </div>
+        
+        <div class="carousel p-2">
+            <mdb-carousel [controls]="true" [indicators]="true" [animation]="'fade'">
+                
+                <mdb-carousel-item *ngIf="recipeList.length < 1">
+                    <img src={{recipeList[0].imageUrl}} class="d-block w-100" alt="..." [routerLink]= "['/recipes/', recipeList[0].id ]" />
+                    <div class="carousel-caption d-none d-md-block">
+                        <h2>{{recipeList[0].name}}</h2>
+                        <p> <span *ngFor="let diet of recipeList[0].diets"><em>{{diet}} </em> </span></p>
+                    </div>
+                </mdb-carousel-item>
+                
+                <mdb-carousel-item *ngFor="let recipe of recipeList">
+                    <img src={{recipe.imageUrl}} class="d-block w-100" alt="..." [routerLink]= "['/recipes/', recipe.id ]" />
+                    <div class="carousel-caption d-none d-md-block">
+                        <h2>{{recipe.name}}</h2>
+                        <h6><span *ngFor="let diet of recipe.diets"> <em>{{diet | titlecase}} </em></span></h6>
+                    </div>
+                </mdb-carousel-item>
+                
+                
+            </mdb-carousel>
+        </div>
+    </div>
+</mat-card>

@@ -1,7 +1,7 @@
 <div class="page">
     <div class="d-flex">
         <div>
-            <button mat-raised-button color="primary" [routerLink]="['/recipes/']">Back</button>
+            <button mat-raised-button color="primary" (click)="back()">Back</button>
         </div>
         <div class="edit">
             <button ml-auto  mat-raised-button color="primary" type="submit" (click)="loadAddForm()">Edit</button>
