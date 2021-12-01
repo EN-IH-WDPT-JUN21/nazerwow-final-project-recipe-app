@@ -3,7 +3,6 @@ package com.ironhack.favouritesservice.controller.impl;
 import com.ironhack.favouritesservice.dao.Favourite;
 import com.ironhack.favouritesservice.dto.FavRecipeListDTO;
 import com.ironhack.favouritesservice.dto.FavouriteDTO;
-import com.ironhack.favouritesservice.dto.FavouriteRecipeCountDTO;
 import com.ironhack.favouritesservice.dto.RecipeDTO;
 import com.ironhack.favouritesservice.repositories.FavouriteRepository;
 import com.ironhack.favouritesservice.services.impl.FavouritesServiceImpl;
@@ -62,6 +61,4 @@ public class FavouriteControllerImpl implements com.ironhack.favouritesservice.c
     public List<RecipeDTO> getTop10FavouritedRecipes() {
         return favouritesService.mostFavouritedRecipesLimitedBy(10);
     }
-
-
 }

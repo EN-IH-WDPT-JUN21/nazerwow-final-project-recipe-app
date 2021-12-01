@@ -72,8 +72,7 @@ public class FavouritesServiceImpl implements FavouritesService {
     }
 
     private List<FavouriteRecipeCountDTO> getFavouriteRecipeCountDTOS(int i) {
-        List<FavouriteRecipeCountDTO> favouriteRecipeCountDTOS = convertRepoResultToFavRecipeCountDTOList(i);
-        return favouriteRecipeCountDTOS;
+        return convertRepoResultToFavRecipeCountDTOList(i);
     }
 
     private List<FavouriteRecipeCountDTO> convertRepoResultToFavRecipeCountDTOList(int i) {

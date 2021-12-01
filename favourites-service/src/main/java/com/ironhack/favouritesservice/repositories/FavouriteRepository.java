@@ -16,5 +16,4 @@ public interface FavouriteRepository extends JpaRepository<Favourite, Long> {
     @Query(value = "SELECT COUNT(recipe_id) AS favourited_count, recipe_id FROM favourite GROUP BY recipe_id ORDER BY favourited_count DESC LIMIT :limit", nativeQuery = true)
     List<long[]> getMostFavouritedRecipesLimitedUpto(@Param("limit") int limit);
 
-
 }

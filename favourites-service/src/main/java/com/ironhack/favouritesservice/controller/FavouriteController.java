@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 public interface FavouriteController {
+
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     List<Favourite> findAll();
@@ -33,5 +34,4 @@ public interface FavouriteController {
     @GetMapping("/top10")
     @ResponseStatus(HttpStatus.OK)
     List<RecipeDTO> getTop10FavouritedRecipes();
-
 }

@@ -89,7 +89,7 @@ export interface RecipeDTO {
   authorId: number,
   cuisine :  string ,
   diets : string[],
-  imageUrl?: string;
+  imageUrl? : string,
   createdDate ?:  Date,
   editedDate ?:  Date
 }
