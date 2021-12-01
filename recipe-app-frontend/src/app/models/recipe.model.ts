@@ -91,5 +91,5 @@ export interface RecipeDTO {
   diets : string[],
   imageUrl? : string,
   createdDate ?:  Date,
-  editedDate ?:  Date 
+  editedDate ?:  Date
 }

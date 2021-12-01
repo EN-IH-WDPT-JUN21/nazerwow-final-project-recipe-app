@@ -14,4 +14,5 @@ public class FavouriteRecipeCountDTO {
     long favourited_count;
     Long recipe_id;
 
+
 }
