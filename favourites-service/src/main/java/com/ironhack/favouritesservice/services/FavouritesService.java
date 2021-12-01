@@ -3,6 +3,7 @@ package com.ironhack.favouritesservice.services;
 import com.ironhack.favouritesservice.dao.Favourite;
 import com.ironhack.favouritesservice.dto.FavRecipeListDTO;
 import com.ironhack.favouritesservice.dto.FavouriteDTO;
+import com.ironhack.favouritesservice.dto.RecipeDTO;
 
 import java.util.List;
 
@@ -19,4 +20,6 @@ public interface FavouritesService {
     Favourite addToFavourites(FavouriteDTO favouriteDTO);
 
     void removeFromFavourites(Long id);
+
+    List<RecipeDTO> mostFavouritedRecipesLimitedBy(int i);
 }

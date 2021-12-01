@@ -18,16 +18,16 @@ export class Recipe {
     ){}
 
 
-    public get cookingTime(): string {
+    public get cookingTime(): number {
         return this._cookingTime;
     }
-    public set cookingTime(value: string) {
+    public set cookingTime(value: number) {
         this._cookingTime = value;
     }
-    public get prepTime(): string {
+    public get prepTime(): number {
         return this._prepTime;
     }
-    public set prepTime(value: string) {
+    public set prepTime(value: number) {
         this._prepTime = value;
     }
     public get editedDate(): Date {
@@ -72,30 +72,39 @@ export class Recipe {
     public set ingredients(value: Ingredient[]) {
         this._ingredients = value;
     }
-    public get name(): String {
+    public get name(): string {
         return this._name;
     }
-    public set name(value: String) {
+    public set name(value: string) {
         this._name = value;
     }
-    public get id(): number {
-        return this._id;
-    }
-    public set id(value: number) {
-        this._id = value;
+
+    public convertToDTO(): RecipeDTO {
+        const recipeDTO: RecipeDTO = {
+            name: this.name,
+            ingredients: this.ingredients,
+            method: this.method,
+            prepTime: this.prepTime,
+            cookingTime: this.cookingTime,
+            authorId: this.authorId,
+            cuisine: this.cuisine,
+            diets: this.diets
+        }
+        return recipeDTO;
     }
 }
 
 export interface RecipeDTO {
-  id: number,
+  id?: number,
   name: string,
   ingredients : IngredientDTO[],
-    method : string[],
-    prepTime: number,
-    cookingTime: number,
-   authorId : number,
-   cuisine :  string ,
-   diets : string[],
-   createdDate :  Date,
-   editedDate :  Date 
+  method : string[],
+  prepTime: number,
+  cookingTime: number,
+  authorId: number,
+  cuisine :  string ,
+  diets : string[],
+  imageUrl?: string;
+  createdDate ?:  Date,
+  editedDate ?:  Date
 }
