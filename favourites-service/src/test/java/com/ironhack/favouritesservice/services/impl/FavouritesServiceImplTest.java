@@ -96,4 +96,32 @@ class FavouritesServiceImplTest {
         assertEquals(repoSizeBefore - 1, repoSizeAfter);
         assertThrows(ResponseStatusException.class, () -> favouritesService.findById(testFav1.getId()));
     }
+
+    @Test
+    void mostFavouritedRecipesLimitedBy() {
+        List<Favourite> favouriteList = List.of(
+                new Favourite(1L, 1L),
+                new Favourite(1L, 1L),
+                new Favourite(1L, 1L),
+                new Favourite(1L, 1L),
+         new Favourite(1L, 2L),
+        new Favourite(2L, 3L),
+        new Favourite(3L, 4L),
+        new Favourite(1L, 5L),
+         new Favourite(1L, 6L),
+        new Favourite(2L, 7L),
+        new Favourite(3L, 8L),
+        new Favourite(1L, 9L),
+         new Favourite(1L, 10L),
+        new Favourite(2L, 11L),
+        new Favourite(2L, 12L),
+        new Favourite(2L, 13L),
+        new Favourite(3L, 14L));
+        favouriteRepository.saveAll(favouriteList);
+        var recipeList = favouritesService.mostFavouritedRecipesLimitedBy(5);
+        assertEquals(5, recipeList.size());
+        assertEquals(1L, recipeList.get(0).getId());
+        System.out.println(recipeList);
+    }
+
 }

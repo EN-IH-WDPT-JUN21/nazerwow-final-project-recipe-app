@@ -3,6 +3,7 @@ package com.ironhack.favouritesservice.services.impl;
 import com.ironhack.favouritesservice.dao.Favourite;
 import com.ironhack.favouritesservice.dto.FavRecipeListDTO;
 import com.ironhack.favouritesservice.dto.FavouriteDTO;
+import com.ironhack.favouritesservice.dto.FavouriteRecipeCountDTO;
 import com.ironhack.favouritesservice.dto.RecipeDTO;
 import com.ironhack.favouritesservice.proxy.RecipeServiceProxy;
 import com.ironhack.favouritesservice.repositories.FavouriteRepository;
@@ -54,6 +55,35 @@ public class FavouritesServiceImpl implements FavouritesService {
     @Override
     public void removeFromFavourites(Long id){
         favouriteRepository.delete(findById(id));
+    }
+
+    @Override
+    public List<RecipeDTO> mostFavouritedRecipesLimitedBy(int i) {
+        List<FavouriteRecipeCountDTO> favouriteRecipeCountDTOS = getFavouriteRecipeCountDTOS(i);
+        return getRecipeDTOSFromFavouriteRecipeCountDTOS(favouriteRecipeCountDTOS);
+    }
+
+    private List<RecipeDTO> getRecipeDTOSFromFavouriteRecipeCountDTOS(List<FavouriteRecipeCountDTO> favouriteRecipeCountDTOS) {
+        List<RecipeDTO> favRecipeList = new ArrayList<>();
+        for(FavouriteRecipeCountDTO favouriteRecipeCountDTO : favouriteRecipeCountDTOS) {
+            favRecipeList.add(recipeService.findById(favouriteRecipeCountDTO.getRecipe_id()));
+        }
+        return favRecipeList;
+    }
+
+    private List<FavouriteRecipeCountDTO> getFavouriteRecipeCountDTOS(int i) {
+        List<FavouriteRecipeCountDTO> favouriteRecipeCountDTOS = convertRepoResultToFavRecipeCountDTOList(i);
+        return favouriteRecipeCountDTOS;
+    }
+
+    private List<FavouriteRecipeCountDTO> convertRepoResultToFavRecipeCountDTOList(int i) {
+        List<long[]> results = favouriteRepository.getMostFavouritedRecipesLimitedUpto(i);
+        if(results.size() == 0) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No Recipes have been favourited");
+        List<FavouriteRecipeCountDTO> favouriteRecipeCountDTOS = new ArrayList<>();
+        for(long[] result : results){
+            favouriteRecipeCountDTOS.add(new FavouriteRecipeCountDTO(result[0], result[1]));
+        }
+        return favouriteRecipeCountDTOS;
     }
 
     private Favourite createFavouriteFromDTO(FavouriteDTO favouriteDTO) {
