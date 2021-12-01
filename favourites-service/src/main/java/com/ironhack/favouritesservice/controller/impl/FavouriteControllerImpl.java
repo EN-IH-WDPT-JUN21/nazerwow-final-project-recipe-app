@@ -3,6 +3,7 @@ package com.ironhack.favouritesservice.controller.impl;
 import com.ironhack.favouritesservice.dao.Favourite;
 import com.ironhack.favouritesservice.dto.FavRecipeListDTO;
 import com.ironhack.favouritesservice.dto.FavouriteDTO;
+import com.ironhack.favouritesservice.dto.RecipeDTO;
 import com.ironhack.favouritesservice.services.impl.FavouritesServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -52,6 +53,13 @@ public class FavouriteControllerImpl implements com.ironhack.favouritesservice.c
     public void removeFromFavourites(@PathVariable Long id){
         favouritesService.removeFromFavourites(id);
     }
+
+    @Override
+    @GetMapping("/top10")
+    public List<RecipeDTO> getTop10FavouritedRecipes() {
+        return favouritesService.mostFavouritedRecipesLimitedBy(10);
+    }
+
 
 
 }
