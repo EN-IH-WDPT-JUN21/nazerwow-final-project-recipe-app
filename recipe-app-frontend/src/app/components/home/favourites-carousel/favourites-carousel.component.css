@@ -1,0 +1,32 @@
+.carousel {
+    max-width: 500px;
+}
+
+h1.a {
+    text-indent: 0em;
+}
+
+h1.b {
+    text-indent: 1em;
+}
+
+h1.c {
+    text-indent: 2em;
+}
+
+h1.d {
+    text-indent: 3em;
+}
+
+.text-box {
+    margin-right: 2em;
+}
+
+.carousel-caption {
+    padding: 10px;
+    margin: 10px;
+    background-color: black;
+    background-blend-mode: lighten;
+    opacity: .8;
+    border-radius: 3em;
+}

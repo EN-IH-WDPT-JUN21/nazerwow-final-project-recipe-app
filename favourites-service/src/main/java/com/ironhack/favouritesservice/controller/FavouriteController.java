@@ -3,12 +3,14 @@ package com.ironhack.favouritesservice.controller;
 import com.ironhack.favouritesservice.dao.Favourite;
 import com.ironhack.favouritesservice.dto.FavRecipeListDTO;
 import com.ironhack.favouritesservice.dto.FavouriteDTO;
+import com.ironhack.favouritesservice.dto.RecipeDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 public interface FavouriteController {
+
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     List<Favourite> findAll();
@@ -28,4 +30,8 @@ public interface FavouriteController {
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     void removeFromFavourites(@PathVariable Long id);
+
+    @GetMapping("/top10")
+    @ResponseStatus(HttpStatus.OK)
+    List<RecipeDTO> getTop10FavouritedRecipes();
 }

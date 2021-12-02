@@ -1,3 +1,4 @@
+import { MatBadgeModule } from '@angular/material/badge';
 import { MatDialog } from '@angular/material/dialog';
 import { UserService } from './../../../services/user.service';
 import { UserDTO } from './../../../models/user-model';
@@ -6,6 +7,7 @@ import { RecipeDTO } from '../../../models/recipe.model';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AddRecipeFormComponent } from '../add-recipe-form/add-recipe-form.component';
+import { Location } from '@angular/common'
 
 @Component({
   selector: 'app-recipe-page',
@@ -20,7 +22,8 @@ export class RecipePageComponent implements OnInit {
   constructor(private recipeService:RecipeService,
     private activateRoute:ActivatedRoute,
     private userService: UserService,
-    private dialog: MatDialog) { }
+    private dialog: MatDialog,
+    private location:Location) { }
 
   ngOnInit(): void {
     const recipeId:number = this.activateRoute.snapshot.params['recipeId'];
@@ -42,6 +45,10 @@ export class RecipePageComponent implements OnInit {
       console.log('Dialog result: %{result}');
       window.location.reload();
     })
+  }
+
+  back():void {
+    this.location.back()
   }
 
 }
