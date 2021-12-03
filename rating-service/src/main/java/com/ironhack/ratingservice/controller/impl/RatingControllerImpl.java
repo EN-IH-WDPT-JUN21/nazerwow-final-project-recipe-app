@@ -1,6 +1,7 @@
 package com.ironhack.ratingservice.controller.impl;
 
 import com.ironhack.ratingservice.dao.Rating;
+import com.ironhack.ratingservice.dto.RatingDTO;
 import com.ironhack.ratingservice.dto.RecipeDTO;
 import com.ironhack.ratingservice.services.RatingService;
 import com.ironhack.ratingservice.services.impl.RatingServiceImpl;
@@ -47,10 +48,16 @@ public class RatingControllerImpl implements com.ironhack.ratingservice.controll
     }
 
     @Override
-    @GetMapping("/top10foruser/{userId}")
+    @GetMapping("/top10user/{userId}")
     @ResponseStatus(HttpStatus.OK)
     public List<RecipeDTO> getTop10RecipesForUser(@PathVariable(name = "userId") Long userId){
         return ratingService.getTop10RecipesForUser(userId);
+    }
+
+    @PutMapping()
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public Rating rateRecipe(@RequestBody RatingDTO ratingDTO){
+        return ratingService.rateRecipe(ratingDTO);
     }
 
 
