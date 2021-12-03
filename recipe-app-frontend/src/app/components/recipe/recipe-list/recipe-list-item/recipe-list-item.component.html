@@ -3,7 +3,7 @@
     <div class="p-2">
         <img class="rounded float-left small-image img-fluid" src={{recipe.imageUrl}} alt="">
         <p *ngIf="rating == null">Be the First to Rate</p>
-        <p *ngIf="rating != null">Rating:{{rating}}</p>
+        <p> <ngb-rating *ngIf="rating != null" [(rate)]="rating" [max]="5"></ngb-rating></p>
     </div>
     <div class="p-2">
         <p>Ingredients: {{recipe.ingredients?.length}}</p>
@@ -14,7 +14,7 @@
 </div>
 <div class="p-2">
     <h1 class="title">{{recipe.name}}</h1>
-    <h4 [routerLink]="['/users/', user.id]">by: {{user.name}}</h4>
+    <h4 [routerLink]="['/users/', user.id]"> <em>by: {{user.name}} </em></h4>
 </div>
     <mat-chip-list aria-label="Dietary Requirements">
         <mat-chip color="primary" selected *ngFor="let diet of recipe.diets">{{diet | titlecase}}</mat-chip>

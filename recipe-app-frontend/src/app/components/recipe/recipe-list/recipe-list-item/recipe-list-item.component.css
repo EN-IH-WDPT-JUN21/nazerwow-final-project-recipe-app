@@ -13,3 +13,7 @@
     min-width: 200px
 }
 
+ngb-rating {
+  color: #673ab7;
+  font-size: 20px;
+}

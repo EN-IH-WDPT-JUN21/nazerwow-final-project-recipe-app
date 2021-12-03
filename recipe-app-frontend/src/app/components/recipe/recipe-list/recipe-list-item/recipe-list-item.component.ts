@@ -42,6 +42,7 @@ export class RecipeListItemComponent implements OnInit {
   getRating():void { 
     this.ratingService.getAverageRatingForRecipe(this.recipe.id).subscribe(result => {
       this.rating = result;
+      console.log(result)
     })
   }
 }

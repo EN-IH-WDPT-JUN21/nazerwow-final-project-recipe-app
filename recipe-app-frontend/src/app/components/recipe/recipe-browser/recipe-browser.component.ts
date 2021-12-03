@@ -20,6 +20,7 @@ export class RecipeBrowserComponent implements OnInit {
   cuisineList!:string[];
   dietList!:string[];
   measurementsList!:string[];
+  searchValue!: string;
 
   @Input()
   showList: boolean = true
@@ -48,6 +49,8 @@ export class RecipeBrowserComponent implements OnInit {
     this.getAllRecipes();
   }
 
+  // Get enums for the chips and form
+
   getAllCuisines():void{
     this.enumService.getAllCuisines().subscribe(result => {
       this.cuisineList = result
@@ -65,6 +68,20 @@ export class RecipeBrowserComponent implements OnInit {
       this.measurementsList = result
     })
   }
+
+  // Populates the recipe lists
+  getAllRecipes():void{
+    this.recipeService.getAllRecipes().subscribe(result => {
+      this.recipeList = result;
+      this.populateFilteredList();
+    })
+  }
+  
+  public populateFilteredList():void {
+    this.filteredRecipeList = this.recipeList;
+  }
+
+  // Chip handling
 
   toggleSelection(chip: MatChip) {
    chip.toggleSelected();
@@ -91,41 +108,42 @@ export class RecipeBrowserComponent implements OnInit {
     }
   }
 
-  getAllRecipes():void{
-    this.recipeService.getAllRecipes().subscribe(result => {
-      this.recipeList = result;
-      this.populateFilteredList();
-    })
-  }
-
-  public populateFilteredList():void {
-    this.filteredRecipeList = this.recipeList;
-  }
+  // Filter using chips & search bar is not null 
 
   private filterRecipeList(): void {
-    this.filteredRecipeList = this.recipeList.filter((recipe => this.filterList.includes(recipe.cuisine) || recipe.diets.filter((diet => this.filterList.includes(diet))).length > 0));
     if(this.filterList.length == 0){
       this.filteredRecipeList = this.recipeList
+    }else {
+      this.filteredRecipeList = this.recipeList.filter((recipe => this.filterList.includes(recipe.cuisine) || recipe.diets.filter((diet => this.filterList.includes(diet))).length > 0));
+    }
+    if(this.searchValue != null){
+      this.filterByName(this.searchValue)
     }
   }
 
+  // Filter using the search bar 
   filterByName(recipeName: any){
-    this.recipeSearchComponent.filteredRecipeList.subscribe(recipes => {
-      this.filteredRecipeList = recipes
-    })
+    this.searchValue = recipeName;
+    const filterValue:string = recipeName
+    this.filteredRecipeList = this.filteredRecipeList
+    .filter(recipe => recipe.name.toLowerCase().includes(filterValue) || recipe.cuisine.toLowerCase().includes(filterValue) || recipe.diets.filter((diet => diet.toLowerCase().includes(filterValue))).length > 0);
   }
 
+  // When user deletes text in the search bar this updates to ensure search is correct
+  updateSearchValue(recipeName: any){
+    this.searchValue = recipeName;
+    this.filterRecipeList()
+  }
+
+  // Reloads page when all is clicked 
   reloadPage(): void {
-    if(this.filterActive){
+    if(this.filterActive || this.searchValue != null){
     window.location.reload();
   }
 }
 
-  reloadListAndFilter():void{
-    this.populateFilteredList();
-    this.filterRecipeList();
-  }
 
+  // Loads the add recipe form! 
   loadAddForm(): void {
     const dialogRef = this.dialog.open(AddRecipeFormComponent, { autoFocus: false, height: '80vh', width: '80vw' });
     dialogRef.afterClosed().subscribe(result => {
