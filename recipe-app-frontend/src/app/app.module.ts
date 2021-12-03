@@ -1,3 +1,4 @@
+import { EnumPipe } from './custom-pipes/enum-pipe';
 import { AngularMaterialModule } from './angular-material.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -18,7 +19,7 @@ import { RecipeBrowserComponent } from './components/recipe/recipe-browser/recip
 import { RecipeSearchComponent } from './components/recipe/recipe-search/recipe-search.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddRecipeFormComponent } from './components/recipe/add-recipe-form/add-recipe-form.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { UserPageComponent } from './components/user/user-page/user-page.component';
 import { UserDetailsComponent } from './components/user/user-details/user-details.component';
 import { UserFavouritesComponent } from './components/user/user-favourites/user-favourites.component';
@@ -53,7 +54,8 @@ import { MdbCarouselModule } from 'mdb-angular-ui-kit/carousel';
     DrawerComponent,
     HomeComponent,
     HomeSearchComponent,
-    FavouritesCarouselComponent
+    FavouritesCarouselComponent,
+    EnumPipe
   ],
   imports: [
     BrowserModule,

@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/discovery-service/discovery-service.iml" filepath="$PROJECT_DIR$/discovery-service/discovery-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/favourites-service/favourites-service.iml" filepath="$PROJECT_DIR$/favourites-service/favourites-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/final-project-recipe-full-stack-app.iml" filepath="$PROJECT_DIR$/.idea/final-project-recipe-full-stack-app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rating-service/rating-service.iml" filepath="$PROJECT_DIR$/rating-service/rating-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/recipe-service/recipe-service.iml" filepath="$PROJECT_DIR$/recipe-service/recipe-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/user-service/user-service.iml" filepath="$PROJECT_DIR$/user-service/user-service.iml" />
     </modules>
