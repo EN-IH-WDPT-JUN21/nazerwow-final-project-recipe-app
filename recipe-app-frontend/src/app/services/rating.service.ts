@@ -22,7 +22,7 @@ export class RatingService {
     return this.http.get<any>(this.baseUrl + "/" + recipeId + "/" + userId)
   }
 
-  getAverageRatingForRecipe(recipeId: number): Observable<any> {
+  getAverageRatingForRecipe(recipeId: any): Observable<any> {
     return this.http.get<any>(this.baseUrl +"/recipe/" + recipeId)
   }
 
