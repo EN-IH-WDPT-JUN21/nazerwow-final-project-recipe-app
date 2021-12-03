@@ -48,7 +48,7 @@ public class RatingControllerImpl implements com.ironhack.ratingservice.controll
     }
 
     @Override
-    @GetMapping("/top10user/{userId}")
+    @GetMapping("/top10recipes/{userId}")
     @ResponseStatus(HttpStatus.OK)
     public List<RecipeDTO> getTop10RecipesForUser(@PathVariable(name = "userId") Long userId){
         return ratingService.getTop10RecipesForUser(userId);
