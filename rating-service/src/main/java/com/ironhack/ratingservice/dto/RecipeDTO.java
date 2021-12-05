@@ -2,7 +2,6 @@ package com.ironhack.ratingservice.dto;
 
 import com.ironhack.ratingservice.enums.Cuisine;
 import com.ironhack.ratingservice.enums.Diet;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

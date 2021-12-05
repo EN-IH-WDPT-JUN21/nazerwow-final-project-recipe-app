@@ -31,7 +31,7 @@ export class HeaderComponent implements OnInit {
   }
 
   loadSignUpForm(): void {
-    const dialogRef = this.dialog.open(UserFormComponent, { autoFocus: false, height: '80vh', width: '80vw'});
+    const dialogRef = this.dialog.open(UserFormComponent, {autoFocus: false, minHeight: '80vh', minWidth: '80vw'});
     dialogRef.afterClosed().subscribe(result => {
       console.log('Dialog result: %{result}');
       window.location.reload();

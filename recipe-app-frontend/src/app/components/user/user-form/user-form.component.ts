@@ -13,7 +13,7 @@ import { CustomValidators } from 'src/app/validators/custom-validators';
 })
 export class UserFormComponent implements OnInit {
 
-  title!:string;
+  title:string = "";
 
   @Input()
   userDTO!: UserDTO;

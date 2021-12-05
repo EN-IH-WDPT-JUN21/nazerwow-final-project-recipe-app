@@ -28,7 +28,7 @@ public class SampleDataLoader implements CommandLineRunner {
                         faker.number().numberBetween(1, 5),
                         faker.number().numberBetween(1L, 100L),
                         faker.number().numberBetween(1L, 20L)
-                        ))
+                ))
                 .collect(Collectors.toList());
 
         ratingRepository.saveAll(sampleRatings);

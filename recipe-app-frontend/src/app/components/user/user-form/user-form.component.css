@@ -1,5 +1,6 @@
 .mat-form-field {
   margin: 5px;
+  min-width: 30%;
 }
 
 .method .mat-form-field {

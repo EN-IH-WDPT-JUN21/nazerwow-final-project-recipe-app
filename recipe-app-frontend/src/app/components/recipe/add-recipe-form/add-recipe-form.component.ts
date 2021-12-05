@@ -13,7 +13,7 @@ import { Recipe, RecipeDTO } from 'src/app/models/recipe.model';
 })
 export class AddRecipeFormComponent implements OnInit {
 
-  @Input()
+ 
   title!: string;
   dietList!: string[];
   cuisineList!: string[];
@@ -48,7 +48,8 @@ export class AddRecipeFormComponent implements OnInit {
   constructor(private enumService: EnumService,
     private recipeService: RecipeService,
     private formBuilder: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) public data: RecipeDTO) {
+    @Inject(MAT_DIALOG_DATA) public data: RecipeDTO
+    ) {
        this.name = new FormControl('', [Validators.required]);
        this.ingredients = new FormArray([], [Validators.required]);
        this.ingredientName = new FormControl('', [Validators.required]);
@@ -125,10 +126,12 @@ export class AddRecipeFormComponent implements OnInit {
     if(this.recipeDTO != null){
       this.addForm = false;
       this.addFormButton = "Confirm Edited"
+      this.title = "Edit your recipe"
       this.fillFormToEdit();
     } else {
       this.addForm = true;
       this.addFormButton = "Add"
+      this.title = "Add a new recipe"
     }
   }
 

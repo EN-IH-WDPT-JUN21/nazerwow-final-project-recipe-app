@@ -21,6 +21,7 @@ export class RecipeBrowserComponent implements OnInit {
   dietList!:string[];
   measurementsList!:string[];
   searchValue!: string;
+  recipeFormTitle: string = "Add a new recipe"
 
   @Input()
   showList: boolean = true
@@ -133,6 +134,9 @@ export class RecipeBrowserComponent implements OnInit {
   updateSearchValue(recipeName: any){
     this.searchValue = recipeName;
     this.filterRecipeList()
+    if(this.filterList.length == 0 && this.searchValue == ""){
+      this.filteredRecipeList = this.recipeList;
+    }
   }
 
   // Reloads page when all is clicked 
@@ -142,10 +146,9 @@ export class RecipeBrowserComponent implements OnInit {
   }
 }
 
-
   // Loads the add recipe form! 
   loadAddForm(): void {
-    const dialogRef = this.dialog.open(AddRecipeFormComponent, { autoFocus: false, height: '80vh', width: '80vw' });
+    const dialogRef = this.dialog.open(AddRecipeFormComponent, { autoFocus: false, maxHeight: '80vh', maxWidth: '80vw'});
     dialogRef.afterClosed().subscribe(result => {
       console.log('Dialog result: %{result}');
     })
