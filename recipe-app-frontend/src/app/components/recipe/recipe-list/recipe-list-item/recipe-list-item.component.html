@@ -2,8 +2,12 @@
     <div class="d-flex flex-wrap">
     <div class="p-2">
         <img class="rounded float-left small-image img-fluid" src={{recipe.imageUrl}} alt="">
-        <p *ngIf="rating == null">Be the First to Rate</p>
-        <p> <ngb-rating *ngIf="rating != null" [(rate)]="rating" [max]="5"></ngb-rating></p>
+            <ng-template #t let-fill="fill" let-index="index">
+                <span class="star" [class.full]="fill === 100">
+                    <span class="half" [style.width.%]="fill">&hearts;</span>&hearts;
+                </span>
+            </ng-template>
+            <p> <ngb-rating [(rate)]="rating" [max]="5" [readonly]="true" [starTemplate]="t"></ngb-rating> <span class="rating"> {{rating | number: '1.0-1'}}/5 </span></p>
     </div>
     <div class="p-2">
         <p>Ingredients: {{recipe.ingredients?.length}}</p>

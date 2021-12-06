@@ -15,21 +15,21 @@ public class EnumControllerImpl implements EnumController {
     @Override
     @GetMapping("/cuisines")
     @ResponseStatus(HttpStatus.OK)
-    public Cuisine[] getAllCuisines(){
+    public Cuisine[] getAllCuisines() {
         return Cuisine.class.getEnumConstants();
     }
 
     @Override
     @GetMapping("/diets")
     @ResponseStatus(HttpStatus.OK)
-    public Diet[] getAllDiets(){
+    public Diet[] getAllDiets() {
         return Diet.class.getEnumConstants();
     }
 
     @Override
     @GetMapping("/measurements")
     @ResponseStatus(HttpStatus.OK)
-    public Measurement[] getAllMeasurements(){
+    public Measurement[] getAllMeasurements() {
         return Measurement.class.getEnumConstants();
     }
 }

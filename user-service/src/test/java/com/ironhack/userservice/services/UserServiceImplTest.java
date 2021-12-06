@@ -34,9 +34,8 @@ class UserServiceImplTest {
         user1 = new User(
                 "TestUser1",
                 "username1",
-                "password1",
-                List.of(Role.USER),
                 "test@email.1",
+                List.of(Role.USER),
                 "testLocation1",
                 "testBio1",
                 "testUrl1"
@@ -44,9 +43,8 @@ class UserServiceImplTest {
         user2 = new User(
                 "TestUser2",
                 "username2",
-                "password2",
-                List.of(Role.USER),
                 "test@email.2",
+                List.of(Role.USER),
                 "testLocation2",
                 "testBio2",
                 "testUrl2"
@@ -101,7 +99,6 @@ class UserServiceImplTest {
         CreateUserDTO createUserDTO = new CreateUserDTO(
                 "newUser",
                 "newUsername",
-                "newPassword",
                 "new@email.com",
                 "newLocation",
                 "newBio",
@@ -118,7 +115,6 @@ class UserServiceImplTest {
         CreateUserDTO createUserDTO = new CreateUserDTO(
                 "newUser",
                 "newUsername",
-                "newPassword",
                 "new@email.com",
                 "newLocation",
                 "newBio",
@@ -127,7 +123,6 @@ class UserServiceImplTest {
         User user = userService.addUser(createUserDTO);
         assertEquals(createUserDTO.getName(), user.getName());
         assertEquals(createUserDTO.getUsername(), user.getUsername());
-        assertEquals(createUserDTO.getPassword(), user.getPassword());
         assertEquals(createUserDTO.getEmail(), user.getEmail());
         assertEquals(createUserDTO.getLocation(), user.getLocation());
         assertEquals(createUserDTO.getLocation(), user.getLocation());
@@ -141,7 +136,6 @@ class UserServiceImplTest {
         UserDTO userDTO = new UserDTO(
                 "newUser",
                 "newUsername",
-                "newPassword",
                 "new@email.com",
                 "newLocation",
                 "newBio",
@@ -162,7 +156,6 @@ class UserServiceImplTest {
         UserDTO userDTO = new UserDTO(
                 "newUser",
                 "newUsername",
-                "newPassword",
                 "new@email.com",
                 "newLocation",
                 "newBio",
@@ -172,7 +165,6 @@ class UserServiceImplTest {
         User updatedUser = userService.updateUser(user1.getId(), userDTO);
         assertEquals(userDTO.getName(), updatedUser.getName());
         assertEquals(userDTO.getUsername(), updatedUser.getUsername());
-        assertEquals(userDTO.getPassword(), updatedUser.getPassword());
         assertEquals(userDTO.getEmail(), updatedUser.getEmail());
         assertEquals(userDTO.getLocation(), updatedUser.getLocation());
         assertEquals(userDTO.getLocation(), updatedUser.getLocation());
@@ -192,14 +184,12 @@ class UserServiceImplTest {
                 null,
                 null,
                 null,
-                null,
                 null
         );
         userService.updateUser(user1.getId(), userDTO);
         User updatedUser = userService.findById(user1.getId());
         assertEquals(originalUser.getName(), updatedUser.getName());
         assertEquals(originalUser.getUsername(), updatedUser.getUsername());
-        assertEquals(originalUser.getPassword(), updatedUser.getPassword());
         assertEquals(originalUser.getEmail(), updatedUser.getEmail());
         assertEquals(originalUser.getLocation(), updatedUser.getLocation());
         assertEquals(originalUser.getLocation(), updatedUser.getLocation());
@@ -210,7 +200,6 @@ class UserServiceImplTest {
     @Test
     void updateUser_ThrowsException() {
         UserDTO userDTO = new UserDTO(
-                null,
                 null,
                 null,
                 null,

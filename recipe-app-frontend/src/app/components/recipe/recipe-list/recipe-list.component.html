@@ -5,10 +5,7 @@
                     totalItems: 0 }" class="p-2" >
         <app-recipe-list-item [recipe]="recipe" [authorId]="recipe.authorId"></app-recipe-list-item>
     </div>
-            <pagination-controls (pageChange)="handlePageChange($event)"></pagination-controls>
-    <div *ngIf="recipeList.length <= 0"> 
-        <h1> Ooops... We don't have any of those recipes yet... </h1> 
-        <h2> Why not add one for us??</h2>
-        <img class="img-fluid" src="https://c.tenor.com/LjhaLjAdrQgAAAAC/winnie-the-pooh-hungry.gif" alt="">
- </div>
+    </div>
+           <p class="d-flex justify-content-center"> <pagination-controls (pageChange)="handlePageChange($event)"></pagination-controls></p>
+
 

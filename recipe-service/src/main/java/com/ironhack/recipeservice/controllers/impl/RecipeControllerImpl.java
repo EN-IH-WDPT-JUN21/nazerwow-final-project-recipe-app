@@ -7,6 +7,11 @@ import com.ironhack.recipeservice.dto.RecipeDTO;
 import com.ironhack.recipeservice.services.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
+import org.springframework.security.oauth2.client.annotation.RegisteredOAuth2AuthorizedClient;
+import org.springframework.security.oauth2.core.oidc.user.OidcUser;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -61,6 +66,12 @@ public class RecipeControllerImpl implements RecipeController {
     public Recipe updateRecipe(@PathVariable(name = "id") Long id,
                                @RequestBody @Valid RecipeDTO recipeDTO){
         return recipeService.updateRecipe(id, recipeDTO);
+    }
+
+    @GetMapping("/test")
+    public String greeting(@AuthenticationPrincipal OidcUser oidcUser) {
+
+        return oidcUser.getEmail();
     }
 
 

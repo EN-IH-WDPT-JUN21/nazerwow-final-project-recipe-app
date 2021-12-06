@@ -44,18 +44,18 @@ class RatingServiceImplTest {
         rating2 = new Rating(5, 1L, 2L);
         rating3 = new Rating(2, 2L, 1L);
         rating4 = new Rating(4, 2L, 3L);
-        rating5 = new Rating(4,12L,2L);
-        rating6 = new Rating(4,3L,1L);
-        rating7 = new Rating(4,4L,1L);
-        rating8 = new Rating(4,5L,1L);
-        rating9 = new Rating(4,6L,3L);
-        rating10 = new Rating(4,7L,3L);
-        rating11 = new Rating(4,8L,3L);
-        rating12 = new Rating(4,9L,4L);
-        rating13 = new Rating(4,10L,4L);
-        rating14 = new Rating(4,11L,4L);
+        rating5 = new Rating(4, 12L, 2L);
+        rating6 = new Rating(4, 3L, 1L);
+        rating7 = new Rating(4, 4L, 1L);
+        rating8 = new Rating(4, 5L, 1L);
+        rating9 = new Rating(4, 6L, 3L);
+        rating10 = new Rating(4, 7L, 3L);
+        rating11 = new Rating(4, 8L, 3L);
+        rating12 = new Rating(4, 9L, 4L);
+        rating13 = new Rating(4, 10L, 4L);
+        rating14 = new Rating(4, 11L, 4L);
 
-        ratingRepository.saveAll(List.of(rating1,rating2,rating3,rating4,rating5,rating6,rating7,rating8,rating9,rating10,rating11,rating12,rating13, rating14));
+        ratingRepository.saveAll(List.of(rating1, rating2, rating3, rating4, rating5, rating6, rating7, rating8, rating9, rating10, rating11, rating12, rating13, rating14));
     }
 
     @AfterEach
@@ -96,7 +96,7 @@ class RatingServiceImplTest {
 
     @Test
     void rateRecipe_Valid_UpdatesExistingRating() {
-        RatingDTO ratingDTO = new RatingDTO(3, 1L ,1L);
+        RatingDTO ratingDTO = new RatingDTO(3, 1L, 1L);
         var repoSizeBefore = ratingRepository.findAll().size();
         Rating rating = ratingService.rateRecipe(ratingDTO);
         var repoSizeAfter = ratingRepository.findAll().size();

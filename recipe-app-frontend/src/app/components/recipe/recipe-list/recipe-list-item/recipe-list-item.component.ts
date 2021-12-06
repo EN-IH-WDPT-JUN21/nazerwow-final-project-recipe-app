@@ -14,7 +14,7 @@ export class RecipeListItemComponent implements OnInit {
   @Input()
   recipe!:RecipeDTO;
 
-  rating!: number;
+  rating: number = 0;
 
   @Input()
   authorId!: number;
@@ -25,12 +25,16 @@ export class RecipeListItemComponent implements OnInit {
     private ratingService: RatingService) { }
 
   ngOnInit(): void {
-    this.getAuthor();
-    this.getRating();
+    this.loadData();
   }
 
   ngAfterViewInit(): void {
 
+  }
+
+  async loadData():Promise<void> {
+    await this.getAuthor();
+    await this.getRating();
   }
 
   getAuthor():void {

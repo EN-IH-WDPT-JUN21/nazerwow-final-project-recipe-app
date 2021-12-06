@@ -18,15 +18,12 @@ import java.util.List;
 @Setter
 public class User extends Users {
 
-    @Email
-    private String email;
     private String location;
     private String bio;
     private String pictureUrl;
 
-    public User(String name, String username, String password, List<Role> role, String email, String location, String bio, String pictureUrl) {
-        super(name, username, password, role);
-        this.email = email;
+    public User(String name, String username, String email, List<Role> roles, String location, String bio, String pictureUrl) {
+        super(name, username, email, roles);
         this.location = location;
         this.bio = bio;
         this.pictureUrl = pictureUrl;

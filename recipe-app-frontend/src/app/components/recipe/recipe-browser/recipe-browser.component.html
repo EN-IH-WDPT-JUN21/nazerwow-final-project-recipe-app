@@ -3,8 +3,9 @@
         <div class="search">
             <app-recipe-search [recipeList]="filteredRecipeList" (recipeNameOutput)="filterByName($event)" (deleteOutput)="updateSearchValue($event)"></app-recipe-search>
         </div>
-        <button *ngIf="showAddButton" mat-fab color="primary" (click)="loadAddForm()">+</button>
+        <button *ngIf="showAddButton" mat-fab color="primary" (click)="loadAddForm()"><span class="add-button">+</span></button>
     </div>
+    
     <div class="filter-chips d-flex justify-content-center">
         <mat-chip-list aria-label="Dietary Requirements" class="p-2" [multiple]="true" [selectable]="true">
             <mat-chip color="warn" [selected]="!filterActive" (click)="reloadPage()" >All</mat-chip>
@@ -12,5 +13,13 @@
             <mat-chip #c="matChip" (click)="toggleSelection(c)" color="accent" *ngFor="let cuisine of cuisineList" [value]="cuisine">{{cuisine | enum | titlecase }}</mat-chip>
         </mat-chip-list>
     </div>
-    <app-recipe-list *ngIf="showList" [recipeList]="filteredRecipeList"></app-recipe-list>
+    <div *ngIf="filteredRecipeList.length > 0">
+        <p><app-recipe-list *ngIf="showList" [recipeList]="filteredRecipeList"></app-recipe-list></p>
+    </div>
+    <div *ngIf="filteredRecipeList.length <= 0">
+        <h1> Ooops... We don't have any of those recipes yet... </h1>
+        <h2 (click)="loadAddForm()"> Why not add one for us??</h2>
+        
+        <img class="img-fluid" src="https://c.tenor.com/LjhaLjAdrQgAAAAC/winnie-the-pooh-hungry.gif" alt="">
+    </div>
 </div>
