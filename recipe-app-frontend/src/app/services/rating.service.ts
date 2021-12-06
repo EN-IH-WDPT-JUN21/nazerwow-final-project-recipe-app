@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class RatingService {
 
-  readonly baseUrl: string = "http://localhost:8400/api/v1/ratings"
+  readonly baseUrl: string = "http://localhost:8080/api/v1/ratings"
 
   constructor(
     private http: HttpClient

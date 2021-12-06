@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 export class UserService {
 
 
-  readonly baseUrl: string = "http://localhost:7000/api/v1/users"
+  readonly baseUrl: string = "http://localhost:8080/api/v1/users"
 
   constructor(
     private http: HttpClient

@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class EnumService {
 
-  readonly baseUrl:string = "http://localhost:8100/api/v1/"
+  readonly baseUrl:string = "http://localhost:8080/api/v1/"
 
   constructor(private http: HttpClient) { }
 
