@@ -4,13 +4,13 @@ import com.ironhack.ratingservice.dao.Rating;
 import com.ironhack.ratingservice.dto.RatingDTO;
 import com.ironhack.ratingservice.dto.RecipeDTO;
 import com.ironhack.ratingservice.services.RatingService;
-import com.ironhack.ratingservice.services.impl.RatingServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/v1/ratings")
 public class RatingControllerImpl implements com.ironhack.ratingservice.controller.RatingController {
@@ -21,7 +21,7 @@ public class RatingControllerImpl implements com.ironhack.ratingservice.controll
     @Override
     @GetMapping("/{userId}")
     @ResponseStatus(HttpStatus.OK)
-    public List<RecipeDTO> findByUserId(@PathVariable(name = "userId") Long userId){
+    public List<RecipeDTO> findByUserId(@PathVariable(name = "userId") Long userId) {
         return ratingService.findByUserId(userId);
     }
 
@@ -29,14 +29,14 @@ public class RatingControllerImpl implements com.ironhack.ratingservice.controll
     @GetMapping("/{recipeId}/{userId}")
     @ResponseStatus(HttpStatus.OK)
     public boolean userPreviouslyRatedRecipe(@PathVariable(name = "recipeId") Long recipeId,
-                                             @PathVariable(name = "userId") Long userId){
+                                             @PathVariable(name = "userId") Long userId) {
         return ratingService.userPreviouslyRatedRecipe(recipeId, userId);
     }
 
     @Override
     @GetMapping("/recipe/{recipeId}")
     @ResponseStatus(HttpStatus.OK)
-    public Double getAverageRatingForRecipe(@PathVariable(name = "recipeId") Long recipeId){
+    public Double getAverageRatingForRecipe(@PathVariable(name = "recipeId") Long recipeId) {
         return ratingService.getAverageRatingForRecipe(recipeId);
     }
 
@@ -48,18 +48,17 @@ public class RatingControllerImpl implements com.ironhack.ratingservice.controll
     }
 
     @Override
-    @GetMapping("/top10user/{userId}")
+    @GetMapping("/top10recipes/{userId}")
     @ResponseStatus(HttpStatus.OK)
-    public List<RecipeDTO> getTop10RecipesForUser(@PathVariable(name = "userId") Long userId){
+    public List<RecipeDTO> getTop10RecipesForUser(@PathVariable(name = "userId") Long userId) {
         return ratingService.getTop10RecipesForUser(userId);
     }
 
     @PutMapping()
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public Rating rateRecipe(@RequestBody RatingDTO ratingDTO){
+    public Rating rateRecipe(@RequestBody RatingDTO ratingDTO) {
         return ratingService.rateRecipe(ratingDTO);
     }
-
 
 
 }

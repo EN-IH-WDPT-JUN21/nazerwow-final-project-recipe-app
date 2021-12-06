@@ -46,9 +46,8 @@ class UserControllerImplTest {
         user1 = new User(
                 "TestUser1",
                 "username1",
-                "password1",
-                List.of(Role.USER),
                 "test@email.1",
+                List.of(Role.USER),
                 "testLocation1",
                 "testBio1",
                 "testUrl1"
@@ -56,9 +55,8 @@ class UserControllerImplTest {
         user2 = new User(
                 "TestUser2",
                 "username2",
-                "password2",
-                List.of(Role.USER),
                 "test@email.2",
+                List.of(Role.USER),
                 "testLocation2",
                 "testBio2",
                 "testUrl2"
@@ -108,7 +106,6 @@ class UserControllerImplTest {
         CreateUserDTO createUserDTO = new CreateUserDTO(
                 "newUser",
                 "newUsername",
-                "newPassword",
                 "new@email.com",
                 "newLocation",
                 "newBio",
@@ -132,7 +129,6 @@ class UserControllerImplTest {
                 null,
                 null,
                 null,
-                null,
                 null
         );
         String body = objectMapper.writeValueAsString(createUserDTO);
@@ -149,7 +145,6 @@ class UserControllerImplTest {
         UserDTO userDTO = new UserDTO(
                 "newUser",
                 "newUsername",
-                "newPassword",
                 "new@email.com",
                 "newLocation",
                 "newBio",
@@ -164,7 +159,6 @@ class UserControllerImplTest {
         User updatedUser = userRepository.findById(user1.getId()).get();
         assertTrue(result.getResponse().getContentAsString().contains(userDTO.getName()));
         assertTrue(result.getResponse().getContentAsString().contains(userDTO.getUsername()));
-        assertTrue(result.getResponse().getContentAsString().contains(userDTO.getPassword()));
         assertTrue(result.getResponse().getContentAsString().contains(userDTO.getEmail()));
         assertTrue(result.getResponse().getContentAsString().contains(userDTO.getLocation()));
         assertTrue(result.getResponse().getContentAsString().contains(userDTO.getBio()));
@@ -177,7 +171,6 @@ class UserControllerImplTest {
         UserDTO userDTO = new UserDTO(
                 "newUser",
                 "newUsername",
-                "newPassword",
                 "new@email.com",
                 "newLocation",
                 "newBio",
@@ -192,7 +185,6 @@ class UserControllerImplTest {
         User updatedUser = userRepository.findById(user1.getId()).get();
         assertEquals(userDTO.getName(), updatedUser.getName());
         assertEquals(userDTO.getUsername(), updatedUser.getUsername());
-        assertEquals(userDTO.getPassword(), updatedUser.getPassword());
         assertEquals(userDTO.getEmail(), updatedUser.getEmail());
         assertEquals(userDTO.getLocation(), updatedUser.getLocation());
         assertEquals(userDTO.getLocation(), updatedUser.getLocation());

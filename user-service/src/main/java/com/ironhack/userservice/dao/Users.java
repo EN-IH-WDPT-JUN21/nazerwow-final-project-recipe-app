@@ -9,6 +9,7 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -25,17 +26,19 @@ public abstract class Users {
     private String name;
     @Column(unique = true)
     private String username;
-    private String password;
+    @Column(unique = true)
+    @Email
+    private String email;
     @ElementCollection()
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Role> roles;
     private LocalDate createdDate = LocalDate.now();
     private LocalDate editedDate = LocalDate.now();
 
-    public Users(String name, String username, String password, List<Role> role) {
+    public Users(String name, String username, String email, List<Role> roles) {
         this.name = name;
         this.username = username;
-        this.password = password;
-        this.roles = role;
+        this.email = email;
+        this.roles = roles;
     }
 }

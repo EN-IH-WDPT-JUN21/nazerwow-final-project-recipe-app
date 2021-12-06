@@ -13,3 +13,30 @@
     min-width: 200px
 }
 
+ngb-rating {
+  color: #bd9ff0;
+  font-size: 20px;
+}
+
+star {
+  position: relative;
+  display: inline-block;
+  font-size: 3rem;
+  color: #d3d3d3;
+}
+
+.full {
+  color: #673ab7;
+}
+
+.half {
+  position: absolute;
+  display: inline-block;
+  overflow: hidden;
+  color: #673ab7;
+}
+
+.rating {
+    color: #673ab7;
+    font-style: italic;
+}

@@ -60,7 +60,7 @@ public class RatingServiceImpl implements com.ironhack.ratingservice.services.Ra
 
     @Override
     public Rating rateRecipe(RatingDTO ratingDTO) {
-        if(userPreviouslyRatedRecipe(ratingDTO.getRecipeId(), ratingDTO.getUserId())) {
+        if (userPreviouslyRatedRecipe(ratingDTO.getRecipeId(), ratingDTO.getUserId())) {
             Rating rating = ratingRepository.findByRecipeIdAndUserId(ratingDTO.getRecipeId(), ratingDTO.getUserId()).get();
             rating.setRating(ratingDTO.getRating());
             return ratingRepository.save(rating);
@@ -75,7 +75,7 @@ public class RatingServiceImpl implements com.ironhack.ratingservice.services.Ra
 
     private List<RecipeDTO> getRecipeDTOSFromRatingList(List<Rating> ratingList) {
         List<RecipeDTO> recipeDTOList = new ArrayList<>();
-        for(Rating rating : ratingList){
+        for (Rating rating : ratingList) {
             recipeDTOList.add(recipeServiceProxy.findById(rating.getRecipeId()));
         }
         return recipeDTOList;
@@ -83,7 +83,7 @@ public class RatingServiceImpl implements com.ironhack.ratingservice.services.Ra
 
     private List<RecipeDTO> getRecipeDTOSFromTopRecipeDTOList(List<TopRecipeDTO> topRecipeDTOS) {
         List<RecipeDTO> recipeDTOList = new ArrayList<>();
-        for(TopRecipeDTO topRecipeDTO : topRecipeDTOS){
+        for (TopRecipeDTO topRecipeDTO : topRecipeDTOS) {
             recipeDTOList.add(recipeServiceProxy.findById(topRecipeDTO.getRecipeId()));
         }
         return recipeDTOList;
@@ -91,18 +91,21 @@ public class RatingServiceImpl implements com.ironhack.ratingservice.services.Ra
 
     private List<TopRecipeDTO> convertRepoResultToFavRecipeCountDTOList(int limit) {
         List<Long[]> results = ratingRepository.getTopRatedRecipesLimitBy(limit);
-        if(results.size() == 0) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No Ratings have been completed");
+        if (results.size() == 0)
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No Ratings have been completed");
         List<TopRecipeDTO> topRecipeDTOS = new ArrayList<>();
-        for(Long[] result : results){
+        for (Long[] result : results) {
             topRecipeDTOS.add(new TopRecipeDTO(result[0]));
         }
         return topRecipeDTOS;
     }
+
     private List<TopRecipeDTO> convertUsersTopRecipesToFavRecipeCountDTOList(Long userid, int limit) {
         List<Long[]> results = ratingRepository.getTopRatedRecipesByUserIdLimitBy(userid, limit);
-        if(results.size() == 0) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No Ratings have been completed");
+        if (results.size() == 0)
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No Ratings have been completed");
         List<TopRecipeDTO> topRecipeDTOS = new ArrayList<>();
-        for(Long[] result : results){
+        for (Long[] result : results) {
             topRecipeDTOS.add(new TopRecipeDTO(result[0]));
         }
         return topRecipeDTOS;

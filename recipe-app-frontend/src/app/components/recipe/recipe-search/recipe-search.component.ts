@@ -64,7 +64,7 @@ export class RecipeSearchComponent implements OnInit {
   }
 
   delete():void {
-    this.deleteOutput.emit("Delete");
+    this.deleteOutput.emit(this.recipeSearch.value.toLowerCase().trim());
   }
 
 }

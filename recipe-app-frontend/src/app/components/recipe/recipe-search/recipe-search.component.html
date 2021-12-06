@@ -5,8 +5,8 @@
         matInput 
         formControlName="recipeSearch" 
         [matAutocomplete]="auto" 
-        (keydown.backspace)="delete()" 
-        (keydown.delete)="delete()">
+        (keyDown.backspace)="delete()" 
+        (keyDown.delete)="delete()">
         <mat-autocomplete  #auto="matAutocomplete">
             <mat-option *ngFor="let recipe of filteredRecipeList | async" [value]="recipe.name">
                 {{recipe.name}}

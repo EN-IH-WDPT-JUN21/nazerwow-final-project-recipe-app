@@ -2,7 +2,7 @@
 
 @import '~bootstrap/dist/css/bootstrap.min.css';
 @import url('https://fonts.googleapis.com/css2?family=Mohave&family=Press+Start+2P&display=swap');
-@import "~mdb-angular-ui-kit/assets/scss/mdb.scss"
+@import '~mdb-ui-kit/css/mdb.min.css';
 
 
 html, body { 
