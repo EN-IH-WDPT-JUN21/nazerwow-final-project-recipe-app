@@ -13,5 +13,7 @@
             <img class="img-fluid rounded" src="{{user.pictureUrl}}">
         </div>
     </mat-card-title-group>
-    <button mat-raised-button color="primary" (click)="loadUserForm()">Edit</button>
+    <div *ngIf="userVerified">
+        <button mat-raised-button color="primary" (click)="loadUserForm()">Edit</button>
+    </div>
 </mat-card>

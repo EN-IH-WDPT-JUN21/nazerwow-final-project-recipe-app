@@ -54,9 +54,6 @@
         </mat-form-field>
         
         <p><button [disabled]="userForm.invalid" mat-stroked-button color="primary" type="submit">{{addOrEditButton}}</button></p>
-        <mat-error *ngIf="userForm.hasError('differentPassword') && (passwordConfirmation.touched || passwordConfirmation.dirty)">
-            Passwords do not match
-        </mat-error>
     </form>
     
 </mat-card>

@@ -32,4 +32,8 @@ export class UserService {
     return this.http.put(`${this.baseUrl + "/" + UserDTO.id}`, UserDTO)
   }
 
+  userVerified(userId: number): Observable<any> {
+    return this.http.get(this.baseUrl + "/" + userId + "/verify")
+  }
+
 }

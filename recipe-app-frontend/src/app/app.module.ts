@@ -31,6 +31,7 @@ import { MdbCarouselModule } from 'mdb-angular-ui-kit/carousel';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { HomeSearchComponent } from './components/home-page/home-search/home-search.component';
 import { FavouritesCarouselComponent } from './components/home-page/favourites-carousel/favourites-carousel.component';
+import { AuthRoutingModule } from './auth-routing.module';
 
 
 @NgModule({
@@ -68,7 +69,8 @@ import { FavouritesCarouselComponent } from './components/home-page/favourites-c
     ReactiveFormsModule,
     NgbModule,
     NgxPaginationModule,
-    MdbCarouselModule
+    MdbCarouselModule,
+    AuthRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
