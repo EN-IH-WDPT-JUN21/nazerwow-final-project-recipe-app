@@ -4,6 +4,7 @@ import com.ironhack.userservice.dao.User;
 import com.ironhack.userservice.dto.CreateUserDTO;
 import com.ironhack.userservice.dto.UserDTO;
 
+import java.security.Principal;
 import java.util.List;
 
 public interface UserService {
@@ -17,5 +18,7 @@ public interface UserService {
 
     User updateUser(Long id, UserDTO userDTO);
 
-    User findByUsername(String username);
+    boolean userMatchesLoggedInUser(Principal principal, Long userId);
+
+    User findByEmail(String email);
 }

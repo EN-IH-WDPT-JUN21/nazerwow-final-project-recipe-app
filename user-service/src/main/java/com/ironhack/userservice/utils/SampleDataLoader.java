@@ -37,6 +37,8 @@ public class SampleDataLoader implements CommandLineRunner {
                 )).collect(Collectors.toList());
 
         userRepository.saveAll(users);
+
+        userRepository.save(new User("Nathan", "nazerwow", "gills11@gmail.com", List.of(Role.USER), "Uk", "It's me", "URL" ));
     }
 
 }

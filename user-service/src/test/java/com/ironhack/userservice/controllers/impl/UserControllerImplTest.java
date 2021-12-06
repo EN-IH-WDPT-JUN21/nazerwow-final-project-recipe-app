@@ -192,8 +192,8 @@ class UserControllerImplTest {
     }
 
     @Test
-    void findByUsername() throws Exception {
-        MvcResult result = mockMvc.perform(get("/api/v1/users/username=" + user1.getUsername()))
+    void findByEmail() throws Exception {
+        MvcResult result = mockMvc.perform(get("/api/v1/users/email/" + user1.getEmail()))
                 .andExpect(status().isOk())
                 .andReturn();
         assertTrue(result.getResponse().getContentAsString().contains("TestUser1"));
