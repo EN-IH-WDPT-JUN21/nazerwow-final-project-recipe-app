@@ -1,4 +1,4 @@
-package com.ironhack.userservice;
+package com.ironhack.userservice.utils;
 
 import com.github.javafaker.Faker;
 import com.ironhack.recipeservice.dao.Ingredient;
@@ -33,9 +33,8 @@ public class SampleDataLoader implements CommandLineRunner {
                 .mapToObj(i -> new User(
                         faker.name().name(),
                         faker.superhero().name(),
-                        faker.internet().password(3, 7),
-                        List.of(Role.USER),
                         faker.internet().emailAddress(),
+                        List.of(Role.USER),
                         faker.country().name(),
                         faker.dragonBall().character(),
                         faker.dragonBall().character()

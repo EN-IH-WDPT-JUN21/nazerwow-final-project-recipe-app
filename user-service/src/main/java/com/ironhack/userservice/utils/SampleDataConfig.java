@@ -1,4 +1,4 @@
-package com.ironhack.userservice;
+package com.ironhack.userservice.utils;
 
 import com.github.javafaker.Faker;
 import org.springframework.context.annotation.Bean;

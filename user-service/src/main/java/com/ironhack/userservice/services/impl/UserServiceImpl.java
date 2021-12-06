@@ -64,9 +64,6 @@ public class UserServiceImpl implements UserService {
         if (userDTO.getUsername() != null) {
             user.setUsername(userDTO.getUsername());
         }
-        if (userDTO.getPassword() != null) {
-            user.setPassword(userDTO.getPassword());
-        }
         if (userDTO.getEmail() != null) {
             user.setEmail(userDTO.getEmail());
         }
@@ -87,9 +84,8 @@ public class UserServiceImpl implements UserService {
         return new User(
                 createUserDTO.getName(),
                 createUserDTO.getUsername(),
-                createUserDTO.getPassword(),
-                List.of(Role.USER),
                 createUserDTO.getEmail(),
+                List.of(Role.USER),
                 createUserDTO.getLocation(),
                 createUserDTO.getBio(),
                 createUserDTO.getPictureUrl()
