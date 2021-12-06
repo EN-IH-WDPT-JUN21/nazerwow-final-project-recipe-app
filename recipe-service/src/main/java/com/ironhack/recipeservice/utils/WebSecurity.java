@@ -19,6 +19,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                 .mvcMatchers(HttpMethod.GET, "/api/v1/cuisines/**").permitAll()
                 .mvcMatchers(HttpMethod.GET, "/api/v1/diets/**").permitAll()
                 .mvcMatchers(HttpMethod.GET, "/api/v1/measurements/**").permitAll()
+                .mvcMatchers("/api/v1/recipes/test").authenticated()
                 .anyRequest().authenticated()
                 .and()
                 .oauth2ResourceServer().jwt();

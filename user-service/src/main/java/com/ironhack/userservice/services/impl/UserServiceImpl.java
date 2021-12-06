@@ -8,9 +8,11 @@ import com.ironhack.userservice.repositories.UserRepository;
 import com.ironhack.userservice.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.security.Principal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -50,10 +52,17 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(updateUserWithUserDTO(userDTO, user));
     }
 
+    public boolean userMatchesLoggedInUser(Principal principal, Long userId){
+        User user = findById(userId);
+        String loggedInEmail = principal.getName().toLowerCase().trim();
+        String userEmail = user.getEmail().toLowerCase().trim();
+        return loggedInEmail.equals(userEmail);
+    }
+
     @Override
-    public User findByUsername(String username) {
-        Optional<User> user = userRepository.findByUsername(username);
-        if (user.isEmpty()) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No User found with ID: " + username);
+    public User findByEmail(String email) {
+        Optional<User> user = userRepository.findByEmail(email);
+        if(user.isEmpty()) throw new UsernameNotFoundException("No user found with email: " + email);
         return user.get();
     }
 
