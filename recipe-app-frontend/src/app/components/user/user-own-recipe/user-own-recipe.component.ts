@@ -11,6 +11,7 @@ export class UserOwnRecipeComponent implements OnInit {
 
   @Input()
   userId!: number;
+  loading: boolean = true;
 
   recipeList!: RecipeDTO[];
 
@@ -27,6 +28,11 @@ export class UserOwnRecipeComponent implements OnInit {
   getUsersOwnRecipes(): void {
     this.recipeService.getRecipesByUserId(this.userId).subscribe(result => {
       this.recipeList = result;
+      this.loading = false;
+    },
+     error => {
+      console.log("User currently has not created any recipes");
+      this.loading = false
     })
   }
 }

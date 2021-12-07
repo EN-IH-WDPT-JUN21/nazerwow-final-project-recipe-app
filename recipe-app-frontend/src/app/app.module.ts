@@ -31,7 +31,8 @@ import { MdbCarouselModule } from 'mdb-angular-ui-kit/carousel';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { HomeSearchComponent } from './components/home-page/home-search/home-search.component';
 import { FavouritesCarouselComponent } from './components/home-page/favourites-carousel/favourites-carousel.component';
-import { AuthRoutingModule } from './auth-routing.module';
+import { MyProfileComponent } from './components/user/my-profile/my-profile.component';
+
 
 
 @NgModule({
@@ -56,7 +57,8 @@ import { AuthRoutingModule } from './auth-routing.module';
     HomePageComponent,
     HomeSearchComponent,
     FavouritesCarouselComponent,
-    EnumPipe
+    EnumPipe,
+    MyProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -69,8 +71,7 @@ import { AuthRoutingModule } from './auth-routing.module';
     ReactiveFormsModule,
     NgbModule,
     NgxPaginationModule,
-    MdbCarouselModule,
-    AuthRoutingModule
+    MdbCarouselModule
   ],
   providers: [],
   bootstrap: [AppComponent]

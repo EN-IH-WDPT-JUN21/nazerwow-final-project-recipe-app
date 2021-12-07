@@ -59,7 +59,7 @@ export interface UserDTO {
     id: number;
     name: string;
     username: string;
-    email: string;
+    email?: string;
     location: string;
     bio: string;
     pictureUrl: string;

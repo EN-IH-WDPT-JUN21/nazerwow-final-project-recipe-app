@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { FavouritesCarouselComponent } from './favourites-carousel/favourites-carousel.component';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 
 @Component({
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home-page.component.css']
 })
 export class HomePageComponent implements OnInit {
+
 
   constructor() { }
 

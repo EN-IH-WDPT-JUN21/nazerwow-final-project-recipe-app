@@ -9,6 +9,7 @@ import { MatChip } from '@angular/material/chips';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
+import { OktaAuthStateService } from '@okta/okta-angular';
 
 @Component({
   selector: 'app-recipe-browser',
@@ -22,6 +23,7 @@ export class RecipeBrowserComponent implements OnInit {
   measurementsList!:string[];
   searchValue!: string;
   recipeFormTitle: string = "Add a new recipe"
+  loading: boolean = true;
 
   @Input()
   showList: boolean = true
@@ -38,19 +40,24 @@ export class RecipeBrowserComponent implements OnInit {
   constructor(private enumService:EnumService,
     private recipeService:RecipeService,
     private router:Router,
-    private dialog:MatDialog) {
+    private dialog:MatDialog,
+    public authService: OktaAuthStateService) {
     this.filterList = [],
     this.recipeList = []
    }
 
   ngOnInit(): void {
+    this.loadData();
+  }
+
+  // Get enums for the chips and form
+
+  loadData():void {
     this.getAllDiets();
     this.getAllMeasurements();
     this.getAllCuisines();
     this.getAllRecipes();
   }
-
-  // Get enums for the chips and form
 
   getAllCuisines():void{
     this.enumService.getAllCuisines().subscribe(result => {
@@ -74,6 +81,7 @@ export class RecipeBrowserComponent implements OnInit {
   getAllRecipes():void{
     this.recipeService.getAllRecipes().subscribe(result => {
       this.recipeList = result;
+      this.loading = false;
       this.populateFilteredList();
     })
   }

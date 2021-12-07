@@ -1,7 +1,6 @@
 import { OktaAuth } from '@okta/okta-auth-js';
 import { MatDialog } from '@angular/material/dialog';
 import { UserDTO } from './../../../models/user-model';
-import { UserService } from './../../../services/user.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { UserFormComponent } from '../user-form/user-form.component';
 
@@ -15,20 +14,20 @@ export class UserDetailsComponent implements OnInit {
   @Input()
   user!:UserDTO;
 
+
   loggedInEmail: string | undefined;
 
   userVerified: boolean = false;
-
+  username!: string;
 
   constructor(private dialog: MatDialog, private oktaAuth:OktaAuth) { }
 
   async ngOnInit(): Promise<void> {
-    this.loggedInEmail = (await this.oktaAuth.getUser()).preferred_username;
-    this.verifyUser();
+    await this.verifyUser();
   }
 
   loadUserForm(): void {
-    const dialogRef = this.dialog.open(UserFormComponent, { autoFocus: false, height: '80vh', width: '80vw', data: this.user});
+    const dialogRef = this.dialog.open(UserFormComponent, { autoFocus: true, maxHeight: '80vh', maxWidth: '80vw', data: this.user});
     dialogRef.afterClosed().subscribe(result => {
       console.log('Dialog result: %{result}');
       this.refreshPage();
@@ -39,10 +38,18 @@ export class UserDetailsComponent implements OnInit {
     window.location.reload();
   }
 
-  verifyUser() {
+  async verifyUser(){
+    this.userVerified = (await this.emailsMatch());
+  }
+
+  async emailsMatch(): Promise<boolean> {
+    this.loggedInEmail = (await this.oktaAuth.getUser()).preferred_username;
     if(this.user.email == this.loggedInEmail){
-      this.userVerified = true;
+      return true;
+    } else {
+      return false;
     }
   }
+
 
 }

@@ -39,7 +39,7 @@ public class FavouriteControllerImpl implements com.ironhack.favouritesservice.c
     @Override
     @GetMapping("/userid/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public FavRecipeListDTO getAllFavouriteRecipesByUserId(@PathVariable Long id){
+    public List<RecipeDTO> getAllFavouriteRecipesByUserId(@PathVariable Long id){
         return favouritesService.getAllRecipesByUserId(id);
     }
 

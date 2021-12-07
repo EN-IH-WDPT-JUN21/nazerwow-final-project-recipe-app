@@ -43,7 +43,7 @@ public class FavouritesServiceImpl implements FavouritesService {
     }
 
     @Override
-    public FavRecipeListDTO getAllRecipesByUserId(Long id){
+    public List<RecipeDTO> getAllRecipesByUserId(Long id){
         return recipeListFromFavouritesList(findByUserId(id));
     }
 
@@ -90,11 +90,11 @@ public class FavouritesServiceImpl implements FavouritesService {
     }
 
 
-    private FavRecipeListDTO recipeListFromFavouritesList(List<Favourite> favouritesList) {
+    private List<RecipeDTO> recipeListFromFavouritesList(List<Favourite> favouritesList) {
         List<RecipeDTO> favRecipeList = new ArrayList<>();
         for (Favourite favourite : favouritesList) {
             favRecipeList.add(recipeService.findById(favourite.getRecipeId()));
         }
-        return new FavRecipeListDTO(favRecipeList);
+        return favRecipeList;
     }
 }

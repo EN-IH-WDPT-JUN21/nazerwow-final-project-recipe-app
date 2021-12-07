@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { UserOwnRecipeComponent } from './../user-own-recipe/user-own-recipe.component';
 import { ActivatedRoute } from '@angular/router';
 import { UserDTO } from './../../../models/user-model';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { Location } from '@angular/common'
 
@@ -14,6 +14,7 @@ import { Location } from '@angular/common'
 })
 export class UserPageComponent implements OnInit {
 
+  @Input()
   user!: UserDTO;
 
   constructor(private userService:UserService,
@@ -22,14 +23,20 @@ export class UserPageComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    const userId:number = this.activatedRoute.snapshot.params['userId'];
-    this.getUser(userId);
+    this.getUserIfNoInputtedUser();
+  }
+
+  getUserIfNoInputtedUser():void {
+    if(this.user == null){
+      const userId:number = this.activatedRoute.snapshot.params['userId'];
+      this.getUser(userId);
+    }
   }
 
   getUser(id:number):void{
     this.userService.getUserById(id).subscribe(result => {
       this.user = result;
-      })
+      },)
     }
     
 

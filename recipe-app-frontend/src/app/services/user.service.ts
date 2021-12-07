@@ -33,7 +33,11 @@ export class UserService {
   }
 
   userVerified(userId: number): Observable<any> {
-    return this.http.get(this.baseUrl + "/" + userId + "/verify")
+    return this.http.get<any>(this.baseUrl + "/" + userId + "/verify")
+  }
+
+  loadProfilePage(): Observable<any> {
+    return this.http.get<any>(this.baseUrl + "/profile")
   }
 
 }
