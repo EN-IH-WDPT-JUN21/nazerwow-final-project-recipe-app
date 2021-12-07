@@ -26,11 +26,12 @@ import { UserFavouritesComponent } from './components/user/user-favourites/user-
 import { UserOwnRecipeComponent } from './components/user/user-own-recipe/user-own-recipe.component';
 import { UserFormComponent } from './components/user/user-form/user-form.component';
 import { DrawerComponent } from './components/drawer/drawer.component';
-import { HomeComponent } from './components/home/home.component';
-import { HomeSearchComponent } from './components/home/home-search/home-search.component';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { FavouritesCarouselComponent } from './components/home/favourites-carousel/favourites-carousel.component';
 import { MdbCarouselModule } from 'mdb-angular-ui-kit/carousel';
+import { HomePageComponent } from './components/home-page/home-page.component';
+import { HomeSearchComponent } from './components/home-page/home-search/home-search.component';
+import { FavouritesCarouselComponent } from './components/home-page/favourites-carousel/favourites-carousel.component';
+import { AuthRoutingModule } from './auth-routing.module';
 
 
 @NgModule({
@@ -52,7 +53,7 @@ import { MdbCarouselModule } from 'mdb-angular-ui-kit/carousel';
     UserOwnRecipeComponent,
     UserFormComponent,
     DrawerComponent,
-    HomeComponent,
+    HomePageComponent,
     HomeSearchComponent,
     FavouritesCarouselComponent,
     EnumPipe
@@ -68,7 +69,8 @@ import { MdbCarouselModule } from 'mdb-angular-ui-kit/carousel';
     ReactiveFormsModule,
     NgbModule,
     NgxPaginationModule,
-    MdbCarouselModule
+    MdbCarouselModule,
+    AuthRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

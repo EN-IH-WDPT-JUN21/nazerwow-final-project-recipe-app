@@ -44,10 +44,10 @@ public class UserControllerImpl implements com.ironhack.userservice.controllers.
     }
 
     @Override
-    @PutMapping("/{id}/verify")
+    @GetMapping("/{id}/verify")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public boolean userMatchesLoggedInUser(Principal principal,
-                                           @PathVariable(name="id") Long userId) {
+    public boolean userMatchesLoggedInUser(@PathVariable(name="id") Long userId) {
+        Principal principal = SecurityContextHolder.getContext().getAuthentication();
         return userService.userMatchesLoggedInUser(principal,userId);
     }
 

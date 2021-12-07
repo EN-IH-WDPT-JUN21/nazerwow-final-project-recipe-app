@@ -38,6 +38,6 @@ public interface UserController {
 
     @PutMapping("/{id}/verify")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    boolean userMatchesLoggedInUser(Principal principal, Long userId);
+    boolean userMatchesLoggedInUser(Long userId);
 
 }
