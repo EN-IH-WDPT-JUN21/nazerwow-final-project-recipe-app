@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.List;
 
 public interface UserController {
@@ -17,6 +18,10 @@ public interface UserController {
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     User findById(@PathVariable(name = "id") Long id);
+
+    @GetMapping("/email/{email}")
+    @ResponseStatus(HttpStatus.OK)
+    User findByEmail(@PathVariable(name = "email") String email);
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
@@ -31,8 +36,8 @@ public interface UserController {
     User updateUser(@PathVariable(name = "id") Long id,
                     @RequestBody @Valid UserDTO userDTO);
 
-    @GetMapping("/username={username}")
-    @ResponseStatus(HttpStatus.OK)
-    User findByUsername(@PathVariable(name = "username") String username);
+    @PutMapping("/{id}/verify")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    boolean userMatchesLoggedInUser(Long userId);
 
 }

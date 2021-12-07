@@ -8,10 +8,13 @@ import com.ironhack.userservice.repositories.UserRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.support.SecurityContextProvider;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.security.Principal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -213,8 +216,15 @@ class UserServiceImplTest {
     }
 
     @Test
-    void findByUsername_Valid() {
-        var user = userService.findByUsername(user2.getUsername());
-        assertEquals(user.getUsername(), user2.getUsername());
+    void findByEmail_Valid() {
+        var user = userService.findByEmail(user2.getEmail());
+        assertEquals(user.getEmail(), user2.getEmail());
+    }
+
+    @Test
+    void verify(){
+        Principal mockPrincipal = Mockito.mock(Principal.class);
+        Mockito.when(mockPrincipal.getName()).thenReturn(user1.getEmail());
+        var answer = userService.userMatchesLoggedInUser(mockPrincipal, 1L);
     }
 }

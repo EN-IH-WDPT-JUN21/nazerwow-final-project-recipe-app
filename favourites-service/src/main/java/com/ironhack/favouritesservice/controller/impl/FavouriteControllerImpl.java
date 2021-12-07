@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
-@CrossOrigin("*")
+
 @RestController
 @RequestMapping("/api/v1/favourites")
 public class FavouriteControllerImpl implements com.ironhack.favouritesservice.controller.FavouriteController {

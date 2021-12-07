@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/v1/ratings")
 public class RatingControllerImpl implements com.ironhack.ratingservice.controller.RatingController {

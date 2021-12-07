@@ -1,10 +1,6 @@
 package com.ironhack.userservice.utils;
 
 import com.github.javafaker.Faker;
-import com.ironhack.recipeservice.dao.Ingredient;
-import com.ironhack.recipeservice.enums.Cuisine;
-import com.ironhack.recipeservice.enums.Diet;
-import com.ironhack.recipeservice.enums.Measurement;
 import com.ironhack.userservice.dao.User;
 import com.ironhack.userservice.enums.Role;
 import com.ironhack.userservice.repositories.UserRepository;
@@ -41,6 +37,8 @@ public class SampleDataLoader implements CommandLineRunner {
                 )).collect(Collectors.toList());
 
         userRepository.saveAll(users);
+
+        userRepository.save(new User("Nathan", "nazerwow", "gills11@gmail.com", List.of(Role.USER), "Uk", "It's me", "URL" ));
     }
 
 }

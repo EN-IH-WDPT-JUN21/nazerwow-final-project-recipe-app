@@ -3,7 +3,6 @@ export class User {
     constructor(
         private _name: string,
         private _username: string,
-        private _password: string,
         private _email: string,
         private _location: string,
         private _bio: string,
@@ -41,12 +40,6 @@ export class User {
     public set role(value: string[]) {
         this._role = value;
     }
-    public get password(): string {
-        return this._password;
-    }
-    public set password(value: string) {
-        this._password = value;
-    }
     public get username(): string {
         return this._username;
     }
@@ -66,7 +59,6 @@ export interface UserDTO {
     id: number;
     name: string;
     username: string;
-    password: string;
     email: string;
     location: string;
     bio: string;

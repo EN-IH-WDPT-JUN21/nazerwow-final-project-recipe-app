@@ -7,11 +7,8 @@
             <span class="title">The Recipe Box</span>
         </button>
         <span class="right-spacer"></span>
-        <button mat-button>
-           Log in
-        </button>
-        <button mat-button (click)="loadSignUpForm()">
-            Sign Up
-        </button>
+            <button mat-button *ngIf="!(authService.authState$ | async)?.isAuthenticated"
+                (click)="oktaAuth.signInWithRedirect()">Login</button>
+            <button mat-button *ngIf="(authService.authState$ | async)?.isAuthenticated" (click)="oktaAuth.signOut()">Logout</button>
     </mat-toolbar>
 

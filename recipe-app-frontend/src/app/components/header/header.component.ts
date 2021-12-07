@@ -1,8 +1,11 @@
+import { UserService } from 'src/app/services/user.service';
 import { MatDialog } from '@angular/material/dialog';
 import { Route } from '@angular/compiler/src/core';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserFormComponent } from '../user/user-form/user-form.component';
+import { OktaAuth } from '@okta/okta-auth-js';
+import { OktaAuthStateService } from '@okta/okta-angular';
 
 @Component({
   selector: 'app-header',
@@ -11,12 +14,14 @@ import { UserFormComponent } from '../user/user-form/user-form.component';
 })
 export class HeaderComponent implements OnInit {
 
-  value:String = "Clear me"
 
   @Output() toggleMenu: EventEmitter<string> = new EventEmitter();
 
   constructor(private router: Router,
-    private dialog: MatDialog) { }
+    private dialog: MatDialog, 
+    public oktaAuth: OktaAuth, public authService: OktaAuthStateService, 
+    private userService: UserService) { }
+
 
   ngOnInit(): void {
   }
@@ -29,13 +34,4 @@ export class HeaderComponent implements OnInit {
   menuClicked():void{
     this.toggleMenu.emit("clicked");
   }
-
-  loadSignUpForm(): void {
-    const dialogRef = this.dialog.open(UserFormComponent, {autoFocus: false, minHeight: '80vh', minWidth: '80vw'});
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('Dialog result: %{result}');
-      window.location.reload();
-    })
-  }
-
 }

@@ -1,3 +1,4 @@
+import { OktaAuth } from '@okta/okta-auth-js';
 import { MatDialog } from '@angular/material/dialog';
 import { UserDTO } from './../../../models/user-model';
 import { UserService } from './../../../services/user.service';
@@ -14,10 +15,16 @@ export class UserDetailsComponent implements OnInit {
   @Input()
   user!:UserDTO;
 
+  loggedInEmail: string | undefined;
 
-  constructor(private dialog: MatDialog) { }
+  userVerified: boolean = false;
 
-  ngOnInit(): void {
+
+  constructor(private dialog: MatDialog, private oktaAuth:OktaAuth) { }
+
+  async ngOnInit(): Promise<void> {
+    this.loggedInEmail = (await this.oktaAuth.getUser()).preferred_username;
+    this.verifyUser();
   }
 
   loadUserForm(): void {
@@ -31,4 +38,11 @@ export class UserDetailsComponent implements OnInit {
   refreshPage():void {
     window.location.reload();
   }
+
+  verifyUser() {
+    if(this.user.email == this.loggedInEmail){
+      this.userVerified = true;
+    }
+  }
+
 }

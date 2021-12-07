@@ -10,7 +10,7 @@ type NewType = Observable<any>;
 })
 export class FavouritesService {
 
-  readonly baseUrl: string = "http://localhost:8300/api/v1/favourites"
+  readonly baseUrl: string = "http://localhost:8080/api/v1/favourites"
 
   constructor(
     private http: HttpClient

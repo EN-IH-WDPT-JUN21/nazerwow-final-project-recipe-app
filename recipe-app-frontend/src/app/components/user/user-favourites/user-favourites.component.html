@@ -10,7 +10,7 @@
                 </span>
             </mat-panel-description>
         </mat-expansion-panel-header>
-        <div *ngif="recipeList != null">
+        <div *ngIf="recipeList != null">
             <app-recipe-list [recipeList]="recipeList"></app-recipe-list>
         </div>
     </mat-expansion-panel>

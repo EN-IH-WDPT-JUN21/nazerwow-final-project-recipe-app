@@ -7,7 +7,6 @@ import com.ironhack.recipeservice.enums.Measurement;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/v1")
 public class EnumControllerImpl implements EnumController {
