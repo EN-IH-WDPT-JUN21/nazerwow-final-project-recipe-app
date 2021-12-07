@@ -33,12 +33,12 @@ public class SampleDataLoader implements CommandLineRunner {
                         List.of(Role.USER),
                         faker.country().name(),
                         faker.dragonBall().character(),
-                        faker.dragonBall().character()
+                        "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
                 )).collect(Collectors.toList());
 
         userRepository.saveAll(users);
 
-        userRepository.save(new User("Nathan", "nazerwow", "gills11@gmail.com", List.of(Role.USER), "Uk", "It's me", "URL" ));
+        userRepository.save(new User("Nathan", "nazerwow", "gills11@gmail.com", List.of(Role.USER), "Uk", "It's me", "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" ));
     }
 
 }

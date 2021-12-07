@@ -21,7 +21,7 @@ public interface FavouriteController {
 
     @GetMapping("/userid/{id}")
     @ResponseStatus(HttpStatus.OK)
-    FavRecipeListDTO getAllFavouriteRecipesByUserId(@PathVariable Long id);
+    List<RecipeDTO> getAllFavouriteRecipesByUserId(@PathVariable Long id);
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)

@@ -227,4 +227,24 @@ class UserServiceImplTest {
         Mockito.when(mockPrincipal.getName()).thenReturn(user1.getEmail());
         var answer = userService.userMatchesLoggedInUser(mockPrincipal, 1L);
     }
+
+    @Test
+    void userLogOnOrSignUp() {
+        Principal mockPrincipal = Mockito.mock(Principal.class);
+        Mockito.when(mockPrincipal.getName()).thenReturn("newemail@newemail.com");
+        var userListBefore = userService.findAll().size();
+        userService.userLogOnOrSignUp(mockPrincipal);
+        var userListAfter = userService.findAll().size();
+        assertEquals(userListBefore + 1, userListAfter);
+    }
+
+    @Test
+    void userLogOnOrSignUp_Valid_Existing_User() {
+        Principal mockPrincipal = Mockito.mock(Principal.class);
+        Mockito.when(mockPrincipal.getName()).thenReturn(user1.getEmail());
+        var userListBefore = userService.findAll().size();
+        userService.userLogOnOrSignUp(mockPrincipal);
+        var userListAfter = userService.findAll().size();
+        assertEquals(userListBefore, userListAfter);
+    }
 }

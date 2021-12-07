@@ -74,11 +74,10 @@ public class UserControllerImpl implements com.ironhack.userservice.controllers.
         return userService.updateUser(id, userDTO);
     }
 
-
     @GetMapping("/profile")
     @ResponseStatus(HttpStatus.OK)
     public User loadUserProfile(){
-        return userService.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
+        return userService.userLogOnOrSignUp(SecurityContextHolder.getContext().getAuthentication());
     }
 
 

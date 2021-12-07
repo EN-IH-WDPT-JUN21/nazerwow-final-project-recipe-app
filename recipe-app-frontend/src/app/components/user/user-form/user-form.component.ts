@@ -24,7 +24,6 @@ export class UserFormComponent implements OnInit {
   userForm: FormGroup;
   name: FormControl;
   username: FormControl;
-  email: FormControl;
   location: FormControl;
   bio: FormControl;
   pictureUrl: FormControl;
@@ -34,14 +33,12 @@ export class UserFormComponent implements OnInit {
     private snackBar: MatSnackBar) {
     this.name = new FormControl('', [Validators.required]);
     this.username = new FormControl('', [Validators.required]);
-    this.email = new FormControl('', [Validators.required, Validators.email]);
     this.location = new FormControl('', [Validators.required]);
     this.bio = new FormControl('', [Validators.required]);
     this.pictureUrl = new FormControl('', [Validators.required]);
     this.userForm = new FormGroup({
       name: this.name,
       username: this.username,
-      email: this.email,
       location: this.location,
       bio: this.bio,
       pictureUrl: this.pictureUrl,
@@ -116,7 +113,6 @@ export class UserFormComponent implements OnInit {
       id: id,
       name: this.name.value,
       username: this.username.value,
-      email: this.email.value,
       location: this.location.value,
       bio: this.bio.value,
       pictureUrl: this.pictureUrl.value,

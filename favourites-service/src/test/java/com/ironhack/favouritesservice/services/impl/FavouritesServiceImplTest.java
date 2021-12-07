@@ -69,13 +69,13 @@ class FavouritesServiceImplTest {
     @Test
     void getAllRecipesByUserId() {
         var recipeListDTO = favouritesService.getAllRecipesByUserId(1L);
-        assertEquals(2, recipeListDTO.getFavouriteRecipes().size());
-        assertNotNull(recipeListDTO.getFavouriteRecipes().get(0).getName());
-        assertNotNull(recipeListDTO.getFavouriteRecipes().get(0).getIngredients());
-        assertNotNull(recipeListDTO.getFavouriteRecipes().get(0).getDiets());
-        assertNotNull(recipeListDTO.getFavouriteRecipes().get(0).getAuthorId());
-        assertNotNull(recipeListDTO.getFavouriteRecipes().get(0).getCookingTime());
-        assertNotNull(recipeListDTO.getFavouriteRecipes().get(0).getPrepTime());
+        assertEquals(2, recipeListDTO.size());
+        assertNotNull(recipeListDTO.get(0).getName());
+        assertNotNull(recipeListDTO.get(0).getIngredients());
+        assertNotNull(recipeListDTO.get(0).getDiets());
+        assertNotNull(recipeListDTO.get(0).getAuthorId());
+        assertNotNull(recipeListDTO.get(0).getCookingTime());
+        assertNotNull(recipeListDTO.get(0).getPrepTime());
     }
 
     @Test

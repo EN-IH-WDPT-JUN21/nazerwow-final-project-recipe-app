@@ -21,4 +21,6 @@ public interface UserService {
     boolean userMatchesLoggedInUser(Principal principal, Long userId);
 
     User findByEmail(String email);
+
+    User userLogOnOrSignUp(Principal principal);
 }

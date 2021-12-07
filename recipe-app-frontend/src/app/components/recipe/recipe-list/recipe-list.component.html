@@ -2,7 +2,7 @@
     <div *ngFor="let recipe of recipeList  | paginate: {
                     itemsPerPage: 8,
                     currentPage: page,
-                    totalItems: 0 }" class="p-2" >
+                    totalItems: 0  }" class="p-2" >
         <app-recipe-list-item [recipe]="recipe" [authorId]="recipe.authorId"></app-recipe-list-item>
     </div>
     </div>

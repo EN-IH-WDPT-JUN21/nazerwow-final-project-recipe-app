@@ -15,7 +15,7 @@ public interface FavouritesService {
 
     List<Favourite> findByUserId(Long id);
 
-    FavRecipeListDTO getAllRecipesByUserId(Long id);
+    List<RecipeDTO> getAllRecipesByUserId(Long id);
 
     Favourite addToFavourites(FavouriteDTO favouriteDTO);
 
