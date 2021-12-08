@@ -15,9 +15,10 @@ export class AuthInterceptor implements HttpInterceptor {
 
   private handleAccess(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // Only add an access token to allowed origins
-    const allowedOrigins = ['http://localhost'];
+    const allowedOrigins = ['http://localhost:8080/api/v1/users/profile'];
     if (allowedOrigins.some(url => request.urlWithParams.includes(url))) {
       const accessToken = this.oktaAuth.getAccessToken();
+      console.log("Interceptor Method")
       request = request.clone({
         setHeaders: {
           Authorization: 'Bearer ' + accessToken

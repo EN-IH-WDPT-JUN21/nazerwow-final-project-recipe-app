@@ -25,14 +25,15 @@ export class UserOwnRecipeComponent implements OnInit {
   }
 
 
-  getUsersOwnRecipes(): void {
-    this.recipeService.getRecipesByUserId(this.userId).subscribe(result => {
-      this.recipeList = result;
+  async getUsersOwnRecipes(): Promise<void> {
+    this.recipeList = await this.recipeService.getRecipesByUserId(this.userId)
+    // .subscribe(result => {
+      // this.recipeList = result;
       this.loading = false;
-    },
-     error => {
-      console.log("User currently has not created any recipes");
-      this.loading = false
-    })
+    // },
+    //  error => {
+    //   console.log("User currently has not created any recipes");
+    //   this.loading = false
+    // })
   }
 }

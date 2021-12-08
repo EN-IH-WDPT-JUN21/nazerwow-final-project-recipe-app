@@ -37,7 +37,7 @@ export class UserService {
   }
 
   loadProfilePage(): Observable<any> {
-    return this.http.get<any>(this.baseUrl + "/profile")
+    return  this.http.get<any>(this.baseUrl + "/profile")
   }
 
 }

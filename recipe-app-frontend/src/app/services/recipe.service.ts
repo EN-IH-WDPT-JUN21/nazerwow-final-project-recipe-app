@@ -23,8 +23,8 @@ export class RecipeService {
     return this.http.get<any>(this.baseUrl + "/" + id);
   }
 
-  getRecipesByUserId(userId:number): Observable<any> {
-    return this.http.get<any>(this.baseUrl + "/user/" + userId);
+  async getRecipesByUserId(userId:number): Promise<any> {
+    return this.http.get<any>(this.baseUrl + "/user/" + userId).toPromise();
   }
 
   addRecipe(recipeDTO: RecipeDTO): Observable<any> {

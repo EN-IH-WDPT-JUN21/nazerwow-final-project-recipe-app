@@ -11,7 +11,7 @@ import { RecipePageComponent } from './components/recipe/recipe-page/recipe-page
 import { RecipeListComponent } from './components/recipe/recipe-list/recipe-list.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RecipeCardComponent } from './components/recipe/recipe-page/recipe-card/recipe-card.component';
 import { RecipeInstructionsComponent } from './components/recipe/recipe-page/recipe-instructions/recipe-instructions.component';
 import { RecipeListItemComponent } from './components/recipe/recipe-list/recipe-list-item/recipe-list-item.component';
@@ -32,6 +32,7 @@ import { HomePageComponent } from './components/home-page/home-page.component';
 import { HomeSearchComponent } from './components/home-page/home-search/home-search.component';
 import { FavouritesCarouselComponent } from './components/home-page/favourites-carousel/favourites-carousel.component';
 import { MyProfileComponent } from './components/user/my-profile/my-profile.component';
+import { AuthInterceptor } from './shared/okta/auth.interceptor';
 
 
 
@@ -73,7 +74,9 @@ import { MyProfileComponent } from './components/user/my-profile/my-profile.comp
     NgxPaginationModule,
     MdbCarouselModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
