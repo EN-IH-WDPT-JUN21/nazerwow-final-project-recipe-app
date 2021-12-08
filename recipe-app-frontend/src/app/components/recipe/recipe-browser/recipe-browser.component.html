@@ -1,7 +1,7 @@
 <div class="page">
     <div class="d-flex justify-content-center align-items-center">
         <div class="search">
-            <app-recipe-search [recipeList]="filteredRecipeList" (recipeNameOutput)="filterByName($event)" (deleteOutput)="updateSearchValue($event)"></app-recipe-search>
+            <app-recipe-search [recipeList]="filteredRecipeList" (recipeNameOutput)="filterByText($event)" (deleteOutput)="updateSearchValue($event)"></app-recipe-search>
         </div>
         <button *ngIf="showAddButton && (authService.authState$ | async)?.isAuthenticated" mat-fab color="primary" (click)="loadAddForm()"><span class="add-button">+</span></button>
     </div>
