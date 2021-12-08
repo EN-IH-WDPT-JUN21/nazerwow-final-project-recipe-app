@@ -34,6 +34,7 @@ import { FavouritesCarouselComponent } from './components/home-page/favourites-c
 import { MyProfileComponent } from './components/user/my-profile/my-profile.component';
 import { AuthInterceptor } from './shared/okta/auth.interceptor';
 import { FavouritesToggleComponent } from './components/recipe/favourites-toggle/favourites-toggle.component';
+import { StarRatingComponent } from './components/rating/star-rating/star-rating.component';
 
 
 
@@ -61,7 +62,8 @@ import { FavouritesToggleComponent } from './components/recipe/favourites-toggle
     FavouritesCarouselComponent,
     EnumPipe,
     MyProfileComponent,
-    FavouritesToggleComponent
+    FavouritesToggleComponent,
+    StarRatingComponent
   ],
   imports: [
     BrowserModule,

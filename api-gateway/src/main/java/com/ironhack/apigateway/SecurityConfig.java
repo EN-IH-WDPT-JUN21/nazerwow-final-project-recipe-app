@@ -1,6 +1,5 @@
 package com.ironhack.apigateway;
 
-import com.okta.spring.boot.oauth.Okta;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.context.annotation.Bean;
@@ -23,7 +22,7 @@ public class SecurityConfig {
                 .authorizeExchange()
                 .pathMatchers(HttpMethod.GET, "/api/v1/recipes/**").permitAll()
                 .pathMatchers(HttpMethod.GET, "/api/v1/favourites/**").permitAll()
-                .pathMatchers(HttpMethod.GET, "/api/v1/users/").permitAll()
+                .pathMatchers(HttpMethod.GET, "/api/v1/users/**").permitAll()
                 .pathMatchers(HttpMethod.GET, "/api/v1/users/{id}").permitAll()
                 .pathMatchers(HttpMethod.GET, "/api/v1/ratings/**").permitAll()
                 .pathMatchers(HttpMethod.GET, "/api/v1/cuisines").permitAll()
@@ -49,7 +48,6 @@ public class SecurityConfig {
         corsConfig.setMaxAge(3600L);
         corsConfig.addAllowedMethod("*");
         corsConfig.addAllowedHeader("*");
-
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", corsConfig);
         return source;

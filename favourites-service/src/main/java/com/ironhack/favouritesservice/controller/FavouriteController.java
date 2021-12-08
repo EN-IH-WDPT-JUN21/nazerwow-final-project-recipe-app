@@ -28,7 +28,7 @@ public interface FavouriteController {
     @ResponseStatus(HttpStatus.CREATED)
     Favourite addToFavourites(@RequestBody FavouriteDTO favouriteDTO);
 
-    @DeleteMapping("/remove")
+    @PutMapping("/remove")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     void removeFromFavourites(@RequestBody FavouriteDTO favouriteDTO);
 

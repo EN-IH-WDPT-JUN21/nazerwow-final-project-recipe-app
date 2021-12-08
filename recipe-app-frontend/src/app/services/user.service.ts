@@ -40,4 +40,8 @@ export class UserService {
     return  this.http.get<any>(this.baseUrl + "/profile")
   }
 
+  getUserByEmail(email: string): Observable<any> {
+    return this.http.get<any>(this.baseUrl + "/email/" + email);
+  }
+
 }

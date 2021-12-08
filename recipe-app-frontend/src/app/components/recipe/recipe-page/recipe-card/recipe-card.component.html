@@ -1,8 +1,9 @@
 <mat-card>
     <mat-card-title-group class="d-flex justify-content-around">
-            <mat-card-title class="title">{{recipe.name}}</mat-card-title>
+            <mat-card-title class="title">{{recipe.name}}</mat-card-title> 
             <mat-card-subtitle>
                 <a> by: {{user.name}} </a> <br><br>
+                <app-star-rating [recipeId]="recipe.id"></app-star-rating>
                 <div class="recipe-info">
                     <p><strong>Ingredients: </strong> {{recipe.ingredients?.length}} </p>
                     <p><strong>Prep Time: </strong>{{recipe.prepTime}} mins</p>
@@ -15,7 +16,8 @@
             </mat-card-subtitle>
             <div class="image">
                 <img class="img-fluid rounded" src={{recipe.imageUrl}}>
+                <span class="rating-text"> Your rating <app-star-rating [isReadOnly]="false"></app-star-rating></span>
             </div>
     </mat-card-title-group>
-    <app-favourites-toggle [userId]="user.id" [recipeId]="recipe.id"></app-favourites-toggle>
+    <app-favourites-toggle [recipeId]="recipe.id"></app-favourites-toggle>
 </mat-card>

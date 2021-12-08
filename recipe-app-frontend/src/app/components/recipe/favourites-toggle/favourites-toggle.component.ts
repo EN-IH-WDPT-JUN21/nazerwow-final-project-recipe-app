@@ -1,3 +1,7 @@
+import { OktaAuthStateService } from '@okta/okta-angular';
+import { UserDTO } from './../../../models/user-model';
+import { OktaAuth } from '@okta/okta-auth-js';
+import { UserService } from 'src/app/services/user.service';
 import { Observable } from 'rxjs';
 import { FavouriteDTO } from './../../../models/favourites-model';
 import { FavouritesService } from './../../../services/favourites.service';
@@ -11,26 +15,46 @@ import { Component, Input, OnInit } from '@angular/core';
 export class FavouritesToggleComponent implements OnInit {
 
   @Input()
-  userId!: number;
-  @Input()
   recipeId!: number;
 
-  isFavourite: boolean = false;
+  user!: UserDTO;
 
-  constructor(private favouritesService: FavouritesService) { }
+  isFavourite: boolean = false;
+  loading: boolean = true;
+
+  displayText: string = "Add to favourites"
+
+  constructor(private favouritesService: FavouritesService, 
+    private userService: UserService, 
+    private oktaAuth: OktaAuth, 
+    public authService: OktaAuthStateService) { }
 
   ngOnInit(): void {
+    this.loadUserAndCheckIfFavourite();
+  }
+
+  async loadUserAndCheckIfFavourite(): Promise<void> {
+  this.userService.getUserByEmail(await this.getLoggedInEmail()).subscribe(result => {
+    this.user = result;
     this.checkIfFavourited();
+  })
+  }
+
+  private async getLoggedInEmail(): Promise<string> {
+    return String((await this.oktaAuth.getUser()).preferred_username);
   }
 
   checkIfFavourited(): void {
     this.favouritesService.isRecipeFavourited(this.createFavouriteDTO()).subscribe(result => {
       this.isFavourite = result;
+      console.log(this.isFavourite)
+      this.toggleDisplayText();
+      this.loading = false;
     });
   }
 
   createFavouriteDTO(): FavouriteDTO {
-    const favouriteDTO: FavouriteDTO = {userId: this.userId, recipeId: this.recipeId}
+    const favouriteDTO: FavouriteDTO = {userId: this.user.id, recipeId: this.recipeId}
     return favouriteDTO;
   }
 
@@ -45,6 +69,15 @@ export class FavouritesToggleComponent implements OnInit {
         console.log(result)
         this.isFavourite = true;
       })
+    }
+    this.toggleDisplayText();
+  }
+
+  private toggleDisplayText():void{
+    if(this.isFavourite){
+      this.displayText = "Remove from favourites"
+    } else {
+      this.displayText = "Add to favourites"
     }
   }
 }

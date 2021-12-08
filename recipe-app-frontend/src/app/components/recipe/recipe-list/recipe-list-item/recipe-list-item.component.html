@@ -3,17 +3,7 @@
         <div class="d-flex flex-wrap">
             <div class="p-2">
                 <img class="rounded float-left small-image img-fluid" src={{recipe.imageUrl}} alt="">
-                <div *ngIf="rating > 0"> 
-                    <ng-template #t let-fill="fill" let-index="index">
-                        <span class="star" [class.full]="fill === 100">
-                            <span class="half" [style.width.%]="fill">&hearts;</span>&hearts;
-                        </span>
-                    </ng-template>
-            <p> <ngb-rating [(rate)]="rating" [max]="5" [readonly]="true" [starTemplate]="t"></ngb-rating> <span class="rating-text"> {{rating | number: '1.0-1'}}/5 </span></p>
-        </div>
-        <div *ngIf="rating == 0">
-            <p class="rating-text">Not yet rated</p>
-        </div>
+                <app-star-rating [recipeId]="recipe.id"></app-star-rating>
     </div>
     <div class="p-2">
         <p>Ingredients: {{recipe.ingredients?.length}}</p>
