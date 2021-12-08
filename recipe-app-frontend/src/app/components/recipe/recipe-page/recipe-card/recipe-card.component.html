@@ -16,7 +16,7 @@
             </mat-card-subtitle>
             <div class="image">
                 <img class="img-fluid rounded" src={{recipe.imageUrl}}>
-                <span class="rating-text"> Your rating <app-star-rating [isReadOnly]="false"></app-star-rating></span>
+                <span class="rating-text"> Your rating <app-star-rating [isReadOnly]="false" [usersRating]="usersRating" [recipeId]="recipe.id"></app-star-rating></span>
             </div>
     </mat-card-title-group>
     <app-favourites-toggle [recipeId]="recipe.id"></app-favourites-toggle>

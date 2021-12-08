@@ -53,10 +53,17 @@ public class RatingControllerImpl implements com.ironhack.ratingservice.controll
         return ratingService.getTop10RecipesForUser(userId);
     }
 
-    @PutMapping()
+    @Override
+    @PutMapping("/raterecipe")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public Rating rateRecipe(@RequestBody RatingDTO ratingDTO) {
         return ratingService.rateRecipe(ratingDTO);
+    }
+
+    @PutMapping("/usersRating")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public Double findByUserIdAndRecipeId(RatingDTO ratingDTO) {
+        return ratingService.findByUserIdAndRecipeId(ratingDTO);
     }
 
 

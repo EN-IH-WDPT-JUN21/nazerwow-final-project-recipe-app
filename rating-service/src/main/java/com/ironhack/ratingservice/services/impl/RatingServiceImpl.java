@@ -73,6 +73,16 @@ public class RatingServiceImpl implements com.ironhack.ratingservice.services.Ra
         }
     }
 
+    @Override
+    public Double findByUserIdAndRecipeId(RatingDTO ratingDTO) {
+        Optional<Double> rating = ratingRepository.findByUserIdAndRecipeId(ratingDTO.getUserId(), ratingDTO.getRecipeId());
+        if(rating.isEmpty()){
+            return null;
+        } else {
+            return rating.get();
+        }
+    }
+
     private List<RecipeDTO> getRecipeDTOSFromRatingList(List<Rating> ratingList) {
         List<RecipeDTO> recipeDTOList = new ArrayList<>();
         for (Rating rating : ratingList) {
