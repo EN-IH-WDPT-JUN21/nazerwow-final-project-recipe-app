@@ -18,7 +18,7 @@ export class StarRatingComponent implements OnInit {
 
   loggedInUser!: UserDTO;
 
-  rating: number = 0;
+  rating!: number;
 
   @Output() ratingOutput : EventEmitter<number> = new EventEmitter();
 
@@ -33,31 +33,36 @@ export class StarRatingComponent implements OnInit {
     private userService:UserService) { }
 
   ngOnInit(): void {
+  }
+
+  ngAfterContentInit(): void {
     this.getRating();
   }
 
   getRating():void {
-    if(this.recipeId != null && this.usersRating == null){ 
-    this.ratingService.getAverageRatingForRecipe(this.recipeId).subscribe(result => {
-      this.rating = result;
-    })
-  } else {
-    this.rating = this.usersRating;
-  }
+      this.ratingService.getAverageRatingForRecipe(this.recipeId).subscribe(result => {
+        this.rating = result;
+        if(this.usersRating != null){
+          this.rating = this.usersRating;
+        }
+      })
   }
 
-  async submitRating(rating : number) {
-    this.userService.getUserByEmail(await this.getLoggedInEmail()).subscribe(result => {
-      this.loggedInUser = result;
-      let ratingDTO: RatingDTO = {
-        rating: rating,
-        recipeId: this.recipeId,
-        userId: this.loggedInUser.id
-      }
-      this.ratingService.rateRecipe(ratingDTO).subscribe(result => {
-        console.log(result);
+  async submitRating() {
+    if(this.rating != 0 || this.rating != null){
+
+      this.userService.getUserByEmail(await this.getLoggedInEmail()).subscribe(result => {
+        this.loggedInUser = result;
+        let ratingDTO: RatingDTO = {
+          rating: this.rating,
+          recipeId: this.recipeId,
+          userId: this.loggedInUser.id
+        }
+        this.ratingService.rateRecipe(ratingDTO).subscribe(result => {
+          console.log(result);
+        })
       })
-    })
+    }
   }
   
   private async getLoggedInEmail(): Promise<string> {

@@ -60,7 +60,7 @@ public class RatingControllerImpl implements com.ironhack.ratingservice.controll
         return ratingService.rateRecipe(ratingDTO);
     }
 
-    @PutMapping("/usersRating")
+    @PutMapping("/usersrating")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public Double findByUserIdAndRecipeId(RatingDTO ratingDTO) {
         return ratingService.findByUserIdAndRecipeId(ratingDTO);

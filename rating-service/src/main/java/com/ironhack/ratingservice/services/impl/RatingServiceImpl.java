@@ -76,6 +76,9 @@ public class RatingServiceImpl implements com.ironhack.ratingservice.services.Ra
     @Override
     public Double findByUserIdAndRecipeId(RatingDTO ratingDTO) {
         Optional<Double> rating = ratingRepository.findByUserIdAndRecipeId(ratingDTO.getUserId(), ratingDTO.getRecipeId());
+        System.out.println(rating);
+        System.out.println(ratingDTO.getUserId());
+        System.out.println(ratingDTO.getRecipeId());
         if(rating.isEmpty()){
             return null;
         } else {

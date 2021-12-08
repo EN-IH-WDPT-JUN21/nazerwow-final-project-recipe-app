@@ -1,3 +1,4 @@
+import { OktaAuthStateService } from '@okta/okta-angular';
 import { OktaAuth } from '@okta/okta-auth-js';
 import { RatingService } from './../../../../services/rating.service';
 import { UserService } from './../../../../services/user.service';
@@ -24,21 +25,25 @@ export class RecipeCardComponent implements OnInit {
 
   constructor(private userService:UserService, 
     private ratingService: RatingService,
-    private oktaAuth:OktaAuth) { }
+    private oktaAuth:OktaAuth,
+    public authService: OktaAuthStateService) { }
 
-  ngOnInit(): void {
-    this.getUsersRating();
+  async ngOnInit(): Promise<void> {
+    await this.getUsersRating();
   }
 
    async getUsersRating() {
     this.userService.getUserByEmail(await this.getLoggedInEmail()).subscribe(result => {
       this.loggedInUser = result;
       let ratingDTO: RatingDTO = {
-        userId: this.loggedInUser.id,
-        recipeId: this.recipe.id
+        rating: 0,
+        recipeId: this.recipe.id,
+        userId: this.loggedInUser.id
       }
+      console.log(ratingDTO)
       this.ratingService.getUsersRating(ratingDTO).subscribe(result => {
         this.usersRating = result;
+        console.log(result)
       })
     })
   }

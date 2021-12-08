@@ -35,7 +35,7 @@ public interface RatingController {
     @ResponseStatus(HttpStatus.ACCEPTED)
     Rating rateRecipe(@RequestBody RatingDTO ratingDTO);
 
-    @PutMapping("/usersRating")
+    @PutMapping("/usersrating")
     @ResponseStatus(HttpStatus.ACCEPTED)
     Double findByUserIdAndRecipeId(RatingDTO ratingDTO);
 }
