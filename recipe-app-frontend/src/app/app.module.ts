@@ -33,6 +33,7 @@ import { HomeSearchComponent } from './components/home-page/home-search/home-sea
 import { FavouritesCarouselComponent } from './components/home-page/favourites-carousel/favourites-carousel.component';
 import { MyProfileComponent } from './components/user/my-profile/my-profile.component';
 import { AuthInterceptor } from './shared/okta/auth.interceptor';
+import { FavouritesToggleComponent } from './components/recipe/favourites-toggle/favourites-toggle.component';
 
 
 
@@ -59,7 +60,8 @@ import { AuthInterceptor } from './shared/okta/auth.interceptor';
     HomeSearchComponent,
     FavouritesCarouselComponent,
     EnumPipe,
-    MyProfileComponent
+    MyProfileComponent,
+    FavouritesToggleComponent
   ],
   imports: [
     BrowserModule,

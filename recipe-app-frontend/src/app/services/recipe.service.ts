@@ -39,13 +39,4 @@ export class RecipeService {
     return this.http.put(`${this.baseUrl + "/" + RecipeDTO.id}`, RecipeDTO)
   }
 
-
-  recipeList!:RecipeDTO[];
-  returnAllRecipes(): RecipeDTO[] {
-    this.getAllRecipes().subscribe(result => {
-      this.recipeList = result;
-    });
-    return this.recipeList;    
-  }
-
 }

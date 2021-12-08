@@ -17,4 +17,5 @@
                 <img class="img-fluid rounded" src={{recipe.imageUrl}}>
             </div>
     </mat-card-title-group>
+    <app-favourites-toggle [userId]="user.id" [recipeId]="recipe.id"></app-favourites-toggle>
 </mat-card>
