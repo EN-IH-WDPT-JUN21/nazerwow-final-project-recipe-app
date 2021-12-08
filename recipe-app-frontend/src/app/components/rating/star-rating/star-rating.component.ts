@@ -18,6 +18,7 @@ export class StarRatingComponent implements OnInit {
 
   loggedInUser!: UserDTO;
 
+  @Input()
   rating!: number;
 
   @Output() ratingOutput : EventEmitter<number> = new EventEmitter();
@@ -25,32 +26,25 @@ export class StarRatingComponent implements OnInit {
   @Input()
   isReadOnly: boolean = true;
   
-  @Input()
-  usersRating!: number;
 
   constructor(private ratingService: RatingService, 
     private oktaAuth: OktaAuth, 
     private userService:UserService) { }
 
   ngOnInit(): void {
-  }
-
-  ngAfterContentInit(): void {
-    this.getRating();
+    this.getRating()
   }
 
   getRating():void {
+    if(this.isReadOnly){
       this.ratingService.getAverageRatingForRecipe(this.recipeId).subscribe(result => {
         this.rating = result;
-        if(this.usersRating != null){
-          this.rating = this.usersRating;
-        }
       })
+    }
   }
 
   async submitRating() {
     if(this.rating != 0 || this.rating != null){
-
       this.userService.getUserByEmail(await this.getLoggedInEmail()).subscribe(result => {
         this.loggedInUser = result;
         let ratingDTO: RatingDTO = {
@@ -59,7 +53,6 @@ export class StarRatingComponent implements OnInit {
           userId: this.loggedInUser.id
         }
         this.ratingService.rateRecipe(ratingDTO).subscribe(result => {
-          console.log(result);
         })
       })
     }

@@ -17,7 +17,7 @@
             <div class="image">
                 <img class="img-fluid rounded" src={{recipe.imageUrl}}>
                 <div *ngIf="(authService.authState$ | async)?.isAuthenticated">
-                    <span class="rating-text"> Your rating <app-star-rating [isReadOnly]="false" [usersRating]="usersRating" [recipeId]="recipe.id"></app-star-rating></span>
+                    <span class="rating-text"> Your rating <app-star-rating [isReadOnly]="false" [rating]="usersRating" [recipeId]="recipe.id"></app-star-rating></span>
                 </div>
             </div>
     </mat-card-title-group>
