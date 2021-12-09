@@ -2,11 +2,9 @@
 
     <h1>{{title}}</h1>
     
-    <form (ngSubmit)="onSubmit()" [formGroup]="userForm">
-        
-        <p>
+    <div class="form-box">
 
-        </p>
+    <form (ngSubmit)="onSubmit()" [formGroup]="userForm">
         <mat-form-field appearance="fill">
             <mat-label>Name</mat-label>
             <input type="text" matInput formControlName="name" placeholder="name...">
@@ -52,5 +50,5 @@
         </p>
         <p><button [disabled]="userForm.invalid" mat-stroked-button color="primary" type="submit">{{addOrEditButton}}</button></p>
     </form>
-    
+    </div>
 </mat-card>

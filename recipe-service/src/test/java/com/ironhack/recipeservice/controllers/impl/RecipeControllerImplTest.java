@@ -156,7 +156,7 @@ class RecipeControllerImplTest {
                 "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg"
         );
         String body = objectMapper.writeValueAsString(createRecipeDTO);
-        mockMvc.perform(post("/api/v1/recipes")
+        mockMvc.perform(post("/api/v1/recipes/add")
                         .content(body).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated())
                 .andReturn();
@@ -179,7 +179,7 @@ class RecipeControllerImplTest {
                 "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg"
         );
         String body = objectMapper.writeValueAsString(createRecipeDTO);
-        mockMvc.perform(post("/api/v1/recipes")
+        mockMvc.perform(post("/api/v1/recipes/add")
                         .content(body).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest())
                 .andReturn();

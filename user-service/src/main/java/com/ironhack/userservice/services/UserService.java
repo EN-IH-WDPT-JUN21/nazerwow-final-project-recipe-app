@@ -16,7 +16,7 @@ public interface UserService {
 
     User addUser(CreateUserDTO createUserDTO);
 
-    User updateUser(Long id, UserDTO userDTO);
+    User updateUser(UserDTO userDTO);
 
     boolean userMatchesLoggedInUser(Principal principal, Long userId);
 

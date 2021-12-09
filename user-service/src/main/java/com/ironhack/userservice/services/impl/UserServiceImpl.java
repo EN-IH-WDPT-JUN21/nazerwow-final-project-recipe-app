@@ -47,8 +47,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User updateUser(Long id, UserDTO userDTO){
-        User user = findById(id);
+    public User updateUser(UserDTO userDTO){
+        User user = findById(userDTO.getId());
         return userRepository.save(updateUserWithUserDTO(userDTO, user));
     }
 

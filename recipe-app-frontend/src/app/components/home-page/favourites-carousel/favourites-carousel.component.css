@@ -2,6 +2,13 @@
     max-width: 500px;
 }
 
+h1 {
+    font-size: large;
+    font-family: 'Abril Fatface',
+    cursive;
+    font-size: 3vw;
+}
+
 h1.a {
     text-indent: 0em;
 }

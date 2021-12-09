@@ -27,9 +27,13 @@ export class UserPageComponent implements OnInit {
   }
 
   getUserIfNoInputtedUser():void {
-    if(this.user == null){
-      const userId:number = this.activatedRoute.snapshot.params['userId'];
-      this.getUser(userId);
+    try {
+      if(this.user == null){
+        const userId:number = this.activatedRoute.snapshot.params['userId'];
+        this.getUser(userId);
+      }
+    } catch(error){
+      console.error(error);
     }
   }
 

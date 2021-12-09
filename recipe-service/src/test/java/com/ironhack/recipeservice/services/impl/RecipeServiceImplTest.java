@@ -153,6 +153,7 @@ class RecipeServiceImplTest {
     @Test
     void updateRecipe_Valid_NoDataBaseIncrease() {
         RecipeDTO recipeDTO = new RecipeDTO(
+                recipe1.getId(),
                 "Test Recipe2",
                 List.of(ingredient2, ingredient3),
                 method,
@@ -164,7 +165,7 @@ class RecipeServiceImplTest {
                 "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg"
         );
         var recipeListBefore = recipeService.findAll().size();
-        Recipe recipe = recipeService.updateRecipe(recipe1.getId(), recipeDTO);
+        Recipe recipe = recipeService.updateRecipe(recipeDTO);
         var recipeListAfter = recipeService.findAll().size();
         assertEquals(recipeListBefore, recipeListAfter);
     }
@@ -175,6 +176,7 @@ class RecipeServiceImplTest {
         recipeRepository.save(recipe1);
         System.out.println(recipe1.getCreatedDate());
         RecipeDTO recipeDTO = new RecipeDTO(
+                recipe1.getId(),
                 "Test Recipe2",
                 List.of(ingredient2, ingredient3),
                 method,
@@ -185,7 +187,7 @@ class RecipeServiceImplTest {
                 List.of(Diet.VEGETARIAN, Diet.GLUTEN_FREE),
                 "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg"
         );
-        recipeService.updateRecipe(recipe1.getId(), recipeDTO);
+        recipeService.updateRecipe(recipeDTO);
         Recipe updatedRecipe = recipeService.findById(recipe1.getId());
         assertEquals(recipe1.getId(), updatedRecipe.getId());
         assertEquals(recipeDTO.getName(), updatedRecipe.getName());
@@ -201,6 +203,7 @@ class RecipeServiceImplTest {
         recipeRepository.save(recipe1);
         Recipe originalRecipe = recipeService.findById(recipe1.getId());
         RecipeDTO recipeDTO = new RecipeDTO(
+                recipe1.getId(),
                 null,
                 null,
                 null,
@@ -211,7 +214,7 @@ class RecipeServiceImplTest {
                 null,
                 null
         );
-        recipeService.updateRecipe(recipe1.getId(), recipeDTO);
+        recipeService.updateRecipe(recipeDTO);
         Recipe updatedRecipe = recipeService.findById(recipe1.getId());
         assertEquals(originalRecipe.getId(), updatedRecipe.getId());
         assertEquals(originalRecipe.getName(), updatedRecipe.getName());
@@ -224,6 +227,7 @@ class RecipeServiceImplTest {
     @Test
     void updateRecipe_ThrowsException() {
         RecipeDTO recipeDTO = new RecipeDTO(
+                recipe1.getId() + 65L,
                 null,
                 null,
                 null,
@@ -234,8 +238,7 @@ class RecipeServiceImplTest {
                 null,
                 null
         );
-        assertThrows(ResponseStatusException.class, () ->  recipeService.updateRecipe(recipe1.getId() - 60L,
-                recipeDTO));
+        assertThrows(ResponseStatusException.class, () ->  recipeService.updateRecipe(recipeDTO));
     }
 
     @Test

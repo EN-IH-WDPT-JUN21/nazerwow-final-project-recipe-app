@@ -22,14 +22,13 @@ public interface RecipeController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     void deleteRecipe(@PathVariable(name = "id") Long id);
 
-    @PostMapping()
+    @PostMapping("/add")
     @ResponseStatus(HttpStatus.CREATED)
     Recipe addRecipe(@RequestBody CreateRecipeDTO createRecipeDTO);
 
-    @PutMapping("{id}")
+    @PutMapping("edit")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    Recipe updateRecipe(@PathVariable(name = "id") Long id,
-                        @RequestBody RecipeDTO recipeDTO);
+    Recipe updateRecipe(@RequestBody RecipeDTO recipeDTO);
 
     @GetMapping("/user/{id}")
     @ResponseStatus(HttpStatus.OK)

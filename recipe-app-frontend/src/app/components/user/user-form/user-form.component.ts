@@ -101,7 +101,6 @@ export class UserFormComponent implements OnInit {
     )
   }
 
-
   private createUserDTOFromForm(): UserDTO {
       let id: number;
       if(this.userDTO == null){

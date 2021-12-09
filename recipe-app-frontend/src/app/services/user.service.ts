@@ -29,7 +29,7 @@ export class UserService {
   }
 
   editUser(UserDTO: UserDTO): Observable<any> {
-    return this.http.put(`${this.baseUrl + "/" + UserDTO.id}`, UserDTO)
+    return this.http.put(`${this.baseUrl + "/edit"}`, UserDTO)
   }
 
   userVerified(userId: number): Observable<any> {

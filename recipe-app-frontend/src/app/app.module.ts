@@ -35,6 +35,7 @@ import { MyProfileComponent } from './components/user/my-profile/my-profile.comp
 import { AuthInterceptor } from './shared/okta/auth.interceptor';
 import { FavouritesToggleComponent } from './components/recipe/favourites-toggle/favourites-toggle.component';
 import { StarRatingComponent } from './components/rating/star-rating/star-rating.component';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 
 
@@ -79,7 +80,9 @@ import { StarRatingComponent } from './components/rating/star-rating/star-rating
     MdbCarouselModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: MAT_DIALOG_DATA, useValue: {} },
+    { provide: MatDialogRef, useValue: {} }
   ],
   bootstrap: [AppComponent]
 })

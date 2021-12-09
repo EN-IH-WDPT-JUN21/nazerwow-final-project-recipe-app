@@ -39,8 +39,8 @@ public class RecipeServiceImpl implements RecipeService {
         return recipeRepository.save(convertNewRecipeDTOToRecipe(createRecipeDTO));
     }
 
-    public Recipe updateRecipe(Long id, RecipeDTO recipeDTO){
-        Recipe recipe = findById(id);
+    public Recipe updateRecipe(RecipeDTO recipeDTO){
+        Recipe recipe = findById(recipeDTO.getId());
         return recipeRepository.save(updateRecipeWithRecipeDTO(recipeDTO, recipe));
     }
 

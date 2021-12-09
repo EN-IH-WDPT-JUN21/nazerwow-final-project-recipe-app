@@ -28,7 +28,7 @@ export class RecipeService {
   }
 
   addRecipe(recipeDTO: RecipeDTO): Observable<any> {
-    return this.http.post(`${this.baseUrl}`, recipeDTO);
+    return this.http.post(`${this.baseUrl}/add`, recipeDTO);
   }
 
   deleteRecipe(id: number): Observable<any> {
@@ -36,7 +36,7 @@ export class RecipeService {
   }
 
   editRecipe(RecipeDTO: RecipeDTO): Observable<any> {
-    return this.http.put(`${this.baseUrl + "/" + RecipeDTO.id}`, RecipeDTO)
+    return this.http.put(`${this.baseUrl + "/edit"}`, RecipeDTO)
   }
 
 }

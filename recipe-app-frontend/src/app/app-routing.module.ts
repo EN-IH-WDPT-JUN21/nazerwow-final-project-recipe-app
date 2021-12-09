@@ -1,3 +1,4 @@
+import { AddRecipeFormComponent } from './components/recipe/add-recipe-form/add-recipe-form.component';
 import { MyProfileComponent } from './components/user/my-profile/my-profile.component';
 import { RecipeBrowserComponent } from './components/recipe/recipe-browser/recipe-browser.component';
 import { RecipePageComponent } from './components/recipe/recipe-page/recipe-page.component';
@@ -46,6 +47,10 @@ const routes: Routes = [
   {
     path: 'recipes',
     component: RecipeBrowserComponent
+  },
+  {
+    path: 'addrecipe',
+    component: AddRecipeFormComponent
   }
 ];
 
