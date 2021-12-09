@@ -7,6 +7,7 @@ import com.ironhack.favouritesservice.dto.RecipeDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 public interface FavouriteController {
@@ -21,17 +22,21 @@ public interface FavouriteController {
 
     @GetMapping("/userid/{id}")
     @ResponseStatus(HttpStatus.OK)
-    FavRecipeListDTO getAllFavouriteRecipesByUserId(@PathVariable Long id);
+    List<RecipeDTO> getAllFavouriteRecipesByUserId(@PathVariable Long id);
 
-    @PostMapping
+    @PostMapping("/add")
     @ResponseStatus(HttpStatus.CREATED)
     Favourite addToFavourites(@RequestBody FavouriteDTO favouriteDTO);
 
-    @DeleteMapping("/{id}")
+    @PutMapping("/remove")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    void removeFromFavourites(@PathVariable Long id);
+    void removeFromFavourites(@RequestBody FavouriteDTO favouriteDTO);
 
     @GetMapping("/top10")
     @ResponseStatus(HttpStatus.OK)
     List<RecipeDTO> getTop10FavouritedRecipes();
+
+    @PutMapping("/recipeisfavourited")
+    @ResponseStatus(HttpStatus.CREATED)
+    boolean isRecipeFavourited(@Valid @RequestBody FavouriteDTO favouriteDTO);
 }

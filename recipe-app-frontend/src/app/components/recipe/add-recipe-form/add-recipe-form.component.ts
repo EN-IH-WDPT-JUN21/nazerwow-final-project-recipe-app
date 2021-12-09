@@ -1,3 +1,5 @@
+import { UserService } from 'src/app/services/user.service';
+import { OktaAuth } from '@okta/okta-auth-js';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AbstractControl, Form, FormArray, FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Ingredient, IngredientDTO } from './../../../models/ingredient.model';
@@ -5,6 +7,7 @@ import { RecipeService } from './../../../services/recipe.service';
 import { EnumService } from './../../../services/enum.service';
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { Recipe, RecipeDTO } from 'src/app/models/recipe.model';
+import { UserDTO } from 'src/app/models/user-model';
 
 @Component({
   selector: 'app-add-recipe-form',
@@ -13,8 +16,8 @@ import { Recipe, RecipeDTO } from 'src/app/models/recipe.model';
 })
 export class AddRecipeFormComponent implements OnInit {
 
- 
-  title!: string;
+  user!:UserDTO;
+  title: string = "Add a new recipe"
   dietList!: string[];
   cuisineList!: string[];
   measurementList!: string[];
@@ -48,6 +51,8 @@ export class AddRecipeFormComponent implements OnInit {
   constructor(private enumService: EnumService,
     private recipeService: RecipeService,
     private formBuilder: FormBuilder,
+    private oktaAuth: OktaAuth,
+    private userService: UserService,
     @Inject(MAT_DIALOG_DATA) public data: RecipeDTO
     ) {
        this.name = new FormControl('', [Validators.required]);
@@ -59,7 +64,7 @@ export class AddRecipeFormComponent implements OnInit {
        this.prepTime = new FormControl('', [Validators.required, Validators.min(0)]);
        this.cookingTime = new FormControl('', [Validators.required, Validators.min(0)]);
        this.cuisine = new FormControl('', [Validators.required]);
-       this.diets = new FormArray([], [Validators.required]);
+       this.diets = new FormArray([]);
        
        this.ingredient = new FormGroup({
          name: this.ingredientName,
@@ -98,7 +103,7 @@ export class AddRecipeFormComponent implements OnInit {
   }
 
   addIngredient(): void {
-    this.ingredients.push(this.ingredient)
+    this.ingredients.push(new FormGroup({ name: new FormControl(''), quantity: new FormControl(''), measurement: new FormControl('')} ))
   }
 
   removeIngredient(index: number):void {
@@ -123,7 +128,7 @@ export class AddRecipeFormComponent implements OnInit {
   }
 
   addOrEdit(): void {
-    if(this.recipeDTO != null){
+    if(this.recipeDTO.id != null){
       this.addForm = false;
       this.addFormButton = "Confirm Edited"
       this.title = "Edit your recipe"
@@ -133,6 +138,7 @@ export class AddRecipeFormComponent implements OnInit {
       this.addFormButton = "Add"
       this.title = "Add a new recipe"
     }
+    console.log(this.addForm)
   }
 
   fillFormToEdit():void {
@@ -176,17 +182,18 @@ export class AddRecipeFormComponent implements OnInit {
     })
   }
 
-  private addNewRecipeToDatabase() {
+  private async addNewRecipeToDatabase() {
+    await this.getUserByEmail();
     const newRecipe: RecipeDTO = this.createRecipeDTOFromForm();
     this.recipeService.addRecipe(newRecipe).subscribe(result => {
-      console.log(result);
+      console.log(result)
     });
   }
 
   private editRecipeInDatabase() {
     const editedRecipe: RecipeDTO = this.createRecipeDTOFromForm();
     this.recipeService.editRecipe(editedRecipe).subscribe(result => {
-      console.log(result);
+      console.log(result)
     });
   }
 
@@ -204,10 +211,23 @@ export class AddRecipeFormComponent implements OnInit {
       method : this.method.value,
       prepTime: this.prepTime.value,
       cookingTime: this.cookingTime.value,
-      authorId: 1,
+      authorId: this.recipeDTO.authorId,
       cuisine :  this.cuisine.value ,
       diets : this.diets.value,
     };
+  }
+
+
+  async getLoggedInEmail(): Promise<string> {
+    let loggedInEmail: string = String((await this.oktaAuth.getUser()).preferred_username);
+    return loggedInEmail;
+  }
+
+  async getUserByEmail(): Promise<void> {
+    this.userService.getUserByEmail(await this.getLoggedInEmail()).subscribe(result => {
+      this.user = result;
+      this.recipeDTO.authorId = this.user.id;
+    })
   }
 
 }

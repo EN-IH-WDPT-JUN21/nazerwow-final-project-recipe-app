@@ -23,12 +23,12 @@ export class RecipeService {
     return this.http.get<any>(this.baseUrl + "/" + id);
   }
 
-  getRecipesByUserId(userId:number): Observable<any> {
-    return this.http.get<any>(this.baseUrl + "/user/" + userId);
+  async getRecipesByUserId(userId:number): Promise<any> {
+    return this.http.get<any>(this.baseUrl + "/user/" + userId).toPromise();
   }
 
   addRecipe(recipeDTO: RecipeDTO): Observable<any> {
-    return this.http.post(`${this.baseUrl}`, recipeDTO);
+    return this.http.post(`${this.baseUrl}/add`, recipeDTO);
   }
 
   deleteRecipe(id: number): Observable<any> {
@@ -36,16 +36,7 @@ export class RecipeService {
   }
 
   editRecipe(RecipeDTO: RecipeDTO): Observable<any> {
-    return this.http.put(`${this.baseUrl + "/" + RecipeDTO.id}`, RecipeDTO)
-  }
-
-
-  recipeList!:RecipeDTO[];
-  returnAllRecipes(): RecipeDTO[] {
-    this.getAllRecipes().subscribe(result => {
-      this.recipeList = result;
-    });
-    return this.recipeList;    
+    return this.http.put(`${this.baseUrl + "/edit"}`, RecipeDTO)
   }
 
 }

@@ -1,17 +1,19 @@
-<div>
+<div *ngIf="!loading">
     <mat-accordion>
         <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
             <mat-expansion-panel-header>
                 <mat-panel-title>
-                    Your Recipes
+                    Created Recipes
                 </mat-panel-title>
                 <mat-panel-description>
                     <span *ngIf="recipeList == null">
-                        You currently have no favourites
+                        No recipes created by user
                     </span>
                 </mat-panel-description>
             </mat-expansion-panel-header>
-            <app-recipe-list [recipeList]="recipeList"></app-recipe-list>
+            <div *ngIf="recipeList.length > 0">
+                <app-recipe-list [recipeList]="recipeList"></app-recipe-list>
+            </div>
         </mat-expansion-panel>
     </mat-accordion>
 </div>

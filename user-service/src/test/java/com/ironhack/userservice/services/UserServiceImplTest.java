@@ -137,6 +137,7 @@ class UserServiceImplTest {
     @Test
     void updateUser_Valid_NoDataBaseIncrease() {
         UserDTO userDTO = new UserDTO(
+                user1.getId(),
                 "newUser",
                 "newUsername",
                 "new@email.com",
@@ -146,7 +147,7 @@ class UserServiceImplTest {
                 List.of(Role.USER)
         );
         var userListBefore = userService.findAll().size();
-        User user = userService.updateUser(user1.getId(), userDTO);
+        User user = userService.updateUser(userDTO);
         var userListAfter = userService.findAll().size();
         assertEquals(userListBefore, userListAfter);
     }
@@ -157,6 +158,7 @@ class UserServiceImplTest {
         userRepository.save(user1);
         System.out.println(user1.getCreatedDate());
         UserDTO userDTO = new UserDTO(
+                user1.getId(),
                 "newUser",
                 "newUsername",
                 "new@email.com",
@@ -165,7 +167,7 @@ class UserServiceImplTest {
                 "newUrl",
                 List.of(Role.USER)
         );
-        User updatedUser = userService.updateUser(user1.getId(), userDTO);
+        User updatedUser = userService.updateUser(userDTO);
         assertEquals(userDTO.getName(), updatedUser.getName());
         assertEquals(userDTO.getUsername(), updatedUser.getUsername());
         assertEquals(userDTO.getEmail(), updatedUser.getEmail());
@@ -181,6 +183,7 @@ class UserServiceImplTest {
         userRepository.save(user1);
         User originalUser = userService.findById(user1.getId());
         UserDTO userDTO = new UserDTO(
+                user1.getId(),
                 null,
                 null,
                 null,
@@ -189,7 +192,7 @@ class UserServiceImplTest {
                 null,
                 null
         );
-        userService.updateUser(user1.getId(), userDTO);
+        userService.updateUser(userDTO);
         User updatedUser = userService.findById(user1.getId());
         assertEquals(originalUser.getName(), updatedUser.getName());
         assertEquals(originalUser.getUsername(), updatedUser.getUsername());
@@ -203,6 +206,7 @@ class UserServiceImplTest {
     @Test
     void updateUser_ThrowsException() {
         UserDTO userDTO = new UserDTO(
+                user1.getId() + 65L,
                 null,
                 null,
                 null,
@@ -211,8 +215,7 @@ class UserServiceImplTest {
                 null,
                 null
         );
-        assertThrows(ResponseStatusException.class, () ->  userService.updateUser(user1.getId() - 60L,
-                userDTO));
+        assertThrows(ResponseStatusException.class, () ->  userService.updateUser(userDTO));
     }
 
     @Test
@@ -225,6 +228,26 @@ class UserServiceImplTest {
     void verify(){
         Principal mockPrincipal = Mockito.mock(Principal.class);
         Mockito.when(mockPrincipal.getName()).thenReturn(user1.getEmail());
-        var answer = userService.userMatchesLoggedInUser(mockPrincipal, 1L);
+        var answer = userService.userMatchesLoggedInUser(mockPrincipal, user1.getId());
+    }
+
+    @Test
+    void userLogOnOrSignUp() {
+        Principal mockPrincipal = Mockito.mock(Principal.class);
+        Mockito.when(mockPrincipal.getName()).thenReturn("newemail@newemail.com");
+        var userListBefore = userService.findAll().size();
+        userService.userLogOnOrSignUp(mockPrincipal);
+        var userListAfter = userService.findAll().size();
+        assertEquals(userListBefore + 1, userListAfter);
+    }
+
+    @Test
+    void userLogOnOrSignUp_Valid_Existing_User() {
+        Principal mockPrincipal = Mockito.mock(Principal.class);
+        Mockito.when(mockPrincipal.getName()).thenReturn(user1.getEmail());
+        var userListBefore = userService.findAll().size();
+        userService.userLogOnOrSignUp(mockPrincipal);
+        var userListAfter = userService.findAll().size();
+        assertEquals(userListBefore, userListAfter);
     }
 }

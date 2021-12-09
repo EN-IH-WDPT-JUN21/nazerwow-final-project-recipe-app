@@ -15,6 +15,7 @@ export class RecipeListItemComponent implements OnInit {
   recipe!:RecipeDTO;
 
   rating: number = 0;
+  loading: boolean = true;
 
   @Input()
   authorId!: number;
@@ -40,13 +41,13 @@ export class RecipeListItemComponent implements OnInit {
   getAuthor():void {
     this.userService.getUserById(this.authorId).subscribe(result => {
       this.user = result;
+      this.loading = false;
     })
   }
 
   getRating():void { 
     this.ratingService.getAverageRatingForRecipe(this.recipe.id).subscribe(result => {
       this.rating = result;
-      console.log(result)
     })
   }
 }

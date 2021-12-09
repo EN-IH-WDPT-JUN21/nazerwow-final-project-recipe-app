@@ -1,14 +1,18 @@
-
     <mat-toolbar color="primary">
-        <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" (click)="menuClicked()">
+        <button mat-icon-button (click)="menuClicked()">
             <mat-icon>menu</mat-icon>
         </button>
-        <button mat-button [routerLink]="['/']" >
-            <span class="title">The Recipe Box</span>
+        <button mat-button [routerLink]="['/']">
+            <mat-icon>home</mat-icon>
+        </button>
+        <button mat-button [routerLink]="['/recipes/']" >
+            <span mat-button class="title">The Recipe Box</span>
         </button>
         <span class="right-spacer"></span>
-            <button mat-button *ngIf="!(authService.authState$ | async)?.isAuthenticated"
-                (click)="oktaAuth.signInWithRedirect()">Login</button>
-            <button mat-button *ngIf="(authService.authState$ | async)?.isAuthenticated" (click)="oktaAuth.signOut()">Logout</button>
+        <button mat-button *ngIf="!(authService.authState$ | async)?.isAuthenticated"
+        (click)="oktaAuth.signInWithRedirect()"><span class="title">Login</span></button>
+        <button mat-button *ngIf="(authService.authState$ | async)?.isAuthenticated"[routerLink]="['/profile/']"> <span class="title-small">My Profile</span></button>
+        <button mat-button *ngIf="(authService.authState$ | async)?.isAuthenticated" (click)="oktaAuth.signOut()"><span class="title-small">Logout</span></button>
     </mat-toolbar>
+
 

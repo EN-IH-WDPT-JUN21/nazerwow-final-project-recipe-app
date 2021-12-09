@@ -11,6 +11,7 @@ export class UserOwnRecipeComponent implements OnInit {
 
   @Input()
   userId!: number;
+  loading: boolean = true;
 
   recipeList!: RecipeDTO[];
 
@@ -24,9 +25,8 @@ export class UserOwnRecipeComponent implements OnInit {
   }
 
 
-  getUsersOwnRecipes(): void {
-    this.recipeService.getRecipesByUserId(this.userId).subscribe(result => {
-      this.recipeList = result;
-    })
+  async getUsersOwnRecipes(): Promise<void> {
+    this.recipeList = await this.recipeService.getRecipesByUserId(this.userId)
+      this.loading = false;
   }
 }

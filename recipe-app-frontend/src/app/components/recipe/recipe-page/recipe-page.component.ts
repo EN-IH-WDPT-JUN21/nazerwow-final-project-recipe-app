@@ -1,3 +1,4 @@
+import { OktaAuth } from '@okta/okta-auth-js';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatDialog } from '@angular/material/dialog';
 import { UserService } from './../../../services/user.service';
@@ -19,15 +20,22 @@ export class RecipePageComponent implements OnInit {
   recipeDTO!:RecipeDTO;
   user!: UserDTO;
 
+  loggedInEmail: string | undefined;
+
+  userVerified: boolean = false;
+  username!: string;
+
   constructor(private recipeService:RecipeService,
     private activateRoute:ActivatedRoute,
     private userService: UserService,
     private dialog: MatDialog,
-    private location:Location) { }
+    private location:Location,
+    private oktaAuth: OktaAuth) { }
 
   ngOnInit(): void {
     const recipeId:number = this.activateRoute.snapshot.params['recipeId'];
     this.getRecipe(recipeId);
+    this.verifyUser();
   }
 
   getRecipe(id:number):void{
@@ -49,6 +57,23 @@ export class RecipePageComponent implements OnInit {
 
   back():void {
     this.location.back()
+  }
+
+  refreshPage():void {
+    window.location.reload();
+  }
+
+  async verifyUser(){
+    this.userVerified = (await this.emailsMatch());
+  }
+
+  async emailsMatch(): Promise<boolean> {
+    this.loggedInEmail = (await this.oktaAuth.getUser()).preferred_username;
+    if(this.user.email == this.loggedInEmail){
+      return true;
+    } else {
+      return false;
+    }
   }
 
 }

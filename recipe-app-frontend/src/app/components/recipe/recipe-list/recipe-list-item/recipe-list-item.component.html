@@ -1,13 +1,9 @@
-<mat-card class="default-hover" [routerLink]="['/recipes/', recipe.id ]">
-    <div class="d-flex flex-wrap">
-    <div class="p-2">
-        <img class="rounded float-left small-image img-fluid" src={{recipe.imageUrl}} alt="">
-            <ng-template #t let-fill="fill" let-index="index">
-                <span class="star" [class.full]="fill === 100">
-                    <span class="half" [style.width.%]="fill">&hearts;</span>&hearts;
-                </span>
-            </ng-template>
-            <p> <ngb-rating [(rate)]="rating" [max]="5" [readonly]="true" [starTemplate]="t"></ngb-rating> <span class="rating"> {{rating | number: '1.0-1'}}/5 </span></p>
+<div *ngIf="!loading">
+    <mat-card class="default-hover" [routerLink]="['/recipes/', recipe.id ]">
+        <div class="d-flex flex-wrap">
+            <div class="p-2">
+                <img class="rounded float-left small-image img-fluid" src={{recipe.imageUrl}} alt="">
+                <app-star-rating [recipeId]="recipe.id"></app-star-rating>
     </div>
     <div class="p-2">
         <p>Ingredients: {{recipe.ingredients?.length}}</p>
@@ -20,8 +16,9 @@
     <h1 class="title">{{recipe.name}}</h1>
     <h4 [routerLink]="['/users/', user.id]"> <em>by: {{user.name}} </em></h4>
 </div>
-    <mat-chip-list aria-label="Dietary Requirements">
-        <mat-chip color="primary" selected *ngFor="let diet of recipe.diets">{{diet | titlecase}}</mat-chip>
-        <mat-chip color="accent" selected>{{recipe.cuisine | titlecase}}</mat-chip>
-    </mat-chip-list>
+<mat-chip-list aria-label="Dietary Requirements">
+    <mat-chip color="primary" selected *ngFor="let diet of recipe.diets">{{diet | titlecase}}</mat-chip>
+    <mat-chip color="accent" selected>{{recipe.cuisine | titlecase}}</mat-chip>
+</mat-chip-list>
 </mat-card>
+</div>

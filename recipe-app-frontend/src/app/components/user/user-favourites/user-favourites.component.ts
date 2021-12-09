@@ -2,6 +2,7 @@ import { FavouritesService } from './../../../services/favourites.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { RecipeDTO } from 'src/app/models/recipe.model';
 
+
 @Component({
   selector: 'app-user-favourites',
   templateUrl: './user-favourites.component.html',
@@ -13,6 +14,7 @@ export class UserFavouritesComponent implements OnInit {
   userId!: number;
 
   recipeList!: RecipeDTO[];
+  loading: boolean = true;
 
   panelOpenState: boolean = false;
 
@@ -25,9 +27,12 @@ export class UserFavouritesComponent implements OnInit {
   getFavouriteRecipes(): void {
     this.favouritesService.getFavouriteRecipesByUserId(this.userId).subscribe(result => {
       this.recipeList = result;
+      this.loading = false;
+      console.log(this.recipeList)
     },
     error => {
       console.log("User currently has no favourites");
+      this.loading = false;
     })
   }
 

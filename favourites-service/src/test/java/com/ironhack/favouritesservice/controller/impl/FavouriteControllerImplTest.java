@@ -105,7 +105,7 @@ class FavouriteControllerImplTest {
     void addToFavourites() throws Exception {
        var repoSizeBefore = favouriteRepository.findAll().size();
        String body = objectMapper.writeValueAsString(new FavouriteDTO(22L, 33L));
-        mockMvc.perform(post("/api/v1/favourites")
+        mockMvc.perform(post("/api/v1/favourites/add")
                         .content(body).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated());
         var repoSizeAfter = favouriteRepository.findAll().size();
@@ -116,7 +116,7 @@ class FavouriteControllerImplTest {
     void addToFavourites_Throws() throws Exception {
         var repoSizeBefore = favouriteRepository.findAll().size();
         String body = objectMapper.writeValueAsString(new FavouriteDTO(null, null));
-        mockMvc.perform(post("/api/v1/favourites")
+        mockMvc.perform(post("/api/v1/favourites/add")
                         .content(body).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest());
         var repoSizeAfter = favouriteRepository.findAll().size();

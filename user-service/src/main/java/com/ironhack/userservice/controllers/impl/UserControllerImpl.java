@@ -67,18 +67,16 @@ public class UserControllerImpl implements com.ironhack.userservice.controllers.
     }
 
     @Override
-    @PutMapping("{id}")
+    @PutMapping("/edit")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public User updateUser(@PathVariable(name = "id") Long id,
-                           @RequestBody @Valid UserDTO userDTO){
-        return userService.updateUser(id, userDTO);
+    public User updateUser(@RequestBody @Valid UserDTO userDTO){
+        return userService.updateUser(userDTO);
     }
-
 
     @GetMapping("/profile")
     @ResponseStatus(HttpStatus.OK)
     public User loadUserProfile(){
-        return userService.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
+        return userService.userLogOnOrSignUp(SecurityContextHolder.getContext().getAuthentication());
     }
 
 

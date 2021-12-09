@@ -1,10 +1,12 @@
 <div class="drawer">
     <img [routerLink]="['/']" class="logo img-fluid" src="../../../assets/images/The Recipe Box.png" alt="">
     <mat-list>
-        <a routerLink='/recipes/'><mat-list-item matRipple class="default-hover">Recipes</mat-list-item></a>
+        <a (click)="loadRecipePage()"><mat-list-item matRipple class="default-hover"><span class="text">Recipes</span></mat-list-item></a>
         <mat-divider></mat-divider>
-        <mat-list-item matRipple class="default-hover"> Profile</mat-list-item>
+        <mat-list-item (click)="loadProfile()" matRipple class="default-hover"> <span class="text">Profile</span></mat-list-item>
         <mat-divider></mat-divider>
-        <mat-list-item matRipple class="default-hover">About</mat-list-item>
+        <mat-list-item (click)="loadAddRecipe()" matRipple class="default-hover"><span class="text">Add Recipe</span></mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item matRipple class="default-hover"><span class="text">About</span></mat-list-item>
     </mat-list>
 </div>

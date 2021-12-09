@@ -17,8 +17,7 @@ public interface RecipeService {
 
     Recipe addRecipe(CreateRecipeDTO createRecipeDTO) throws ResponseStatusException;
 
-    Recipe updateRecipe(Long id, RecipeDTO recipeDTO) throws ResponseStatusException;
-
+    Recipe updateRecipe(RecipeDTO recipeDTO) throws ResponseStatusException;
 
     List<Recipe> findByUserId(Long id);
 }

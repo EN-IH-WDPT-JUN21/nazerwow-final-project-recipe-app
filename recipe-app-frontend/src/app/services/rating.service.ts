@@ -35,9 +35,10 @@ export class RatingService {
   }
 
   rateRecipe(ratingDTO: RatingDTO): Observable<any> {
-    return this.http.put(`${this.baseUrl}`, ratingDTO)
+    return this.http.put(`${this.baseUrl}/raterecipe`, ratingDTO)
   }
 
-  
-
+  getUsersRating(ratingDTO: RatingDTO): Observable<any> {
+    return this.http.put(`${this.baseUrl}/usersrating`, ratingDTO)
+  }
 }

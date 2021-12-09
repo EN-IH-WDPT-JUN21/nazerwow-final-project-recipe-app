@@ -104,4 +104,16 @@ class RatingServiceImplTest {
         assertEquals(3, rating.getRating());
         assertEquals(3, ratingRepository.findById(rating1.getId()).get().getRating());
     }
+
+    @Test
+    void findByUserIdAndRecipeId_Valid() {
+        Double rating = ratingService.findByUserIdAndRecipeId(new RatingDTO(0, 1L, 1L));
+        assertEquals(5, rating);
+    }
+
+    @Test
+    void findByUserIdAndRecipeId_Null() {
+        var rating = ratingService.findByUserIdAndRecipeId(new RatingDTO(0, 1L, 65L));
+        assertNull(rating);
+    }
 }

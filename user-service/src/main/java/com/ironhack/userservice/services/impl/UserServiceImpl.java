@@ -47,8 +47,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User updateUser(Long id, UserDTO userDTO){
-        User user = findById(id);
+    public User updateUser(UserDTO userDTO){
+        User user = findById(userDTO.getId());
         return userRepository.save(updateUserWithUserDTO(userDTO, user));
     }
 
@@ -64,6 +64,26 @@ public class UserServiceImpl implements UserService {
         Optional<User> user = userRepository.findByEmail(email);
         if(user.isEmpty()) throw new UsernameNotFoundException("No user found with email: " + email);
         return user.get();
+    }
+
+    @Override
+    public User userLogOnOrSignUp(Principal principal) {
+        try{
+            return findByEmail(principal.getName());
+        } catch (UsernameNotFoundException e){
+            User user = new User();
+            user.setUsername(randomUsernameFromEmail(principal.getName()));
+            user.setEmail(principal.getName());
+            user.setName(user.getUsername());
+            user.setRoles(List.of(Role.USER));
+            return userRepository.save(user);
+        }
+    }
+
+    private String randomUsernameFromEmail(String email){
+        String startOfEmail = email.substring(0, 3);
+        int randomNumber = 111 + (int)(Math.random() * ((5464738 - 111) + 1));
+        return startOfEmail.concat(String.valueOf(randomNumber));
     }
 
     private User updateUserWithUserDTO(UserDTO userDTO, User user) {

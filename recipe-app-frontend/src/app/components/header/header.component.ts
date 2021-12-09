@@ -7,6 +7,7 @@ import { UserFormComponent } from '../user/user-form/user-form.component';
 import { OktaAuth } from '@okta/okta-auth-js';
 import { OktaAuthStateService } from '@okta/okta-angular';
 
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -34,4 +35,6 @@ export class HeaderComponent implements OnInit {
   menuClicked():void{
     this.toggleMenu.emit("clicked");
   }
+
+  
 }

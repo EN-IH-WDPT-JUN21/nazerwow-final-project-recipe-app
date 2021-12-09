@@ -9,6 +9,7 @@ import { MatChip } from '@angular/material/chips';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
+import { OktaAuthStateService } from '@okta/okta-angular';
 
 @Component({
   selector: 'app-recipe-browser',
@@ -22,6 +23,7 @@ export class RecipeBrowserComponent implements OnInit {
   measurementsList!:string[];
   searchValue!: string;
   recipeFormTitle: string = "Add a new recipe"
+  loading: boolean = true;
 
   @Input()
   showList: boolean = true
@@ -38,19 +40,25 @@ export class RecipeBrowserComponent implements OnInit {
   constructor(private enumService:EnumService,
     private recipeService:RecipeService,
     private router:Router,
-    private dialog:MatDialog) {
+    private dialog:MatDialog,
+    public authService: OktaAuthStateService) {
     this.filterList = [],
     this.recipeList = []
    }
 
-  ngOnInit(): void {
-    this.getAllDiets();
-    this.getAllMeasurements();
-    this.getAllCuisines();
-    this.getAllRecipes();
+  async ngOnInit(): Promise<void> {
+    await this.loadData();
+
   }
 
   // Get enums for the chips and form
+
+  async loadData():Promise<void> {
+    this.getAllDiets();
+    this.getAllMeasurements();
+    this.getAllCuisines();
+    await this.getAllRecipes();
+  }
 
   getAllCuisines():void{
     this.enumService.getAllCuisines().subscribe(result => {
@@ -71,9 +79,10 @@ export class RecipeBrowserComponent implements OnInit {
   }
 
   // Populates the recipe lists
-  getAllRecipes():void{
+  async getAllRecipes():Promise<void>{
     this.recipeService.getAllRecipes().subscribe(result => {
       this.recipeList = result;
+      this.loading = false;
       this.populateFilteredList();
     })
   }
@@ -118,12 +127,12 @@ export class RecipeBrowserComponent implements OnInit {
       this.filteredRecipeList = this.recipeList.filter((recipe => this.filterList.includes(recipe.cuisine) || recipe.diets.filter((diet => this.filterList.includes(diet))).length > 0));
     }
     if(this.searchValue != null){
-      this.filterByName(this.searchValue)
+      this.filterByText(this.searchValue)
     }
   }
 
   // Filter using the search bar 
-  filterByName(recipeName: any){
+  filterByText(recipeName: any){
     this.searchValue = recipeName;
     const filterValue:string = recipeName
     this.filteredRecipeList = this.filteredRecipeList

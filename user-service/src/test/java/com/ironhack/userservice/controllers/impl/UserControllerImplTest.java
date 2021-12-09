@@ -152,7 +152,7 @@ class UserControllerImplTest {
                 List.of(Role.USER)
         );
         String body = objectMapper.writeValueAsString(userDTO);
-        MvcResult result = mockMvc.perform(put("/api/v1/users/" + user1.getId())
+        MvcResult result = mockMvc.perform(put("/api/v1/users/" + user1.getId() + "/edit")
                         .content(body).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isAccepted())
                 .andReturn();
@@ -178,7 +178,7 @@ class UserControllerImplTest {
                 List.of(Role.USER)
         );
         String body = objectMapper.writeValueAsString(userDTO);
-        MvcResult result = mockMvc.perform(put("/api/v1/users/" + user1.getId())
+        MvcResult result = mockMvc.perform(put("/api/v1/users/" + user1.getId() + "/edit")
                         .content(body).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isAccepted())
                 .andReturn();

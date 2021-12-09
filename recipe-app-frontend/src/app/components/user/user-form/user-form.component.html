@@ -2,9 +2,9 @@
 
     <h1>{{title}}</h1>
     
+    <div class="form-box">
+
     <form (ngSubmit)="onSubmit()" [formGroup]="userForm">
-        
-        
         <mat-form-field appearance="fill">
             <mat-label>Name</mat-label>
             <input type="text" matInput formControlName="name" placeholder="name...">
@@ -12,7 +12,7 @@
                 Please enter a valid name.
             </mat-error>
         </mat-form-field>
-        
+        <p>
         <mat-form-field appearance="fill">
             <mat-label>Username</mat-label>
             <input type="text" matInput formControlName="username" placeholder="Username...">
@@ -20,15 +20,8 @@
                 Please enter a valid username
             </mat-error>
         </mat-form-field>
-        
-        <mat-form-field appearance="fill">
-            <mat-label>email</mat-label>
-            <input type="email" matInput formControlName="email" placeholder="email...">
-            <mat-error *ngIf="email.invalid && email.touched">
-                Please enter a valid email
-            </mat-error>
-        </mat-form-field>
-        
+        </p>
+        <p>
         <mat-form-field appearance="fill">
             <mat-label>location</mat-label>
             <input type="text" matInput formControlName="location" placeholder="location...">
@@ -36,7 +29,8 @@
                 Please enter a valid location
             </mat-error>
         </mat-form-field>
-        
+        </p>
+        <p>
         <mat-form-field appearance="fill">
             <mat-label>bio</mat-label>
             <input type="text" matInput formControlName="bio" placeholder="bio...">
@@ -44,7 +38,8 @@
                 Please enter a valid bio
             </mat-error>
         </mat-form-field>
-        
+        </p>
+        <p>
         <mat-form-field appearance="fill">
             <mat-label>pictureUrl</mat-label>
             <input type="text" matInput formControlName="pictureUrl" placeholder="pictureUrl...">
@@ -52,8 +47,8 @@
                 Please enter a valid pictureUrl
             </mat-error>
         </mat-form-field>
-        
+        </p>
         <p><button [disabled]="userForm.invalid" mat-stroked-button color="primary" type="submit">{{addOrEditButton}}</button></p>
     </form>
-    
+    </div>
 </mat-card>
