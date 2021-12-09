@@ -37,6 +37,7 @@ import { FavouritesToggleComponent } from './components/recipe/favourites-toggle
 import { StarRatingComponent } from './components/rating/star-rating/star-rating.component';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { RecipeAccordionComponent } from './components/recipe/recipe-accordion/recipe-accordion.component';
+import { RatingCarouselGenericComponent } from './components/home-page/rating-carousel-generic/rating-carousel-generic.component';
 
 
 
@@ -66,7 +67,8 @@ import { RecipeAccordionComponent } from './components/recipe/recipe-accordion/r
     MyProfileComponent,
     FavouritesToggleComponent,
     StarRatingComponent,
-    RecipeAccordionComponent
+    RecipeAccordionComponent,
+    RatingCarouselGenericComponent
   ],
   imports: [
     BrowserModule,

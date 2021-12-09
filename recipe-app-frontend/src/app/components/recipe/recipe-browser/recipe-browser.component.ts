@@ -1,3 +1,4 @@
+import { EnumPipe } from './../../../custom-pipes/enum-pipe';
 import { RecipeInstructionsComponent } from './../recipe-page/recipe-instructions/recipe-instructions.component';
 import { AddRecipeFormComponent } from './../add-recipe-form/add-recipe-form.component';
 import { RecipeSearchComponent } from './../recipe-search/recipe-search.component';
@@ -24,6 +25,7 @@ export class RecipeBrowserComponent implements OnInit {
   searchValue!: string;
   recipeFormTitle: string = "Add a new recipe"
   loading: boolean = true;
+  enumPipe: EnumPipe = new EnumPipe();
 
   @Input()
   showList: boolean = true
@@ -136,7 +138,7 @@ export class RecipeBrowserComponent implements OnInit {
     this.searchValue = recipeName;
     const filterValue:string = recipeName
     this.filteredRecipeList = this.filteredRecipeList
-    .filter(recipe => recipe.name.toLowerCase().includes(filterValue) || recipe.cuisine.toLowerCase().includes(filterValue) || recipe.diets.filter((diet => diet.toLowerCase().includes(filterValue))).length > 0);
+    .filter(recipe => recipe.name.toLowerCase().includes(filterValue) ||  this.enumPipe.transform(recipe.cuisine).toLowerCase().includes(filterValue) || recipe.diets.filter((diet => this.enumPipe.transform(diet).toLowerCase().includes(filterValue))).length > 0);
   }
 
   // When user deletes text in the search bar this updates to ensure search is correct
