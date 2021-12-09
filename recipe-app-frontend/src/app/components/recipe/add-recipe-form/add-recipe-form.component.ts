@@ -43,6 +43,7 @@ export class AddRecipeFormComponent implements OnInit {
   authorId!: FormControl;
   cuisine!: FormControl;
   diets!: FormArray;
+  imageUrl!: FormControl;
 
   stepCount: number = 1;
 
@@ -64,6 +65,7 @@ export class AddRecipeFormComponent implements OnInit {
        this.prepTime = new FormControl('', [Validators.required, Validators.min(0)]);
        this.cookingTime = new FormControl('', [Validators.required, Validators.min(0)]);
        this.cuisine = new FormControl('', [Validators.required]);
+       this.imageUrl = new FormControl('', [Validators.required]);
        this.diets = new FormArray([]);
        
        this.ingredient = new FormGroup({
@@ -79,7 +81,8 @@ export class AddRecipeFormComponent implements OnInit {
          prepTime: this.prepTime,
          cookingTime: this.cookingTime,
          cuisine: this.cuisine,
-         diets: this.diets
+         diets: this.diets,
+         imageUrl: this.imageUrl
        })
      }
 
@@ -214,6 +217,7 @@ export class AddRecipeFormComponent implements OnInit {
       authorId: this.recipeDTO.authorId,
       cuisine :  this.cuisine.value ,
       diets : this.diets.value,
+      imageUrl: this.imageUrl.value
     };
   }
 

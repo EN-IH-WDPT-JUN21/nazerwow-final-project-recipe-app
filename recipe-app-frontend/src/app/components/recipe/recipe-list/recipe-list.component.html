@@ -1,11 +1,11 @@
  <div class="d-flex flex-wrap justify-content-center">
     <div *ngFor="let recipe of recipeList  | paginate: {
-                    itemsPerPage: 8,
+                    itemsPerPage: 10,
                     currentPage: page,
                     totalItems: 0  }" class="p-2" >
         <app-recipe-list-item [recipe]="recipe" [authorId]="recipe.authorId"></app-recipe-list-item>
     </div>
     </div>
-           <p class="d-flex justify-content-center"> <pagination-controls (pageChange)="handlePageChange($event)"></pagination-controls></p>
+           <p class="d-flex justify-content-center"> <pagination-controls class="my-pagination" (pageChange)="handlePageChange($event)"></pagination-controls></p>
 
 

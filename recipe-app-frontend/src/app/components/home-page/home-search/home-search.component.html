@@ -1,5 +1,13 @@
 <mat-card>
-    <app-recipe-search></app-recipe-search>
+    <div class="d-flex justify-content-center">
+        <img src="../../../../assets/images/The Recipe Box.png" alt="">
+    </div>
+    <div class = "search-bar">
+        <app-recipe-search [external]="true" (recipeIdOutput)="loadRecipePage($event)"></app-recipe-search>
+    </div>
+    <div class="d-flex justify-content-center advanced-search">
+        <a href="/recipes"><h4>Advanced Search</h4></a>
+    </div>
 </mat-card>
 
 

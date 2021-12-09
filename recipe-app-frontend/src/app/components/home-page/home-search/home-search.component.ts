@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -9,7 +10,7 @@ export class HomeSearchComponent implements OnInit {
 
   showList:boolean = false;
 
-  constructor() { }
+  constructor(private router:Router) { }
 
   ngOnInit(): void {
   }
@@ -18,4 +19,9 @@ export class HomeSearchComponent implements OnInit {
     this.showList = !this.showList;
   }
 
+  loadRecipePage(recipeId: any):void {
+    if(recipeId != null){
+        this.router.navigate(['/recipes/' + recipeId]);
+    }
+  }
 }

@@ -1,16 +1,37 @@
-<form [formGroup]="recipeForm" (ngSubmit)="sendRecipeName()" class="search" >
-    <mat-form-field class="search" appearance="outline">
-        <mat-label>Search Recipes</mat-label>
-        <input type="text" 
-        matInput 
-        formControlName="recipeSearch" 
-        [matAutocomplete]="auto" 
-        (keyDown.backspace)="delete()" 
-        (keyDown.delete)="delete()">
-        <mat-autocomplete  #auto="matAutocomplete">
-            <mat-option *ngFor="let recipe of filteredRecipeList | async" [value]="recipe.name">
-                {{recipe.name}}
-            </mat-option>
-        </mat-autocomplete>
-    </mat-form-field>
-</form>
+<div *ngIf="!external">
+    <form [formGroup]="recipeForm" (ngSubmit)="sendRecipeName()" class="search" >
+        <mat-form-field class="search" appearance="outline">
+            <mat-label>Search Recipes</mat-label>
+            <input type="text" 
+            matInput 
+            formControlName="recipeSearch" 
+            [matAutocomplete]="auto" 
+            (keyDown.backspace)="delete()" 
+            (keyDown.delete)="delete()">
+            <mat-autocomplete  #auto="matAutocomplete">
+                <mat-option *ngFor="let recipe of filteredRecipeList | async" [value]="recipe.name" (click)="sendClickedRecipeName()">
+                    {{recipe.name}}
+                </mat-option>
+                <mat-option *ngIf="(filteredRecipeList | async)?.length == 0"> Sorry we have no recipes matching your search</mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+    </form>
+</div>
+
+<div *ngIf="external">
+    <form [formGroup]="recipeForm" (ngSubmit)="sendRecipeId()" class="search">
+        <mat-form-field class="search" appearance="outline">
+            <mat-label>Search Recipes</mat-label>
+            <input type="text" matInput formControlName="recipeSearch" [matAutocomplete]="auto"
+                (keyDown.backspace)="delete()" (keyDown.delete)="delete()" (keyDown.enter)="sendRecipeId()">
+            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" autoActiveFirstOption >
+                <mat-option *ngFor="let recipe of filteredRecipeList | async" [value]="recipe"
+                    (click)="sendRecipeId()" (keyDown.enter)="sendRecipeId()">
+                    {{recipe.name}}
+                </mat-option>
+                <mat-option *ngIf="(filteredRecipeList | async)?.length == 0"> Sorry we have no recipes matching your
+                    search</mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+    </form>
+</div>
