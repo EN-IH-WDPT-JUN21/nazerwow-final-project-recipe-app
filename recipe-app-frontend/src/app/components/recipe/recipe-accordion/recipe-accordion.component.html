@@ -1,0 +1,19 @@
+<div>
+    <mat-accordion>
+        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Show More
+                </mat-panel-title>
+                <mat-panel-description>
+                    <span *ngIf="recipeList.length == 0">
+                        No More Recipes To Show
+                    </span>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div *ngIf="recipeList.length > 0 && panelOpenState">
+                <app-recipe-list [recipeList]="recipeList"></app-recipe-list>
+            </div>
+        </mat-expansion-panel>
+    </mat-accordion>
+</div>

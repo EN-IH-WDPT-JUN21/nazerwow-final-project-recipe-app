@@ -31,10 +31,9 @@ public interface UserController {
     @ResponseStatus(HttpStatus.CREATED)
     User addUser(@Valid @RequestBody CreateUserDTO createUserDTO);
 
-    @PutMapping("{id}")
+    @PutMapping("/edit")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    User updateUser(@PathVariable(name = "id") Long id,
-                    @RequestBody @Valid UserDTO userDTO);
+    User updateUser(@RequestBody @Valid UserDTO userDTO);
 
     @PutMapping("/{id}/verify")
     @ResponseStatus(HttpStatus.ACCEPTED)

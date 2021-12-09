@@ -29,7 +29,7 @@ export class UserService {
   }
 
   editUser(UserDTO: UserDTO): Observable<any> {
-    return this.http.put(`${this.baseUrl + "/" + UserDTO.id}`, UserDTO)
+    return this.http.put(`${this.baseUrl + "/edit"}`, UserDTO)
   }
 
   userVerified(userId: number): Observable<any> {
@@ -37,7 +37,11 @@ export class UserService {
   }
 
   loadProfilePage(): Observable<any> {
-    return this.http.get<any>(this.baseUrl + "/profile")
+    return  this.http.get<any>(this.baseUrl + "/profile")
+  }
+
+  getUserByEmail(email: string): Observable<any> {
+    return this.http.get<any>(this.baseUrl + "/email/" + email);
   }
 
 }

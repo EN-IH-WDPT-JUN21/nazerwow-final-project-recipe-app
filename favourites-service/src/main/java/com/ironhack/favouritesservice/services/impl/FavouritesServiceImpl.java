@@ -53,14 +53,26 @@ public class FavouritesServiceImpl implements FavouritesService {
     }
 
     @Override
-    public void removeFromFavourites(Long id){
-        favouriteRepository.delete(findById(id));
+    public void removeFromFavourites(FavouriteDTO favouriteDTO){
+        Optional<Favourite> favourite = favouriteRepository.findByUserIdAndRecipeId(favouriteDTO.getUserId(), favouriteDTO.getRecipeId());
+        if(favourite.isEmpty()) throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Unable to find favourite by UserId and RecipeId");
+        favouriteRepository.delete(favourite.get());
     }
 
     @Override
     public List<RecipeDTO> mostFavouritedRecipesLimitedBy(int i) {
         List<FavouriteRecipeCountDTO> favouriteRecipeCountDTOS = getFavouriteRecipeCountDTOS(i);
         return getRecipeDTOSFromFavouriteRecipeCountDTOS(favouriteRecipeCountDTOS);
+    }
+
+    @Override
+    public boolean isRecipeFavourited(FavouriteDTO favouriteDTO) {
+        Optional<Favourite> favourite = favouriteRepository.findByUserIdAndRecipeId(favouriteDTO.getUserId(), favouriteDTO.getRecipeId());
+        if(favourite.isEmpty()){
+            return false;
+        }else {
+            return true;
+        }
     }
 
     private List<RecipeDTO> getRecipeDTOSFromFavouriteRecipeCountDTOS(List<FavouriteRecipeCountDTO> favouriteRecipeCountDTOS) {

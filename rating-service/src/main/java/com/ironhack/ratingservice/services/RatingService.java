@@ -19,4 +19,6 @@ public interface RatingService {
     boolean userPreviouslyRatedRecipe(Long recipeId, Long userId);
 
     Rating rateRecipe(RatingDTO ratingDTO);
+
+    Double findByUserIdAndRecipeId(RatingDTO ratingDTO);
 }

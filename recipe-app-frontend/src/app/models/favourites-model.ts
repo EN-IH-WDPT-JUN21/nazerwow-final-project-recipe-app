@@ -1,4 +1,10 @@
 export class Favourite {
+    public get userId(): number {
+        return this._userId;
+    }
+    public set userId(value: number) {
+        this._userId = value;
+    }
 
     public get recipeId(): number {
         return this._recipeId;
@@ -14,12 +20,14 @@ export class Favourite {
     }
 
     constructor(private _id: number,
-        private _recipeId: number){};
+        private _recipeId: number,
+        private _userId: number){};
         
         
 }
 
 export interface FavouriteDTO{
-    id: number;
+    id?: number;
     recipeId: number;
+    userId: number;
 }

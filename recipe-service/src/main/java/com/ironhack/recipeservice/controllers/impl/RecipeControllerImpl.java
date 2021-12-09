@@ -56,18 +56,17 @@ public class RecipeControllerImpl implements RecipeController {
     }
 
     @Override
-    @PostMapping()
+    @PostMapping("/add")
     @ResponseStatus(HttpStatus.CREATED)
     public Recipe addRecipe(@Valid @RequestBody CreateRecipeDTO createRecipeDTO){
         return recipeService.addRecipe(createRecipeDTO);
     }
 
     @Override
-    @PutMapping("/{id}")
+    @PutMapping("/edit")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public Recipe updateRecipe(@PathVariable(name = "id") Long id,
-                               @RequestBody @Valid RecipeDTO recipeDTO){
-        return recipeService.updateRecipe(id, recipeDTO);
+    public Recipe updateRecipe(@RequestBody @Valid RecipeDTO recipeDTO){
+        return recipeService.updateRecipe(recipeDTO);
     }
 
 

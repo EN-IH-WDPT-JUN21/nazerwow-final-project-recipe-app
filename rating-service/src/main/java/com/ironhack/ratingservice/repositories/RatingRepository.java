@@ -16,13 +16,16 @@ public interface RatingRepository extends JpaRepository<Rating, Long> {
 
     Optional<Rating> findByRecipeIdAndUserId(Long recipeId, Long userId);
 
-    @Query(value = "SELECT AVG(r.rating) FROM Rating r WHERE r.recipeId = :recipId")
-    Optional<Double> getAverageRatingForRecipe(@Param("recipId") Long recipeId);
+    @Query(value = "SELECT AVG(r.rating) FROM Rating r WHERE r.recipeId = :recipeId")
+    Optional<Double> getAverageRatingForRecipe(@Param("recipeId") Long recipeId);
 
     @Query(value = "SELECT recipe_id FROM rating GROUP BY recipe_id ORDER BY AVG(rating) DESC LIMIT :limit", nativeQuery = true)
     List<Long[]> getTopRatedRecipesLimitBy(@Param("limit") int limit);
 
     @Query(value = "SELECT recipe_id FROM rating WHERE user_id = :userId GROUP BY recipe_id ORDER BY AVG(rating) DESC LIMIT :limit", nativeQuery = true)
     List<Long[]> getTopRatedRecipesByUserIdLimitBy(@Param("userId") Long userId, @Param("limit") int limit);
+
+    @Query(value = "SELECT r.rating FROM Rating r WHERE r.userId = :userId AND r.recipeId = :recipeId")
+    Optional<Double> findByUserIdAndRecipeId(@Param("userId")Long userId,@Param("recipeId") Long recipeId);
 
 }

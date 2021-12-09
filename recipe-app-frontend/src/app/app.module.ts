@@ -1,3 +1,4 @@
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { EnumPipe } from './custom-pipes/enum-pipe';
 import { AngularMaterialModule } from './angular-material.module';
 import { NgModule } from '@angular/core';
@@ -11,7 +12,7 @@ import { RecipePageComponent } from './components/recipe/recipe-page/recipe-page
 import { RecipeListComponent } from './components/recipe/recipe-list/recipe-list.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RecipeCardComponent } from './components/recipe/recipe-page/recipe-card/recipe-card.component';
 import { RecipeInstructionsComponent } from './components/recipe/recipe-page/recipe-instructions/recipe-instructions.component';
 import { RecipeListItemComponent } from './components/recipe/recipe-list/recipe-list-item/recipe-list-item.component';
@@ -27,11 +28,15 @@ import { UserOwnRecipeComponent } from './components/user/user-own-recipe/user-o
 import { UserFormComponent } from './components/user/user-form/user-form.component';
 import { DrawerComponent } from './components/drawer/drawer.component';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { MdbCarouselModule } from 'mdb-angular-ui-kit/carousel';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { HomeSearchComponent } from './components/home-page/home-search/home-search.component';
 import { FavouritesCarouselComponent } from './components/home-page/favourites-carousel/favourites-carousel.component';
 import { MyProfileComponent } from './components/user/my-profile/my-profile.component';
+import { AuthInterceptor } from './shared/okta/auth.interceptor';
+import { FavouritesToggleComponent } from './components/recipe/favourites-toggle/favourites-toggle.component';
+import { StarRatingComponent } from './components/rating/star-rating/star-rating.component';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { RecipeAccordionComponent } from './components/recipe/recipe-accordion/recipe-accordion.component';
 
 
 
@@ -58,7 +63,10 @@ import { MyProfileComponent } from './components/user/my-profile/my-profile.comp
     HomeSearchComponent,
     FavouritesCarouselComponent,
     EnumPipe,
-    MyProfileComponent
+    MyProfileComponent,
+    FavouritesToggleComponent,
+    StarRatingComponent,
+    RecipeAccordionComponent
   ],
   imports: [
     BrowserModule,
@@ -71,9 +79,13 @@ import { MyProfileComponent } from './components/user/my-profile/my-profile.comp
     ReactiveFormsModule,
     NgbModule,
     NgxPaginationModule,
-    MdbCarouselModule
+    MDBBootstrapModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: MAT_DIALOG_DATA, useValue: {} },
+    { provide: MatDialogRef, useValue: {} }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

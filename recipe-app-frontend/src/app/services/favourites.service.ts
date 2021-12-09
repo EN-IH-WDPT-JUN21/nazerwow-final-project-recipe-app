@@ -22,16 +22,19 @@ export class FavouritesService {
   }
 
   addToFavourites(favouriteDTO: FavouriteDTO): Observable<any> {
-    return this.http.post(`${this.baseUrl}`, favouriteDTO);
+    return this.http.post(`${this.baseUrl}/add`, favouriteDTO);
   }
 
-  removeFromFavourites(id: number): Observable<any> {
-    return this.http.delete(this.baseUrl + "/" + id)
+  removeFromFavourites(favouriteDTO: FavouriteDTO): Observable<any> {
+    return this.http.put(`${this.baseUrl}/remove`, favouriteDTO)
   }
 
   getTop10FavouritedRecipes(): Observable<any> {
     return this.http.get<any>(this.baseUrl + "/top10");
   }
 
+  isRecipeFavourited(favouriteDTO: FavouriteDTO): Observable<any> {
+    return this.http.put<any>(`${this.baseUrl}/recipeisfavourited`, favouriteDTO);
+  }
 
 }

@@ -1,3 +1,4 @@
+import { AddRecipeFormComponent } from './components/recipe/add-recipe-form/add-recipe-form.component';
 import { MyProfileComponent } from './components/user/my-profile/my-profile.component';
 import { RecipeBrowserComponent } from './components/recipe/recipe-browser/recipe-browser.component';
 import { RecipePageComponent } from './components/recipe/recipe-page/recipe-page.component';
@@ -9,7 +10,7 @@ import { OktaAuthGuard, OktaAuthModule, OktaCallbackComponent, OKTA_CONFIG } fro
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AuthInterceptor } from './shared/okta/auth.interceptor';
+// import { AuthInterceptor } from './shared/okta/auth.interceptor';
 
 const oktaConfig = {
   issuer: 'https://dev-1472640.okta.com/oauth2/default',
@@ -46,6 +47,11 @@ const routes: Routes = [
   {
     path: 'recipes',
     component: RecipeBrowserComponent
+  },
+  {
+    path: 'addrecipe',
+    component: AddRecipeFormComponent,
+    canActivate: [OktaAuthGuard]
   }
 ];
 
@@ -56,8 +62,7 @@ const routes: Routes = [
     OktaAuthModule,
     RouterModule.forRoot(routes)],
     providers: [
-      { provide: OKTA_CONFIG, useValue: { oktaAuth } },
-      { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+      { provide: OKTA_CONFIG, useValue: { oktaAuth } }      
     ],
     exports: [RouterModule]
 })

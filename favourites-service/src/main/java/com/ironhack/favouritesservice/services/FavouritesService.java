@@ -19,7 +19,9 @@ public interface FavouritesService {
 
     Favourite addToFavourites(FavouriteDTO favouriteDTO);
 
-    void removeFromFavourites(Long id);
+    void removeFromFavourites(FavouriteDTO favouriteDTO);
 
     List<RecipeDTO> mostFavouritedRecipesLimitedBy(int i);
+
+    boolean isRecipeFavourited(FavouriteDTO favouriteDTO);
 }

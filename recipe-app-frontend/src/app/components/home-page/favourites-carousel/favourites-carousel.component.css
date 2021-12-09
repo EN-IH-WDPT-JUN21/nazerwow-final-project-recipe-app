@@ -1,5 +1,12 @@
-.carousel {
+/* .carousel {
     max-width: 500px;
+} */
+
+h1 {
+    font-size: large;
+    font-family: 'Abril Fatface',
+    cursive;
+    font-size: 3vw;
 }
 
 h1.a {
@@ -22,11 +29,15 @@ h1.d {
     margin-right: 2em;
 }
 
-.carousel-caption {
+/* .carousel-caption {
     padding: 10px;
     margin: 10px;
     background-color: black;
     background-blend-mode: lighten;
     opacity: .8;
     border-radius: 3em;
+} */
+
+.my-pagination /deep/ .ngx-pagination .current {
+  background: #673ab7;
 }

@@ -66,6 +66,7 @@ export class Recipe {
 
     public convertToDTO(): RecipeDTO {
         const recipeDTO: RecipeDTO = {
+            id: 0,
             name: this.name,
             ingredients: this.ingredients,
             method: this.method,
@@ -80,7 +81,7 @@ export class Recipe {
 }
 
 export interface RecipeDTO {
-  id?: number,
+  id: number,
   name: string,
   ingredients : IngredientDTO[],
   method : string[],

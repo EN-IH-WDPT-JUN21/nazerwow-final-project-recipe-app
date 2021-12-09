@@ -91,7 +91,7 @@ class FavouritesServiceImplTest {
     @Test
     void removeFromFavourites_Valid() {
         var repoSizeBefore = favouritesService.findAll().size();
-        favouritesService.removeFromFavourites(testFav1.getId());
+        favouritesService.removeFromFavourites(new FavouriteDTO(1L, 1L));
         var repoSizeAfter = favouritesService.findAll().size();
         assertEquals(repoSizeBefore - 1, repoSizeAfter);
         assertThrows(ResponseStatusException.class, () -> favouritesService.findById(testFav1.getId()));
@@ -122,6 +122,18 @@ class FavouritesServiceImplTest {
         assertEquals(5, recipeList.size());
         assertEquals(1L, recipeList.get(0).getId());
         System.out.println(recipeList);
+    }
+
+    @Test
+    void isRecipeFavourited_Valid(){
+        boolean value = favouritesService.isRecipeFavourited(new FavouriteDTO(1L, 1L));
+        assertTrue(value);
+    }
+
+    @Test
+    void False(){
+        boolean value = favouritesService.isRecipeFavourited(new FavouriteDTO(65L, 1L));
+        assertFalse(value);
     }
 
 }

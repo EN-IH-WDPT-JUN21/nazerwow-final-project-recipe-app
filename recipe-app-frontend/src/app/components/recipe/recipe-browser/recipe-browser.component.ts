@@ -46,17 +46,18 @@ export class RecipeBrowserComponent implements OnInit {
     this.recipeList = []
    }
 
-  ngOnInit(): void {
-    this.loadData();
+  async ngOnInit(): Promise<void> {
+    await this.loadData();
+
   }
 
   // Get enums for the chips and form
 
-  loadData():void {
+  async loadData():Promise<void> {
     this.getAllDiets();
     this.getAllMeasurements();
     this.getAllCuisines();
-    this.getAllRecipes();
+    await this.getAllRecipes();
   }
 
   getAllCuisines():void{
@@ -78,7 +79,7 @@ export class RecipeBrowserComponent implements OnInit {
   }
 
   // Populates the recipe lists
-  getAllRecipes():void{
+  async getAllRecipes():Promise<void>{
     this.recipeService.getAllRecipes().subscribe(result => {
       this.recipeList = result;
       this.loading = false;
@@ -126,12 +127,12 @@ export class RecipeBrowserComponent implements OnInit {
       this.filteredRecipeList = this.recipeList.filter((recipe => this.filterList.includes(recipe.cuisine) || recipe.diets.filter((diet => this.filterList.includes(diet))).length > 0));
     }
     if(this.searchValue != null){
-      this.filterByName(this.searchValue)
+      this.filterByText(this.searchValue)
     }
   }
 
   // Filter using the search bar 
-  filterByName(recipeName: any){
+  filterByText(recipeName: any){
     this.searchValue = recipeName;
     const filterValue:string = recipeName
     this.filteredRecipeList = this.filteredRecipeList
