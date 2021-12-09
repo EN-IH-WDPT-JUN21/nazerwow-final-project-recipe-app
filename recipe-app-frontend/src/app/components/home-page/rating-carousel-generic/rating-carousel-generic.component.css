@@ -1,0 +1,42 @@
+h1 {
+  font-size: large;
+  font-family: 'Abril Fatface',
+    cursive;
+  font-size: 3vw;
+}
+
+h1.a {
+  text-indent: 0em;
+}
+
+h1.b {
+  text-indent: 1em;
+}
+
+h1.c {
+  text-indent: 2em;
+}
+
+h1.d {
+  text-indent: 3em;
+}
+
+h1.ar {
+  text-indent: 3em;
+}
+
+h1.br {
+  text-indent: 2em;
+}
+
+h1.cr {
+  text-indent: 1em;
+}
+
+h1.dr {
+  text-indent: 0em;
+}
+
+.text-box {
+  margin-right: 2em;
+}

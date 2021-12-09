@@ -1,6 +1,6 @@
 <mat-card>
 
-    <h1>{{title}}</h1>
+    <h1 class="title">{{title}}</h1>
     
     <div class="form-box">
 
@@ -33,7 +33,7 @@
         <p>
         <mat-form-field appearance="fill">
             <mat-label>bio</mat-label>
-            <input type="text" matInput formControlName="bio" placeholder="bio...">
+            <textarea type="text" matInput formControlName="bio" placeholder="bio..."></textarea>
             <mat-error *ngIf="bio.invalid && bio.touched">
                 Please enter a valid bio
             </mat-error>
@@ -48,7 +48,7 @@
             </mat-error>
         </mat-form-field>
         </p>
-        <p><button [disabled]="userForm.invalid" mat-stroked-button color="primary" type="submit">{{addOrEditButton}}</button></p>
+        <p><button [disabled]="userForm.invalid" mat-raised-button color="primary" type="submit">{{addOrEditButton}}</button></p>
     </form>
     </div>
 </mat-card>

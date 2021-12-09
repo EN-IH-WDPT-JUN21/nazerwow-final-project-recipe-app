@@ -12,3 +12,8 @@ button {
   margin-left: auto;
   margin-right: auto;
 }
+
+.title {
+  font-family: 'Abril Fatface',
+    cursive;
+}
