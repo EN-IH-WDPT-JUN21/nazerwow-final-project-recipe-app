@@ -50,7 +50,8 @@ const routes: Routes = [
   },
   {
     path: 'addrecipe',
-    component: AddRecipeFormComponent
+    component: AddRecipeFormComponent,
+    canActivate: [OktaAuthGuard]
   }
 ];
 
