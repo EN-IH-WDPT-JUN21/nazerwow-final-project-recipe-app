@@ -29,7 +29,6 @@ export class UserDetailsComponent implements OnInit {
   loadUserForm(): void {
     const dialogRef = this.dialog.open(UserFormComponent, { autoFocus: true, height: '85vh', width: '85vw', maxWidth: "600px", data: this.user});
     dialogRef.afterClosed().subscribe(result => {
-      console.log('Dialog result: %{result}');
       this.refreshPage();
     })
   }

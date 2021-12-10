@@ -21,9 +21,11 @@ export class AddRecipeFormComponent implements OnInit {
   dietList!: string[];
   cuisineList!: string[];
   measurementList!: string[];
+  authorsId!: number;
 
   addForm: boolean = true;
   addFormButton: string = "Add";
+  formDisabled: boolean = false;
 
   @Input()
   recipeDTO!: RecipeDTO;
@@ -91,6 +93,7 @@ export class AddRecipeFormComponent implements OnInit {
     this.getCuisines();
     this.getMeasurements();
     this.recipeDTO = this.data;
+    this.getUserByEmail();
   }
 
   ngAfterViewInit(): void {
@@ -105,6 +108,16 @@ export class AddRecipeFormComponent implements OnInit {
     }
   }
 
+  // Method to disable form after submission
+
+  disableForm(): void {
+    this.formDisabled = true;
+    this.recipeForm.disable();
+    this.ingredient.disable();
+  }
+
+
+  // Methods To set up Form Arrays and Their Controls 
   addIngredient(): void {
     this.ingredients.push(new FormGroup({ name: new FormControl(''), quantity: new FormControl(''), measurement: new FormControl('')} ))
   }
@@ -129,6 +142,8 @@ export class AddRecipeFormComponent implements OnInit {
   removeStep(index: number):void {
     this.method.removeAt(index);
   }
+
+  // Logic for when form is loaded to display either Edit or Add information 
 
   addOrEdit(): void {
     if(this.recipeDTO.id != null){
@@ -166,6 +181,8 @@ export class AddRecipeFormComponent implements OnInit {
       })
     }
 
+    // Methods To load data for cuisine list, diet list and measurements 
+
 
   private getDiets(): void{
     this.enumService.getAllDiets().subscribe(diets => {
@@ -185,18 +202,22 @@ export class AddRecipeFormComponent implements OnInit {
     })
   }
 
+  // Methods to sent Post / Put requests to back end to either Add new Recipe or Edit existing 
+
   private async addNewRecipeToDatabase() {
-    await this.getUserByEmail();
     const newRecipe: RecipeDTO = this.createRecipeDTOFromForm();
     this.recipeService.addRecipe(newRecipe).subscribe(result => {
       console.log(result)
+      this.disableForm();
     });
   }
 
   private editRecipeInDatabase() {
+    this.authorsId = this.recipeDTO.authorId;  
     const editedRecipe: RecipeDTO = this.createRecipeDTOFromForm();
     this.recipeService.editRecipe(editedRecipe).subscribe(result => {
       console.log(result)
+      this.disableForm();
     });
   }
 
@@ -214,13 +235,14 @@ export class AddRecipeFormComponent implements OnInit {
       method : this.method.value,
       prepTime: this.prepTime.value,
       cookingTime: this.cookingTime.value,
-      authorId: this.recipeDTO.authorId,
+      authorId: this.authorsId,
       cuisine :  this.cuisine.value ,
       diets : this.diets.value,
       imageUrl: this.imageUrl.value
     };
   }
 
+  // Gets logged in users details
 
   async getLoggedInEmail(): Promise<string> {
     let loggedInEmail: string = String((await this.oktaAuth.getUser()).preferred_username);
@@ -230,8 +252,10 @@ export class AddRecipeFormComponent implements OnInit {
   async getUserByEmail(): Promise<void> {
     this.userService.getUserByEmail(await this.getLoggedInEmail()).subscribe(result => {
       this.user = result;
-      this.recipeDTO.authorId = this.user.id;
+      this.authorsId = this.user.id;
     })
   }
+
+  
 
 }

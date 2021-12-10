@@ -21,6 +21,7 @@ width: 95%;
 margin-left: auto;
 margin-right: auto;
 padding: 0.5%;
+max-width: 1920px;
 }
 
 .default-hover:hover{
