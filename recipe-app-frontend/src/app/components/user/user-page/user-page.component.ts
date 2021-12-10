@@ -33,14 +33,17 @@ export class UserPageComponent implements OnInit {
         this.getUser(userId);
       }
     } catch(error){
-      console.error(error);
+      
     }
   }
 
   getUser(id:number):void{
     this.userService.getUserById(id).subscribe(result => {
       this.user = result;
-      },)
+      },
+    error => {
+  
+    })
     }
     
 
