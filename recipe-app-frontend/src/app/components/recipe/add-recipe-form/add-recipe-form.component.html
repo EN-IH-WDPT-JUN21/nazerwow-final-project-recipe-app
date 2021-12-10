@@ -6,9 +6,9 @@
     <div class = "d-flex justify-content-center flex-wrap">
         
         <form ngSubmit="onSubmit()" [formGroup]="recipeForm">    
-            <mat-form-field appearance="fill">
+            <mat-form-field appearance="fill" >
                 <mat-label>Recipe Name</mat-label>
-                <input matInput formControlName="name" placeholder="recipe name...">
+                <input matInput formControlName="name" placeholder="recipe name..." >
                 <mat-error *ngIf="name.invalid && name.touched">
                     Please enter a valid recipe name.
                 </mat-error>
@@ -47,9 +47,9 @@
                             <mat-option *ngFor="let diet of dietList" [value]="diet">{{diet | enum | titlecase}}</mat-option>
                         </mat-select>
                     </mat-form-field>
-                    <button mat-raised-button color="primary" (click)="removeDiet(i)">Remove Diet</button>
+                    <button mat-raised-button color="primary" (click)="removeDiet(i)" [disabled]="formDisabled">Remove Diet</button>
                 </div>
-                <button mat-raised-button color="primary" (click)="addDiet()">Add Diet</button>
+                <button mat-raised-button color="primary" (click)="addDiet()" [disabled]="formDisabled">Add Diet</button>
             </ng-container> 
             <br>
             <p>Ingredients*</p>
@@ -77,11 +77,11 @@
                                     <mat-option *ngFor="let measure of measurementList" [value]="measure">{{measure | titlecase}}</mat-option>
                                 </mat-select>
                             </mat-form-field>
-                            <button mat-raised-button color="primary" (click)="removeIngredient(i)">Remove Ingredient</button>
+                            <button mat-raised-button color="primary" (click)="removeIngredient(i)" [disabled]="formDisabled">Remove Ingredient</button>
                         </div>
                     </form>
                 </div>
-                <button mat-raised-button color="primary" (click)="addIngredient()">Add Ingredient</button><br>    
+                <button mat-raised-button color="primary" (click)="addIngredient()" [disabled]="formDisabled">Add Ingredient</button><br>    
             </ng-container>
             <p>Method*</p>
             <div class="method" formArrayName="method">
@@ -93,10 +93,10 @@
                             Please enter at least 1 valid instruction
                         </mat-error>
                     </mat-form-field>
-                    <button mat-raised-button color="primary" (click)="removeStep(i)">Remove Step {{i + 1}}</button>
+                    <button mat-raised-button color="primary" (click)="removeStep(i)" [disabled]="formDisabled">Remove Step {{i + 1}}</button>
                 </div>
             </div>
-            <button mat-raised-button color="primary" (click)="addStep()">Add Cooking Instruction</button>
+            <button mat-raised-button color="primary" (click)="addStep()" [disabled]="formDisabled">Add Cooking Instruction</button>
             <br>
             <mat-form-field appearance="fill">
                 <mat-label>Image URL</mat-label>
@@ -106,7 +106,7 @@
                 </mat-error>
             </mat-form-field>
             <br>
-            <button mat-raised-button color="primary"  [disabled]="recipeForm.invalid" type="submit" (click)="onSubmit()">{{addFormButton}} Recipe</button>
+            <button mat-raised-button color="primary"  [disabled]="recipeForm.invalid || formDisabled" type="submit" (click)="onSubmit()">{{addFormButton}} Recipe</button>
         </form>
     </div>
 </mat-card>

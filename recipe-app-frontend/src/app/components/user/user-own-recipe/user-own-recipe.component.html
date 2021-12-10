@@ -1,4 +1,4 @@
-<div *ngIf="!loading">
+<div>
     <mat-accordion>
         <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
             <mat-expansion-panel-header>
@@ -6,12 +6,12 @@
                     Created Recipes
                 </mat-panel-title>
                 <mat-panel-description>
-                    <span *ngIf="recipeList == null">
+                    <span *ngIf="loading">
                         No recipes created by user
                     </span>
                 </mat-panel-description>
             </mat-expansion-panel-header>
-            <div *ngIf="recipeList.length > 0">
+            <div *ngIf="!loading">
                 <app-recipe-list [recipeList]="recipeList"></app-recipe-list>
             </div>
         </mat-expansion-panel>
