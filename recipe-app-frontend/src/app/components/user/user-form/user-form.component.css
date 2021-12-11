@@ -16,4 +16,9 @@ button {
 .title {
   font-family: 'Abril Fatface',
     cursive;
+    text-align: center;
+}
+
+.mat-card {
+  margin-top: 1em;
 }

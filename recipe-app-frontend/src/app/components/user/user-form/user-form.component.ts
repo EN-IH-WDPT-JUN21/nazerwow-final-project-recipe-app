@@ -20,6 +20,7 @@ export class UserFormComponent implements OnInit {
 
   addForm!: boolean;
   addOrEditButton: string = "Add";
+  formDisabled: boolean = false;
 
   userForm: FormGroup;
   name: FormControl;
@@ -65,6 +66,11 @@ export class UserFormComponent implements OnInit {
   }
   }
 
+  disableForm(): void {
+    this.formDisabled = true;
+    this.userForm.disable();
+  }
+
   addOrEdit(): void {
     if(this.userDTO != null){
       this.addForm = false;
@@ -94,6 +100,7 @@ export class UserFormComponent implements OnInit {
     this.userService.editUser(editedUser).subscribe(result => {
       console.log(result)
       this.snackBar.open("Details Updated Successfully")
+      this.disableForm();
     },
     error => {
       this.snackBar.open("Failed to update details, please try again")
@@ -118,5 +125,7 @@ export class UserFormComponent implements OnInit {
       roles: []
     };
   }
+
+
 
 }

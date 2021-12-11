@@ -48,7 +48,7 @@
             </mat-error>
         </mat-form-field>
         </p>
-        <p><button [disabled]="userForm.invalid" mat-raised-button color="primary" type="submit">{{addOrEditButton}}</button></p>
+        <p><button [disabled]="userForm.invalid || formDisabled" mat-raised-button color="primary" type="submit">{{addOrEditButton}}</button></p>
     </form>
     </div>
 </mat-card>
