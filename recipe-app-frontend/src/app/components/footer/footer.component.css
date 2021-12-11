@@ -19,6 +19,7 @@
 }
 
 .mat-divider {
+    margin-top: 1em;
     display: flex;
     width: 90%;
     justify-content: center;

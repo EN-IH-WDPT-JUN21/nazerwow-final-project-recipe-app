@@ -1,3 +1,4 @@
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserService } from 'src/app/services/user.service';
 import { OktaAuth } from '@okta/okta-auth-js';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -56,7 +57,8 @@ export class AddRecipeFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private oktaAuth: OktaAuth,
     private userService: UserService,
-    @Inject(MAT_DIALOG_DATA) public data: RecipeDTO
+    @Inject(MAT_DIALOG_DATA) public data: RecipeDTO,
+    private snackBar:MatSnackBar
     ) {
        this.name = new FormControl('', [Validators.required]);
        this.ingredients = new FormArray([], [Validators.required]);
@@ -154,7 +156,7 @@ export class AddRecipeFormComponent implements OnInit {
     } else {
       this.addForm = true;
       this.addFormButton = "Add"
-      this.title = "Add a new recipe"
+      this.title = "Enter your new recipe details...";
     }
     console.log(this.addForm)
   }
@@ -209,6 +211,10 @@ export class AddRecipeFormComponent implements OnInit {
     this.recipeService.addRecipe(newRecipe).subscribe(result => {
       console.log(result)
       this.disableForm();
+      this.snackBar.open("Success: Recipe Added")
+    } ,
+    error => {
+      this.snackBar.open("Failed to update details, please try again")
     });
   }
 
@@ -218,6 +224,10 @@ export class AddRecipeFormComponent implements OnInit {
     this.recipeService.editRecipe(editedRecipe).subscribe(result => {
       console.log(result)
       this.disableForm();
+            this.snackBar.open("Success: Recipe Edited")
+    },
+    error => {
+      this.snackBar.open("Failed to update details, please try again")
     });
   }
 

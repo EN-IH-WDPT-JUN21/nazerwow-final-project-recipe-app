@@ -2,7 +2,7 @@
     <mat-card-title-group class="d-flex justify-content-around">
             <mat-card-title class="title">{{recipe.name}}</mat-card-title> 
             <mat-card-subtitle>
-                <a> by: {{user.name}} </a> <br><br>
+                <a [routerLink]="['/users/', user.id]" class="author"> by: {{user.name}} </a> <br><br>
                 <app-star-rating [recipeId]="recipe.id"></app-star-rating><br>
                 <div class="recipe-info">
                     <p><strong>Ingredients: </strong> {{recipe.ingredients?.length}} </p>

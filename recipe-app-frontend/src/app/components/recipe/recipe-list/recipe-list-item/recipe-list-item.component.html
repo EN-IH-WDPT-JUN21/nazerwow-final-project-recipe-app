@@ -14,7 +14,7 @@
 </div>
 <div class="p-2">
     <h1 class="title">{{recipe.name}}</h1>
-    <h4 [routerLink]="['/users/', user.id]"> <em>by: {{user.name}} </em></h4>
+    <h4> <em>by: {{user.name}} </em></h4>
 </div>
 <mat-chip-list aria-label="Dietary Requirements">
     <mat-chip color="primary" selected *ngFor="let diet of recipe.diets">{{diet | enum | titlecase}}</mat-chip>
