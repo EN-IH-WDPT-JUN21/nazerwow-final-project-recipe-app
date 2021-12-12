@@ -1,4 +1,8 @@
-<mat-card>
+<div *ngIf="loading" class="d-flex justify-content-center align-self-center">
+    <mat-spinner></mat-spinner>
+</div>
+
+<mat-card *ngIf="!loading">
 
     <div class="d-flex justify-content-center">
         

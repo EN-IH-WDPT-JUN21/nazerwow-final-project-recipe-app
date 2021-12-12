@@ -29,8 +29,8 @@ export class FavouritesService {
     return this.http.put(`${this.baseUrl}/remove`, favouriteDTO)
   }
 
-  getTop10FavouritedRecipes(): Observable<any> {
-    return this.http.get<any>(this.baseUrl + "/top10");
+  async getTop10FavouritedRecipes(): Promise<any> {
+    return this.http.get<any>(this.baseUrl + "/top10").toPromise();
   }
 
   isRecipeFavourited(favouriteDTO: FavouriteDTO): Observable<any> {

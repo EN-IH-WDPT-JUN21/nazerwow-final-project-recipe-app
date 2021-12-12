@@ -1,4 +1,9 @@
-<div *ngIf="recipeList != null">
+
+<div *ngIf="loading && hasFavourites" class="d-flex justify-content-center align-self-center">
+    <mat-spinner></mat-spinner>
+</div>
+
+<div *ngIf="!loading">
 
     <mat-card>
         

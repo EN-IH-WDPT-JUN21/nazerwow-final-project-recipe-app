@@ -8,7 +8,7 @@
         <mat-form-field appearance="fill">
             <mat-label>Name</mat-label>
             <input type="text" matInput formControlName="name" placeholder="name...">
-            <mat-error *ngIf="name.invalid && name.touched">
+            <mat-error *ngIf="(name.invalid || name.hasError('invalidName'))  && name.touched">
                 Please enter a valid name.
             </mat-error>
         </mat-form-field>
@@ -43,7 +43,7 @@
         <mat-form-field appearance="fill">
             <mat-label>pictureUrl</mat-label>
             <input type="text" matInput formControlName="pictureUrl" placeholder="pictureUrl...">
-            <mat-error *ngIf="pictureUrl.invalid && pictureUrl.touched">
+            <mat-error *ngIf="(pictureUrl.invalid || pictureUrl.hasError('invalidUrl')) && pictureUrl.touched ">
                 Please enter a valid pictureUrl
             </mat-error>
         </mat-form-field>

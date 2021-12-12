@@ -1,3 +1,7 @@
+    <div *ngIf="loading">
+        <mat-slide-toggle color="primary"><em>Loading</em></mat-slide-toggle>
+    </div>
+    
     <div *ngIf="!loading && (authService.authState$ | async)?.isAuthenticated">
         <mat-slide-toggle color="primary" (click)="toggleFavourite()" [(ngModel)]="isFavourite"> {{displayText}}</mat-slide-toggle>
     </div>

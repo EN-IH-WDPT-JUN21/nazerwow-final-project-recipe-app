@@ -32,11 +32,11 @@ export class UserFormComponent implements OnInit {
   constructor(private userService: UserService,
     @Inject(MAT_DIALOG_DATA) public data: UserDTO,
     private snackBar: MatSnackBar) {
-    this.name = new FormControl('', [Validators.required]);
+    this.name = new FormControl('', [Validators.required, CustomValidators.nameValidator]);
     this.username = new FormControl('', [Validators.required]);
     this.location = new FormControl('', [Validators.required]);
     this.bio = new FormControl('', [Validators.required]);
-    this.pictureUrl = new FormControl('', [Validators.required]);
+    this.pictureUrl = new FormControl('', [Validators.required, CustomValidators.urlValidator]);
     this.userForm = new FormGroup({
       name: this.name,
       username: this.username,
@@ -99,11 +99,11 @@ export class UserFormComponent implements OnInit {
     const editedUser: UserDTO = this.createUserDTOFromForm();
     this.userService.editUser(editedUser).subscribe(result => {
       console.log(result)
-      this.snackBar.open("Details Updated Successfully")
+      this.snackBar.open("Details Updated Successfully" , "close")
       this.disableForm();
     },
     error => {
-      this.snackBar.open("Failed to update details, please try again")
+      this.snackBar.open("Failed to update details, please try again" , "close")
     }
     )
   }

@@ -1,5 +1,5 @@
 
-<div class="page">
+<div class="page" *ngIf="!loading">
     <button mat-raised-button color="primary" (click)="back()">Back</button>
     <div class="card">
         <app-user-details [user]="user"></app-user-details>

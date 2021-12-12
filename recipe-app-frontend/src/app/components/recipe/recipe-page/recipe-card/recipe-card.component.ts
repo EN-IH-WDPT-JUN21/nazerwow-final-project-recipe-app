@@ -33,11 +33,9 @@ export class RecipeCardComponent implements OnInit {
     await this.getUser();
   }
 
-   async getUser() {
-    this.userService.getUserByEmail(await this.getLoggedInEmail()).subscribe(result => {
-      this.loggedInUser = result;
-      this.getRating();
-    })
+   async getUser(): Promise<void> {
+    this.loggedInUser = await this.userService.getUserByEmail(await this.getLoggedInEmail())
+    this.getRating();
   }
   
   private getRating() {
@@ -48,7 +46,6 @@ export class RecipeCardComponent implements OnInit {
     };
     this.ratingService.getUsersRating(this.ratingDTO).subscribe(result => {
       this.usersRating = result;
-      console.log(result);
     });
   }
 

@@ -15,12 +15,12 @@ export class RecipeService {
   ) { }
 
 
-  getAllRecipes(): Observable<any> {
-    return this.http.get<any>(this.baseUrl);
+  async getAllRecipes(): Promise<any> {
+    return this.http.get<any>(this.baseUrl).toPromise();
   }
 
-  getRecipeById(id: number): Observable<any> {
-    return this.http.get<any>(this.baseUrl + "/" + id);
+  async getRecipeById(id: number): Promise<any> {
+    return this.http.get<any>(this.baseUrl + "/" + id).toPromise();
   }
 
   async getRecipesByUserId(userId:number): Promise<any> {

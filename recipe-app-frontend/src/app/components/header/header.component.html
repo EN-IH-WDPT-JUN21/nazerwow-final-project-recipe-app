@@ -10,8 +10,8 @@
         </button>
         <span class="right-spacer"></span>
         <button mat-button *ngIf="!(authService.authState$ | async)?.isAuthenticated"
-        (click)="oktaAuth.signInWithRedirect()"><span class="title">Login</span></button>
-        <button mat-button *ngIf="(authService.authState$ | async)?.isAuthenticated"[routerLink]="['/profile/']"> <span class="title-small">My Profile</span></button>
+        (click)="oktaAuth.signInWithRedirect()"><span class="title-small">Login</span></button>
+        <!-- <button mat-button *ngIf="(authService.authState$ | async)?.isAuthenticated"[routerLink]="['/profile/']"> <span class="title-small">My Profile</span></button> -->
         <button mat-button *ngIf="(authService.authState$ | async)?.isAuthenticated" (click)="oktaAuth.signOut()"><span class="title-small">Logout</span></button>
     </mat-toolbar>
 

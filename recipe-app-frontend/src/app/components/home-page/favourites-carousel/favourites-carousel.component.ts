@@ -12,6 +12,8 @@ import { NgbCarousel, NgbSlideEvent, NgbSlideEventSource } from '@ng-bootstrap/n
 })
 export class FavouritesCarouselComponent implements OnInit {
 
+  loading: boolean = true;
+
   constructor(private favouritesService: FavouritesService,
     private userService: UserService) { }
 
@@ -20,15 +22,14 @@ export class FavouritesCarouselComponent implements OnInit {
 
   page: number = 0;
 
-  ngOnInit(): void {
-    this.getTop10Favourites();
+  async ngOnInit(): Promise<void> {
+    await this.getTop10Favourites();
   }
 
-  getTop10Favourites():void {
-    this.favouritesService.getTop10FavouritedRecipes().subscribe(result => {
-      this.recipeList = result;
-    })
-  }
+  async getTop10Favourites():Promise<void> {
+    this.recipeList = await this.favouritesService.getTop10FavouritedRecipes();
+    this.loading = false;
+    }
 
 
 } 

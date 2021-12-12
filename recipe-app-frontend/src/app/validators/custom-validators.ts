@@ -1,3 +1,4 @@
+import { invalid } from "@angular/compiler/src/render3/view/util";
 import { AbstractControl, ControlContainer, ValidationErrors, ValidatorFn } from "@angular/forms";
 
 export class CustomValidators{
@@ -27,5 +28,16 @@ export class CustomValidators{
         }
         return null;
     }
+
+
+static urlValidator(control: AbstractControl): ValidationErrors | null {
+  const value = control.value;
+    try {
+        const url = new URL(value);
+        return null;
+  } catch (error){
+      return {invalidUrl:true}
+  }
+}
 
 }

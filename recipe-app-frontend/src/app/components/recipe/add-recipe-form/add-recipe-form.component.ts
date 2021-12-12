@@ -1,14 +1,17 @@
+import { CustomValidators } from 'src/app/validators/custom-validators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserService } from 'src/app/services/user.service';
 import { OktaAuth } from '@okta/okta-auth-js';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { AbstractControl, Form, FormArray, FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { Ingredient, IngredientDTO } from './../../../models/ingredient.model';
+import { FormArray, FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { RecipeService } from './../../../services/recipe.service';
 import { EnumService } from './../../../services/enum.service';
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { Recipe, RecipeDTO } from 'src/app/models/recipe.model';
 import { UserDTO } from 'src/app/models/user-model';
+import { Router } from '@angular/router';
+import { Location } from '@angular/common'
+
 
 @Component({
   selector: 'app-add-recipe-form',
@@ -27,6 +30,7 @@ export class AddRecipeFormComponent implements OnInit {
   addForm: boolean = true;
   addFormButton: string = "Add";
   formDisabled: boolean = false;
+  loading:boolean = true;
 
   @Input()
   recipeDTO!: RecipeDTO;
@@ -58,18 +62,20 @@ export class AddRecipeFormComponent implements OnInit {
     private oktaAuth: OktaAuth,
     private userService: UserService,
     @Inject(MAT_DIALOG_DATA) public data: RecipeDTO,
-    private snackBar:MatSnackBar
+    private snackBar:MatSnackBar,
+    private router: Router,
+    private location:Location
     ) {
-       this.name = new FormControl('', [Validators.required]);
+       this.name = new FormControl('', [Validators.required, CustomValidators.nameValidator]);
        this.ingredients = new FormArray([], [Validators.required]);
-       this.ingredientName = new FormControl('', [Validators.required]);
+       this.ingredientName = new FormControl('', [Validators.required, CustomValidators.nameValidator]);
        this.ingredientQuantity = new FormControl('', [Validators.required]);
        this.ingredientMeasurement = new FormControl('');
        this.method = new FormArray([], [Validators.required]);
        this.prepTime = new FormControl('', [Validators.required, Validators.min(0)]);
        this.cookingTime = new FormControl('', [Validators.required, Validators.min(0)]);
        this.cuisine = new FormControl('', [Validators.required]);
-       this.imageUrl = new FormControl('', [Validators.required]);
+       this.imageUrl = new FormControl('', [Validators.required, CustomValidators.urlValidator]);
        this.diets = new FormArray([]);
        
        this.ingredient = new FormGroup({
@@ -90,16 +96,20 @@ export class AddRecipeFormComponent implements OnInit {
        })
      }
 
-  ngOnInit(): void {
-    this.getDiets();
-    this.getCuisines();
-    this.getMeasurements();
-    this.recipeDTO = this.data;
-    this.getUserByEmail();
+  async ngOnInit(): Promise<void> {
+    this.loadData();
+    await this.getUserByEmail();
   }
 
   ngAfterViewInit(): void {
     this.addOrEdit();
+  }
+
+  private loadData() {
+    this.getDiets();
+    this.getCuisines();
+    this.getMeasurements();
+    this.recipeDTO = this.data;
   }
 
   onSubmit(){
@@ -211,10 +221,10 @@ export class AddRecipeFormComponent implements OnInit {
     this.recipeService.addRecipe(newRecipe).subscribe(result => {
       console.log(result)
       this.disableForm();
-      this.snackBar.open("Success: Recipe Added")
+      this.snackBar.open("Success: Recipe Added" , "close")
     } ,
     error => {
-      this.snackBar.open("Failed to update details, please try again")
+      this.snackBar.open("Failed to update details, please try again" , "close")
     });
   }
 
@@ -224,10 +234,10 @@ export class AddRecipeFormComponent implements OnInit {
     this.recipeService.editRecipe(editedRecipe).subscribe(result => {
       console.log(result)
       this.disableForm();
-            this.snackBar.open("Success: Recipe Edited")
+            this.snackBar.open("Success: Recipe Edited" , "close")
     },
     error => {
-      this.snackBar.open("Failed to update details, please try again")
+      this.snackBar.open("Failed to update details, please try again" , "close")
     });
   }
 
@@ -260,10 +270,18 @@ export class AddRecipeFormComponent implements OnInit {
   }
 
   async getUserByEmail(): Promise<void> {
-    this.userService.getUserByEmail(await this.getLoggedInEmail()).subscribe(result => {
-      this.user = result;
+    try {
+      this.user = await this.userService.getUserByEmail(await this.getLoggedInEmail())
       this.authorsId = this.user.id;
-    })
+      this.loading = false;
+    } catch (error){
+          this.snackBar.open("Please ensure your details are correct before creating a recipe", "close")
+          this.router.navigateByUrl("/profile")
+      }
+  }
+
+  back():void {
+    this.location.back();
   }
 
   

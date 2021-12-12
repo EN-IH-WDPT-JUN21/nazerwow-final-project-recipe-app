@@ -24,6 +24,9 @@ export class RatingCarouselGenericComponent implements OnInit {
   @Input()
   ourOrYour!: string;
 
+  loading:boolean = true;
+  hasFavourites: boolean = true;
+
  constructor(private ratingService: RatingService,
     private userService: UserService) { }
 
@@ -32,27 +35,31 @@ export class RatingCarouselGenericComponent implements OnInit {
 
   page: number = 0;
 
-  ngOnInit(): void {
-    this.loadRecipes();
+  async ngOnInit(): Promise<void> {
+    await this.loadRecipes();
   }
 
-  getTop10Recipes():void {
-    this.ratingService.getTop10Recipes().subscribe(result => {
-      this.recipeList = result;
-    })
+  async getTop10Recipes():Promise<void> {
+    this.recipeList = await this.ratingService.getTop10Recipes();
   }
 
-  getUsersTop10Recipes():void {
-    this.ratingService.getTop10RecipesForUser(this.userId).subscribe(result => {
-      this.recipeList = result;
-    })
+  async getUsersTop10Recipes():Promise<void> {
+    this.recipeList = await this.ratingService.getTop10RecipesForUser(this.userId)
   }
 
-  loadRecipes():void {
+  async loadRecipes():Promise<void> {
     if(this.userList){
-      this.getUsersTop10Recipes();
+      try {
+        await this.getUsersTop10Recipes();
+        this.hasFavourites = true;
+        this.loading = false;
+      } catch (error){
+        this.hasFavourites = false;
+      }
+      
     } else {
-      this.getTop10Recipes();
+      await this.getTop10Recipes();
+      this.loading = false;
     }
   }
 
