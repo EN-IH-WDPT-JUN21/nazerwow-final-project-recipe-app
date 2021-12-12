@@ -47,6 +47,7 @@ export class RecipeSearchComponent implements OnInit {
       startWith(''),
       map(value => this._filter()),
     )
+    this.loading = false;
   }
 
  
@@ -57,7 +58,6 @@ export class RecipeSearchComponent implements OnInit {
       startWith(''),
       map(value => this._filter())
     )
-    this.loading = false;
   }
 
   private _filter(): RecipeDTO[] {

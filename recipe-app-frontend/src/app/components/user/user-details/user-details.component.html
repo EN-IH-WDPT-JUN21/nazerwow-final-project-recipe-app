@@ -1,4 +1,4 @@
-    <mat-card>
+    <mat-card *ngIf="!loading">
         <mat-card-title-group class="d-flex justify-content-around">
             <mat-card-title class="title">{{user.username}}</mat-card-title>
             <mat-card-subtitle>
@@ -20,3 +20,7 @@
             <button mat-raised-button color="primary" (click)="loadUserForm()">Edit</button>
         </div>
     </mat-card>
+
+    <div *ngIf="loading" class="d-flex justify-content-center align-self-center">
+        <mat-spinner></mat-spinner>
+    </div>

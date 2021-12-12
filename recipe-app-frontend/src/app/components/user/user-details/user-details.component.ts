@@ -13,7 +13,7 @@ export class UserDetailsComponent implements OnInit {
 
   @Input()
   user!:UserDTO;
-
+  loading:boolean = true;
 
   loggedInEmail: string | undefined;
 
@@ -24,6 +24,8 @@ export class UserDetailsComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     await this.verifyUser();
+    this.loading = false;
+
   }
 
   loadUserForm(): void {
