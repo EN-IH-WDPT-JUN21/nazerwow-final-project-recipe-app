@@ -1,5 +1,7 @@
 <div class="drawer">
-    <img [routerLink]="['/']" class="logo img-fluid" src="../../../assets/images/The Recipe Box.png" alt="">
+    <div class="d-flex justify-content-center">
+        <img [routerLink]="['/']" class="logo img-fluid" src="../../../assets/images/The Recipe Box.png" alt="">
+    </div>
     <mat-list>
         <a (click)="loadRecipePage()"><mat-list-item matRipple class="default-hover"><span class="text">Recipes</span></mat-list-item></a>
         <mat-divider></mat-divider>

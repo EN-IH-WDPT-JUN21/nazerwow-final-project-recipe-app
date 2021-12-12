@@ -79,8 +79,11 @@ export class RecipeSearchComponent implements OnInit {
   }
 
   sendRecipeId(): void {
-    console.log(this.recipeSearch.value.id)
-    this.recipeIdOutput.emit(this.recipeSearch.value.id)
+    try {
+      this.recipeIdOutput.emit(this.recipeSearch.value.id)
+    }catch (error){
+      window.location.reload();
+    }
   }
 
   displayFn(recipe: RecipeDTO): string {

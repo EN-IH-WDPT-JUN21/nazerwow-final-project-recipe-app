@@ -9,6 +9,6 @@
         <app-favourites-carousel></app-favourites-carousel>
     </div>
     <div *ngIf="loggedIn && !loadingUser" class="component" >
-        <app-rating-carousel-generic [userId]="user.id" [userList]="true" [ourOrYour]="'Your'" [left]="true"></app-rating-carousel-generic>
+        <app-rating-carousel-generic [userId]="user.id" [userList]="true" [ourOrYour]="'Your'" [left]="false"></app-rating-carousel-generic>
     </div>
 </div>
