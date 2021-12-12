@@ -38,17 +38,13 @@ export class RecipeListItemComponent implements OnInit {
     await this.getRating();
   }
 
-  getAuthor():void {
-    this.userService.getUserById(this.authorId).subscribe(result => {
-      this.user = result;
+  async getAuthor():Promise<void> {
+   this.user = await  this.userService.getUserById(this.authorId)
       this.loading = false;
-    })
   }
 
-  getRating():void { 
-    this.ratingService.getAverageRatingForRecipe(this.recipe.id).subscribe(result => {
-      this.rating = result;
-    })
+  async getRating():Promise<void> {
+      this.rating = await this.ratingService.getAverageRatingForRecipe(this.recipe.id).catch(error => {})
   }
 }
 

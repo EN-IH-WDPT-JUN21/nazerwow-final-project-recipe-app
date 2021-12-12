@@ -17,6 +17,8 @@ export class HomePageComponent implements OnInit {
 
   loggedIn: boolean = false;
 
+  loadingUser:boolean = true;
+
 
   constructor(private oktaAuth: OktaAuth, 
     private userService:UserService) { }
@@ -26,10 +28,10 @@ export class HomePageComponent implements OnInit {
     this.getUserIfLoggedIn();
   }
 
-  getUserIfLoggedIn():void {
+  async getUserIfLoggedIn():Promise<void> {
     if(this.oktaAuth.getAccessToken() != null) {
       this.loggedIn = true;
-      this.getUserByEmail();
+      await this.getUserByEmail();
     } else {
       this.loggedIn = false;
     }
@@ -41,9 +43,8 @@ export class HomePageComponent implements OnInit {
   }
 
   async getUserByEmail(): Promise<void> {
-    this.userService.getUserByEmail(await this.getLoggedInEmail()).subscribe(result => {
-      this.user = result;
-    })
+    this.user =  await this.userService.getUserByEmail(await this.getLoggedInEmail())
+    this.loadingUser = false;
   }
 
   

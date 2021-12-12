@@ -22,16 +22,16 @@ export class RatingService {
     return this.http.get<any>(this.baseUrl + "/" + recipeId + "/" + userId)
   }
 
-  getAverageRatingForRecipe(recipeId: any): Observable<any> {
-    return this.http.get<any>(this.baseUrl +"/recipe/" + recipeId)
+  async getAverageRatingForRecipe(recipeId: any): Promise<any> {
+    return this.http.get<any>(this.baseUrl +"/recipe/" + recipeId).toPromise();
   }
 
-  getTop10Recipes(): Observable<any> {
-    return this.http.get<any>(this.baseUrl + "/top10recipes")
+  async getTop10Recipes(): Promise<any> {
+    return this.http.get<any>(this.baseUrl + "/top10recipes").toPromise();
   }
 
-  getTop10RecipesForUser(userId: number): Observable<any> {
-    return this.http.get<any>(this.baseUrl + "/top10recipes/" + userId)
+  async getTop10RecipesForUser(userId: number): Promise<any> {
+    return this.http.get<any>(this.baseUrl + "/top10recipes/" + userId).toPromise()
   }
 
   rateRecipe(ratingDTO: RatingDTO): Observable<any> {

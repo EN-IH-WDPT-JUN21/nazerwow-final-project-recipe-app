@@ -1,5 +1,5 @@
 
-<mat-card class ="page">
+<mat-card class ="page" *ngIf="!loading">
 
     <h1 class="title">{{title}}</h1>
     
@@ -9,7 +9,7 @@
             <mat-form-field appearance="fill" >
                 <mat-label>Recipe Name</mat-label>
                 <input matInput formControlName="name" placeholder="recipe name..." >
-                <mat-error *ngIf="name.invalid && name.touched">
+                <mat-error *ngIf="(name.invalid || name.hasError('invalidName')) && name.touched">
                     Please enter a valid recipe name.
                 </mat-error>
             </mat-form-field>
@@ -60,7 +60,7 @@
                             <mat-form-field appearance="fill">
                                 <mat-label>Ingredient Name</mat-label>
                                 <input matInput formControlName="name" placeholder="ingredient name...">
-                                <mat-error *ngIf="ingredientName.invalid && ingredientName.touched">
+                                <mat-error *ngIf="(ingredientName.invalid || ingredientName.hasError('invalidName')) && ingredientName.touched">
                                     Please enter a valid ingredient name.
                                 </mat-error>
                             </mat-form-field>
@@ -101,8 +101,8 @@
             <mat-form-field appearance="fill">
                 <mat-label>Image URL</mat-label>
                 <input type="text" matInput formControlName="imageUrl" placeholder="imageUrl...">
-                <mat-error *ngIf="imageUrl.invalid && imageUrl.touched">
-                    Please enter a valid pictureUrl
+                <mat-error *ngIf="(imageUrl.invalid || imageUrl.hasError('invalidUrl')) && imageUrl.touched">
+                    Please enter a valid picture Url
                 </mat-error>
             </mat-form-field>
             <br>

@@ -16,34 +16,31 @@ export class UserPageComponent implements OnInit {
 
   @Input()
   user!: UserDTO;
+  loading: boolean = true;
 
   constructor(private userService:UserService,
     private activatedRoute: ActivatedRoute,
     private location: Location
     ) { }
 
-  ngOnInit(): void {
-    this.getUserIfNoInputtedUser();
+  async ngOnInit(): Promise<void> {
+    await this.getUserIfNoInputtedUser();
+    this.loading = false;
   }
 
-  getUserIfNoInputtedUser():void {
+  async getUserIfNoInputtedUser():Promise<void> {
     try {
       if(this.user == null){
         const userId:number = this.activatedRoute.snapshot.params['userId'];
-        this.getUser(userId);
+        await this.getUser(userId);
       }
     } catch(error){
       
     }
   }
 
-  getUser(id:number):void{
-    this.userService.getUserById(id).subscribe(result => {
-      this.user = result;
-      },
-    error => {
-  
-    })
+  async getUser(id:number):Promise<void>{
+    this.user = await this.userService.getUserById(id)
     }
     
 

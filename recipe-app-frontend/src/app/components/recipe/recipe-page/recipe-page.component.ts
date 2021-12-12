@@ -1,3 +1,4 @@
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { OktaAuth } from '@okta/okta-auth-js';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatDialog } from '@angular/material/dialog';
@@ -6,7 +7,7 @@ import { UserDTO } from './../../../models/user-model';
 import { RecipeService } from './../../../services/recipe.service';
 import { RecipeDTO } from '../../../models/recipe.model';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AddRecipeFormComponent } from '../add-recipe-form/add-recipe-form.component';
 import { Location } from '@angular/common'
 
@@ -19,6 +20,7 @@ export class RecipePageComponent implements OnInit {
 
   recipeDTO!:RecipeDTO;
   user!: UserDTO;
+  loadingRecipe: boolean = true;
 
   loggedInEmail: string | undefined;
 
@@ -30,21 +32,26 @@ export class RecipePageComponent implements OnInit {
     private userService: UserService,
     private dialog: MatDialog,
     private location:Location,
-    private oktaAuth: OktaAuth) { }
+    private oktaAuth: OktaAuth,
+    private router:Router,
+    private snackBar:MatSnackBar) { }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     const recipeId:number = this.activateRoute.snapshot.params['recipeId'];
-    this.getRecipe(recipeId);
+    await this.getRecipe(recipeId);
     this.verifyUser();
   }
 
-  getRecipe(id:number):void{
-    this.recipeService.getRecipeById(id).subscribe(result => {
-      this.recipeDTO = result;
-      this.userService.getUserById(this.recipeDTO.authorId).subscribe(result => {
-        this.user = result;
-      })
-    })
+  async getRecipe(id:number):Promise<void>{
+    try {
+
+      this.recipeDTO = await this.recipeService.getRecipeById(id)
+    }catch (error) {
+      this.snackBar.open("Page Not Found - You Have Been Redirected", "close")
+      this.router.navigate(['recipes']);
+    }
+     this.user = await this.userService.getUserById(this.recipeDTO.authorId);
+    this.loadingRecipe = false;
   }
 
   loadAddForm(): void {

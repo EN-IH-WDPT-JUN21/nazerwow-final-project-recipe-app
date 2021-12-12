@@ -1,4 +1,4 @@
-<div class="page">
+<div class="page" *ngIf="!loading">
     <div class="d-flex justify-content-center align-items-center">
         <div class="search">
             <app-recipe-search [recipeList]="filteredRecipeList" (recipeNameOutput)="filterByText($event)" (deleteOutput)="updateSearchValue($event)"></app-recipe-search>

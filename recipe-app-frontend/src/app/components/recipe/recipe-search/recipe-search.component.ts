@@ -17,6 +17,8 @@ export class RecipeSearchComponent implements OnInit {
   recipeList!:RecipeDTO[];
   @Input()
   external: boolean = false;
+
+  loading:boolean = true;
   
   filteredRecipeList!: Observable<RecipeDTO[]>;
 
@@ -39,8 +41,8 @@ export class RecipeSearchComponent implements OnInit {
     })
    }
 
-  ngOnInit(): void {
-    this.getAllRecipes();
+  async ngOnInit(): Promise<void> {
+    await this.getAllRecipes();
     this.filteredRecipeList = this.recipeForm.valueChanges.pipe(
       startWith(''),
       map(value => this._filter()),
@@ -48,15 +50,14 @@ export class RecipeSearchComponent implements OnInit {
   }
 
  
-  getAllRecipes():void{
+  async getAllRecipes():Promise<void>{
     if(this.recipeList == null)
-    this.recipeService.getAllRecipes().subscribe(result => {
-      this.recipeList = result;
+    this.recipeList = await this.recipeService.getAllRecipes();
       this.filteredRecipeList = this.recipeForm.valueChanges.pipe(
       startWith(''),
-      map(value => this._filter()),
+      map(value => this._filter())
     )
-    })
+    this.loading = false;
   }
 
   private _filter(): RecipeDTO[] {

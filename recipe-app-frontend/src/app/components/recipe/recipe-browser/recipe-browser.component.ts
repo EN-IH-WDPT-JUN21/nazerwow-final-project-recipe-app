@@ -50,7 +50,6 @@ export class RecipeBrowserComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     await this.loadData();
-
   }
 
   // Get enums for the chips and form
@@ -60,6 +59,7 @@ export class RecipeBrowserComponent implements OnInit {
     this.getAllMeasurements();
     this.getAllCuisines();
     await this.getAllRecipes();
+    this.loading = false;
   }
 
   getAllCuisines():void{
@@ -82,11 +82,9 @@ export class RecipeBrowserComponent implements OnInit {
 
   // Populates the recipe lists
   async getAllRecipes():Promise<void>{
-    this.recipeService.getAllRecipes().subscribe(result => {
-      this.recipeList = result;
+    this.recipeList = await this.recipeService.getAllRecipes()
       this.loading = false;
       this.populateFilteredList();
-    })
   }
   
   public populateFilteredList():void {

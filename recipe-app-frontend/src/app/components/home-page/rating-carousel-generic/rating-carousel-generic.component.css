@@ -5,22 +5,6 @@ h1 {
   font-size: 5vh;
 }
 
-h1.a {
-  text-indent: 0em;
-}
-
-h1.b {
-  text-indent: 1em;
-}
-
-h1.c {
-  text-indent: 2em;
-}
-
-h1.d {
-  text-indent: 3em;
-}
-
 .text-box {
   margin: 1em;
 }

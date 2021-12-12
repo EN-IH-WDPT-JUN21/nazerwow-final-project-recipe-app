@@ -29,15 +29,13 @@ export class FavouritesToggleComponent implements OnInit {
     private oktaAuth: OktaAuth, 
     public authService: OktaAuthStateService) { }
 
-  ngOnInit(): void {
-    this.loadUserAndCheckIfFavourite();
+  async ngOnInit(): Promise<void> {
+    await this.loadUserAndCheckIfFavourite();
   }
 
   async loadUserAndCheckIfFavourite(): Promise<void> {
-  this.userService.getUserByEmail(await this.getLoggedInEmail()).subscribe(result => {
-    this.user = result;
-    this.checkIfFavourited();
-  })
+  this.user =  await this.userService.getUserByEmail(await this.getLoggedInEmail())
+  this.checkIfFavourited();
   }
 
   private async getLoggedInEmail(): Promise<string> {
@@ -47,7 +45,6 @@ export class FavouritesToggleComponent implements OnInit {
   checkIfFavourited(): void {
     this.favouritesService.isRecipeFavourited(this.createFavouriteDTO()).subscribe(result => {
       this.isFavourite = result;
-      console.log(this.isFavourite)
       this.toggleDisplayText();
       this.loading = false;
     });

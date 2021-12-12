@@ -20,8 +20,8 @@ export class UserService {
     return this.http.get<any>(this.baseUrl);
   }
 
-  getUserById(id: number): Observable<any> {
-    return this.http.get<any>(this.baseUrl + "/" + id);
+  async getUserById(id: number): Promise<any> {
+    return this.http.get<any>(this.baseUrl + "/" + id).toPromise();
   }
 
   addUser(userDTO: UserDTO): Observable<any> {
@@ -40,8 +40,8 @@ export class UserService {
     return  this.http.get<any>(this.baseUrl + "/profile")
   }
 
-  getUserByEmail(email: string): Observable<any> {
-    return this.http.get<any>(this.baseUrl + "/email/" + email);
+  async getUserByEmail(email: string): Promise<any> {
+    return this.http.get<any>(this.baseUrl + "/email/" + email).toPromise();
   }
 
 }
