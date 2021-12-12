@@ -31,7 +31,7 @@ export class RatingService {
   }
 
   async getTop10RecipesForUser(userId: number): Promise<any> {
-    return this.http.get<any>(this.baseUrl + "/top10recipes/" + userId).toPromise()
+    return this.http.get<any>(this.baseUrl + "/top10recipes/" + userId).toPromise();
   }
 
   rateRecipe(ratingDTO: RatingDTO): Observable<any> {

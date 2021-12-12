@@ -1,6 +1,8 @@
 
 <mat-card class ="page" *ngIf="!loading">
-
+    <div>
+        <button mat-raised-button color="primary" (click)="back()">Back</button>
+    </div>
     <h1 class="title">{{title}}</h1>
     
     <div class = "d-flex justify-content-center flex-wrap">
@@ -110,3 +112,7 @@
         </form>
     </div>
 </mat-card>
+
+<div *ngIf="loading" class="d-flex justify-content-center align-self-center">
+    <mat-spinner></mat-spinner>
+</div>

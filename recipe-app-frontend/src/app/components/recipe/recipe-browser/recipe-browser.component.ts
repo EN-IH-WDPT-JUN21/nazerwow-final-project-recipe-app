@@ -157,10 +157,7 @@ export class RecipeBrowserComponent implements OnInit {
 
   // Loads the add recipe form! 
   loadAddForm(): void {
-    const dialogRef = this.dialog.open(AddRecipeFormComponent, { autoFocus: false, maxHeight: '80vh', maxWidth: '80vw'});
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('Dialog result: %{result}');
-    })
+    this.router.navigateByUrl("/addrecipe")
   }
   
 }

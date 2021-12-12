@@ -9,6 +9,9 @@ import { EnumService } from './../../../services/enum.service';
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { Recipe, RecipeDTO } from 'src/app/models/recipe.model';
 import { UserDTO } from 'src/app/models/user-model';
+import { Router } from '@angular/router';
+import { Location } from '@angular/common'
+
 
 @Component({
   selector: 'app-add-recipe-form',
@@ -59,7 +62,9 @@ export class AddRecipeFormComponent implements OnInit {
     private oktaAuth: OktaAuth,
     private userService: UserService,
     @Inject(MAT_DIALOG_DATA) public data: RecipeDTO,
-    private snackBar:MatSnackBar
+    private snackBar:MatSnackBar,
+    private router: Router,
+    private location:Location
     ) {
        this.name = new FormControl('', [Validators.required, CustomValidators.nameValidator]);
        this.ingredients = new FormArray([], [Validators.required]);
@@ -92,15 +97,19 @@ export class AddRecipeFormComponent implements OnInit {
      }
 
   async ngOnInit(): Promise<void> {
-    this.getDiets();
-    this.getCuisines();
-    this.getMeasurements();
-    this.recipeDTO = this.data;
+    this.loadData();
     await this.getUserByEmail();
   }
 
   ngAfterViewInit(): void {
     this.addOrEdit();
+  }
+
+  private loadData() {
+    this.getDiets();
+    this.getCuisines();
+    this.getMeasurements();
+    this.recipeDTO = this.data;
   }
 
   onSubmit(){
@@ -261,9 +270,18 @@ export class AddRecipeFormComponent implements OnInit {
   }
 
   async getUserByEmail(): Promise<void> {
-     this.user = await this.userService.getUserByEmail(await this.getLoggedInEmail())
+    try {
+      this.user = await this.userService.getUserByEmail(await this.getLoggedInEmail())
       this.authorsId = this.user.id;
       this.loading = false;
+    } catch (error){
+          this.snackBar.open("Please ensure your details are correct before creating a recipe", "close")
+          this.router.navigateByUrl("/profile")
+      }
+  }
+
+  back():void {
+    this.location.back();
   }
 
   

@@ -19,7 +19,7 @@ export class StarRatingComponent implements OnInit {
   loggedInUser!: UserDTO;
 
   @Input()
-  rating!: number;
+  rating: number = 0;
 
   @Output() ratingOutput : EventEmitter<number> = new EventEmitter();
 
@@ -33,12 +33,13 @@ export class StarRatingComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     await this.getRating()
+    this.loading = false;
   }
 
   async getRating():Promise<void> {
     if(this.isReadOnly){
         this.rating = await this.ratingService.getAverageRatingForRecipe(this.recipeId).catch( error => { });
-        this.loading = true;
+        this.loading = false;
   }
 }
 

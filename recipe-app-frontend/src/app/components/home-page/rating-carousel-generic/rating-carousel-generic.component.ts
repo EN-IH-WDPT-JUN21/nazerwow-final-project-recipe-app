@@ -25,6 +25,7 @@ export class RatingCarouselGenericComponent implements OnInit {
   ourOrYour!: string;
 
   loading:boolean = true;
+  hasFavourites: boolean = true;
 
  constructor(private ratingService: RatingService,
     private userService: UserService) { }
@@ -48,8 +49,13 @@ export class RatingCarouselGenericComponent implements OnInit {
 
   async loadRecipes():Promise<void> {
     if(this.userList){
-      await this.getUsersTop10Recipes();
-      this.loading = false;
+      try {
+        await this.getUsersTop10Recipes();
+        this.hasFavourites = true;
+        this.loading = false;
+      } catch (error){
+        this.hasFavourites = false;
+      }
       
     } else {
       await this.getTop10Recipes();
