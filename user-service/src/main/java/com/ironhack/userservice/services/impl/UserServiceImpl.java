@@ -74,7 +74,9 @@ public class UserServiceImpl implements UserService {
             User user = new User();
             user.setUsername(randomUsernameFromEmail(principal.getName()));
             user.setEmail(principal.getName());
-            user.setName(user.getUsername());
+            user.setName(user.getName());
+            user.setBio("");
+            user.setLocation("");
             user.setRoles(List.of(Role.USER));
             return userRepository.save(user);
         }

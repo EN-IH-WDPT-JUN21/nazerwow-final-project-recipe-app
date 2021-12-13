@@ -20,8 +20,8 @@ export class HomeSearchComponent implements OnInit {
   }
 
   loadRecipePage(recipeId: any):void {
-    if(recipeId != null){
+      if(recipeId != null){
         this.router.navigate(['/recipes/' + recipeId]);
-    }
+      }
   }
 }

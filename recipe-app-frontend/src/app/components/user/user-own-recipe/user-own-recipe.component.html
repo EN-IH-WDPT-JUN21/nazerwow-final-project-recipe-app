@@ -6,7 +6,7 @@
                     Created Recipes
                 </mat-panel-title>
                 <mat-panel-description>
-                    <span *ngIf="loading">
+                    <span *ngIf="loading || recipeList.length == 0">
                         No recipes created by user
                     </span>
                 </mat-panel-description>

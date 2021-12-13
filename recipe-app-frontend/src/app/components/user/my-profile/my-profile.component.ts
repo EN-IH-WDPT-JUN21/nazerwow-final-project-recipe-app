@@ -56,7 +56,6 @@ async fillDetailsIfEmpty():Promise<void> {
 
   private async updatUserDetails() {
     this.userService.editUser(this.user).subscribe(result => {
-      console.log(result);
       this.user = result;
     })
   }

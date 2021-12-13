@@ -19,7 +19,7 @@ export class RatingCarouselGenericComponent implements OnInit {
   userId!: number;
   
   @Input()
-  left: boolean = true;
+  left!: boolean;
 
   @Input()
   ourOrYour!: string;

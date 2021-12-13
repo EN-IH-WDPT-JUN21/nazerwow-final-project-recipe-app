@@ -2,7 +2,6 @@ import { OktaAuthStateService } from '@okta/okta-angular';
 import { UserDTO } from './../../../models/user-model';
 import { OktaAuth } from '@okta/okta-auth-js';
 import { UserService } from 'src/app/services/user.service';
-import { Observable } from 'rxjs';
 import { FavouriteDTO } from './../../../models/favourites-model';
 import { FavouritesService } from './../../../services/favourites.service';
 import { Component, Input, OnInit } from '@angular/core';

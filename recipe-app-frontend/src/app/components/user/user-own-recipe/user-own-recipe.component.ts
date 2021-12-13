@@ -26,7 +26,12 @@ export class UserOwnRecipeComponent implements OnInit {
 
 
   async getUsersOwnRecipes(): Promise<void> {
-    this.recipeList = await this.recipeService.getRecipesByUserId(this.userId)
+    try {
+      this.recipeList = await this.recipeService.getRecipesByUserId(this.userId)
       this.loading = false;
+    } catch (error) {
+      this.loading = false;
+      this.recipeList = [];
+    }
   }
 }
