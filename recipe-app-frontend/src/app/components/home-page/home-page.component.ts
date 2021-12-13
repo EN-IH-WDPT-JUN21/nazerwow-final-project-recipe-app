@@ -4,6 +4,7 @@ import { UserService } from 'src/app/services/user.service';
 import { OktaAuth } from '@okta/okta-auth-js';
 import { FavouritesCarouselComponent } from './favourites-carousel/favourites-carousel.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -21,7 +22,8 @@ export class HomePageComponent implements OnInit {
 
 
   constructor(private oktaAuth: OktaAuth, 
-    private userService:UserService) { }
+    private userService:UserService,
+    private router:Router) { }
 
 
   ngOnInit(): void {
@@ -43,8 +45,12 @@ export class HomePageComponent implements OnInit {
   }
 
   async getUserByEmail(): Promise<void> {
-    this.user =  await this.userService.getUserByEmail(await this.getLoggedInEmail())
-    this.loadingUser = false;
+    try {
+      this.user =  await this.userService.getUserByEmail(await this.getLoggedInEmail())
+      this.loadingUser = false;
+    }catch (error) {
+      this.router.navigate(['profile']);
+    }
   }
 
   

@@ -12,8 +12,11 @@
                     <p><strong>Bio: </strong> {{user.bio}} mins</p>
                 </div>
             </mat-card-subtitle>
-            <div class="image">
+            <div class="image" *ngIf="user.pictureUrl != null">
                 <img class="img-fluid rounded" src="{{user.pictureUrl}}">
+            </div>
+            <div class="image" *ngIf="user.pictureUrl == null">
+                <img class="img-fluid rounded" src="../../../../assets/images/Profile_avatar_placeholder_large.png">
             </div>
         </mat-card-title-group>
         <div *ngIf="userVerified">
