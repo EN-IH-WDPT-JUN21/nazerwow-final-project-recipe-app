@@ -60,7 +60,8 @@ FLUSH PRIVILEGES;
 ```
 OPTION 1
 === Using Terminal === 
-Navigate to the JARs Folder
+Create a JAR file for each service using Maven package
+Navigate to the target folder for that microservice
 Run each Jar File by using JAVA -jar .\{File-name}
 eg. JAVA -jar .\recipe-service-0.0.1-SNAPSHOT.jar
 
