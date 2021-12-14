@@ -1,4 +1,5 @@
-# The Recipe Box
+
+<img src="./recipe-app-frontend/src/assets/images/logo_long.png">
 
 ## Table of Contents
 
@@ -7,7 +8,7 @@
 2. [**Diagrams**](#Diagrams)
 
 
-<br><br>
+
 
 ## About
 
