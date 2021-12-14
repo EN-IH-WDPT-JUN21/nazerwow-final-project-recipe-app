@@ -25,6 +25,8 @@ The Recipe Box allows you to:
 
 * Our page will also show your our highest rated and most favourited recipes
 
+* Login / Sign Up Using Oauth2 (via Okta) 
+
 The project has been created with a microservices structure to aid with future scalability and the addition of new feature.
 Our microservices include:
 
