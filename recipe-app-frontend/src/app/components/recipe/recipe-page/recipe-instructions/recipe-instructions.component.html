@@ -3,7 +3,7 @@
         <h1>Ingredients</h1>
         <ul>
             <li *ngFor="let ingredient of recipe.ingredients">
-                {{ingredient.quantity}}{{ingredient.measurement | lowercase}} {{ingredient.name}}
+                {{ingredient.quantity}} {{ingredient.measurement | titlecase}} - {{ingredient.name}}
             </li>
         </ul>
     </div>

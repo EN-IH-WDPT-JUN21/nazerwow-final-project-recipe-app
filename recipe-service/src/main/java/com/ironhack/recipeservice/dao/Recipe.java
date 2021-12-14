@@ -57,4 +57,15 @@ public class Recipe {
         this.diets = diets;
         this.imageUrl = imageUrl;
     }
+
+    public Recipe(String name, List<Ingredient> ingredients, List<String> method, Integer prepTime, Integer cookingTime, Long authorId, Cuisine cuisine, String imageUrl) {
+        this.name = name;
+        this.ingredients = ingredients;
+        this.method = method;
+        this.prepTime = prepTime;
+        this.cookingTime = cookingTime;
+        this.authorId = authorId;
+        this.cuisine = cuisine;
+        this.imageUrl = imageUrl;
+    }
 }

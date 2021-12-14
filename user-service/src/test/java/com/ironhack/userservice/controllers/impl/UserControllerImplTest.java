@@ -6,9 +6,11 @@ import com.ironhack.userservice.dto.CreateUserDTO;
 import com.ironhack.userservice.dto.UserDTO;
 import com.ironhack.userservice.enums.Role;
 import com.ironhack.userservice.repositories.UserRepository;
+import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
@@ -17,6 +19,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.security.Principal;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -143,6 +146,7 @@ class UserControllerImplTest {
     @Test
     void updateUser_Valid_CheckResponse() throws Exception {
         UserDTO userDTO = new UserDTO(
+                user1.getId(),
                 "newUser",
                 "newUsername",
                 "new@email.com",
@@ -152,7 +156,7 @@ class UserControllerImplTest {
                 List.of(Role.USER)
         );
         String body = objectMapper.writeValueAsString(userDTO);
-        MvcResult result = mockMvc.perform(put("/api/v1/users/" + user1.getId() + "/edit")
+        MvcResult result = mockMvc.perform(put("/api/v1/users/edit")
                         .content(body).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isAccepted())
                 .andReturn();
@@ -169,6 +173,7 @@ class UserControllerImplTest {
     @Test
     void updateUser_Valid_CheckRepoUpdated() throws Exception {
         UserDTO userDTO = new UserDTO(
+                user1.getId(),
                 "newUser",
                 "newUsername",
                 "new@email.com",
@@ -178,7 +183,7 @@ class UserControllerImplTest {
                 List.of(Role.USER)
         );
         String body = objectMapper.writeValueAsString(userDTO);
-        MvcResult result = mockMvc.perform(put("/api/v1/users/" + user1.getId() + "/edit")
+        MvcResult result = mockMvc.perform(put("/api/v1/users/edit")
                         .content(body).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isAccepted())
                 .andReturn();

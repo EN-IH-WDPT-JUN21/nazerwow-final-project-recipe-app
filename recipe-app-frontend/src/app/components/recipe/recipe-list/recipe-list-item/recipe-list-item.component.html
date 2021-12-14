@@ -9,10 +9,10 @@
                 <app-star-rating [recipeId]="recipe.id"></app-star-rating>
     </div>
     <div class="p-2">
-        <p>Ingredients: {{recipe.ingredients?.length}}</p>
-        <p>Steps: {{recipe.method?.length}}</p>
-        <p>Prep Time: {{recipe.prepTime}} mins </p>
-        <p>Cooking Time: {{recipe.cookingTime}} mins</p>
+        <p>Ingredients: <strong>{{recipe.ingredients?.length}}</strong></p>
+        <p>Steps: <strong>{{recipe.method?.length}} </strong></p>
+        <p>Prep Time: <strong>{{recipe.prepTime}} mins </strong></p>
+        <p>Cooking Time: <strong>{{recipe.cookingTime}} mins</strong></p>
     </div>
 </div>
 <div class="p-2">

@@ -27,6 +27,13 @@ public class SampleDataLoader implements CommandLineRunner {
         List<Favourite> secondMostPopular = createFavouritesForRecipe(2L, 10);
         List<Favourite> thirdMostPopular = createFavouritesForRecipe(3L, 5);
 
+        List<Favourite> favourites = IntStream.rangeClosed(1, 30)
+                .mapToObj(i -> new Favourite(
+                        faker.number().numberBetween(1L, 21L),
+                        faker.number().numberBetween(1L, 23L)
+                )).collect(Collectors.toList());
+
+        favouriteRepository.saveAll(favourites);
         favouriteRepository.saveAll(mostPopularRecipe);
         favouriteRepository.saveAll(secondMostPopular);
         favouriteRepository.saveAll(thirdMostPopular);
@@ -35,7 +42,7 @@ public class SampleDataLoader implements CommandLineRunner {
     private List<Favourite> createFavouritesForRecipe(Long recipeId, int amount) {
         List<Favourite> favourites = IntStream.rangeClosed(1, amount)
                 .mapToObj(i -> new Favourite(
-                        faker.number().numberBetween(1L, 20L),
+                        faker.number().numberBetween(1L, 21L),
                         recipeId
                 )).collect(Collectors.toList());
         return favourites;

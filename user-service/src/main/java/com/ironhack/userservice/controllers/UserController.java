@@ -39,4 +39,8 @@ public interface UserController {
     @ResponseStatus(HttpStatus.ACCEPTED)
     boolean userMatchesLoggedInUser(Long userId);
 
+    @GetMapping("/profile")
+    @ResponseStatus(HttpStatus.OK)
+    User loadUserProfile();
+
 }

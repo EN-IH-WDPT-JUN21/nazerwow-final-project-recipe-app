@@ -26,8 +26,8 @@ public class SampleDataLoader implements CommandLineRunner {
         List<Rating> sampleRatings = IntStream.rangeClosed(1, 100)
                 .mapToObj(i -> new Rating(
                         faker.number().numberBetween(1, 5),
-                        faker.number().numberBetween(1L, 100L),
-                        faker.number().numberBetween(1L, 20L)
+                        faker.number().numberBetween(1L, 23L),
+                        faker.number().numberBetween(1L, 21L)
                 ))
                 .collect(Collectors.toList());
 

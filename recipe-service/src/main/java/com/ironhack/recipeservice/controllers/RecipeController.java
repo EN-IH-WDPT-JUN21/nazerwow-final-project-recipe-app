@@ -18,7 +18,7 @@ public interface RecipeController {
     @ResponseStatus(HttpStatus.OK)
     Recipe findById(@PathVariable(name = "id") Long id);
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     void deleteRecipe(@PathVariable(name = "id") Long id);
 
