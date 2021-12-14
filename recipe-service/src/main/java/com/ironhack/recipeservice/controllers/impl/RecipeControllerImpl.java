@@ -49,7 +49,7 @@ public class RecipeControllerImpl implements RecipeController {
     }
 
     @Override
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteRecipe(@PathVariable(name = "id") Long id){
         recipeService.deleteRecipe(id);

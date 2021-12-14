@@ -15,11 +15,6 @@ export class UserService {
     private http: HttpClient
   ) { }
 
-
-  getAllUsers(): Observable<any> {
-    return this.http.get<any>(this.baseUrl);
-  }
-
   async getUserById(id: number): Promise<any> {
     return this.http.get<any>(this.baseUrl + "/" + id).toPromise();
   }

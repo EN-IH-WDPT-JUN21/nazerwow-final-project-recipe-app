@@ -32,7 +32,7 @@ export class RecipeService {
   }
 
   deleteRecipe(id: number): Observable<any> {
-    return this.http.delete(this.baseUrl + "/" + id)
+    return this.http.delete(this.baseUrl + "/delete/" + id)
   }
 
   editRecipe(RecipeDTO: RecipeDTO): Observable<any> {

@@ -13,4 +13,7 @@
     <div class = instructions-card>
         <app-recipe-instructions [recipe]="recipeDTO"></app-recipe-instructions>
     </div>
+    <div class="d-flex justify-content-end">
+        <button mat-raised-button color="warn" (click)="delete()">Delete</button>
+    </div>
 </div>

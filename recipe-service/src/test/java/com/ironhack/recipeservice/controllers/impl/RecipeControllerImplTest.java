@@ -134,7 +134,7 @@ class RecipeControllerImplTest {
     @Test
     void deleteRecipe() throws Exception {
         var repoSizeBefore = recipeRepository.findAll().size();
-        MvcResult result = mockMvc.perform(delete("/api/v1/recipes/" + recipe1.getId()))
+        MvcResult result = mockMvc.perform(delete("/api/v1/recipes/delete" + recipe1.getId()))
                 .andExpect(status().isNoContent())
                 .andReturn();
         var repoSizeAfter = recipeRepository.findAll().size();

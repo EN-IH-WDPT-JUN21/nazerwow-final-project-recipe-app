@@ -83,4 +83,14 @@ export class RecipePageComponent implements OnInit {
     }
   }
 
+  delete(): void {
+    this.recipeService.deleteRecipe(this.recipeDTO.id).subscribe(result => {
+      console.log(result)
+      this.snackBar.open("Deleted Successfully", "CLOSE")
+    }, 
+    error => {
+      this.snackBar.open("An error occured: Please try again", "CLOSE")
+    })
+  }
+
 }
