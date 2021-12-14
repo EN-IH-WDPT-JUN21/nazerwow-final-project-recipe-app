@@ -33,7 +33,7 @@ Our microservices include:
 - Favourites-Service
 - Ratings-Service
 - User-Service
-- 
+
 ## Getting started
 
 ### Running The Recipe Box App
