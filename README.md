@@ -5,7 +5,7 @@
 
 1. [**About**](#About)
 1. [**Getting started**](#Getting-started)
-2. [**Diagrams**](#Diagrams)
+2. [**Images**](#Images)
 
 
 
@@ -82,3 +82,8 @@ Run Each Microservice Application
   ```
 
 5. Enjoy at http://localhost:4200/
+
+## Images
+ 
+<img src="./read-me-images/home-search.png" width="400" height="auto">
+<img src="./read-me-images/login.png" width="240" height="auto"> <img src="./read-me-images/sign-up.png" width="240" height="auto">
