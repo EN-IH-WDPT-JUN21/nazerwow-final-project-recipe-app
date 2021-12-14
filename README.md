@@ -134,7 +134,7 @@ Generates, stores and updates SalesRep objects
 | :--- | :--- | :--- | :--- 
 | /api/v1/favourites | `GET` | Get all favourites | None
 | /api/v1/favourites/{id} | `GET` | Get Favourite by id| `id=[Long]`
-| /api/v1/favourites/userid/{id} | `GET` | Get All RecipeDTO's By UserId `id=[Long]`
+| /api/v1/favourites/userid/{id} | `GET` | Get All RecipeDTO's By UserId | `id=[Long]`
 | /api/v1/favourites/recipeisfavourited | `PUT` | Boolean Returned - If User Has Favourited Or Not | `favouriteDTO=[favouriteDTO]`
 | /api/v1/favourites/add | `POST` | Add to Favourites | `favouriteDTO=[favouriteDTO]`
 | /api/v1/favourites/remove | `PUT` | Remove From Favourites | `favouriteDTO=[favouriteDTO]`
