@@ -29,7 +29,6 @@ public class UserControllerImpl implements com.ironhack.userservice.controllers.
         return userService.findAll();
     }
 
-    
     @Override
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
@@ -58,7 +57,6 @@ public class UserControllerImpl implements com.ironhack.userservice.controllers.
         userService.deleteUser(id);
     }
 
-    
     @Override
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
