@@ -5,12 +5,12 @@
                 <a [routerLink]="['/users/', user.id]" class="author"> by: {{user.name}} </a> <br><br>
                 <app-star-rating [recipeId]="recipe.id"></app-star-rating><br>
                 <div class="recipe-info">
-                    <p><strong>Ingredients: </strong> {{recipe.ingredients?.length}} </p>
-                    <p><strong>Prep Time: </strong>{{recipe.prepTime}} mins</p>
-                    <p><strong>Cooking Time: </strong> {{recipe.cookingTime}} mins</p>
+                    <p><strong>Ingredients:  </strong> {{recipe.ingredients?.length}} </p>
+                    <p><strong>Prep Time:  </strong>{{recipe.prepTime}} mins</p>
+                    <p><strong>Cooking Time:  </strong> {{recipe.cookingTime}} mins</p>
                     <mat-chip-list aria-label="Dietary Requirements">
-                        <mat-chip color="accent" selected>{{recipe.cuisine | titlecase}}</mat-chip>
-                        <mat-chip color="primary" selected *ngFor="let diet of recipe.diets">{{diet | titlecase}}</mat-chip>
+                        <mat-chip color="accent" selected>{{recipe.cuisine | enum | titlecase}}</mat-chip>
+                        <mat-chip color="primary" selected *ngFor="let diet of recipe.diets">{{diet | enum | titlecase}}</mat-chip>
                     </mat-chip-list>
                 </div>
             </mat-card-subtitle>

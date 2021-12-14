@@ -20,4 +20,8 @@ public class Ingredient {
     private double quantity;
     private Measurement measurement;
 
+    public Ingredient(String name, double quantity) {
+        this.name = name;
+        this.quantity = quantity;
+    }
 }

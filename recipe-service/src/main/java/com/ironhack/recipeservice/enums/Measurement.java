@@ -18,5 +18,5 @@ public enum Measurement {
     OUNCE,
     OZ,
     POUND,
-    LB,
+    LB
 }
