@@ -84,6 +84,17 @@ Run Each Microservice Application
 5. Enjoy at http://localhost:4200/
 
 ## Images
- 
+ Home Page
+
 <img src="./read-me-images/home-search.png" width="400" height="auto">
+<div>
+Login / Sign up 
 <img src="./read-me-images/login.png" width="240" height="auto"> <img src="./read-me-images/sign-up.png" width="240" height="auto">
+</div>
+Recipe Browser (Advanced Search)
+<img src="./read-me-images/recipe-browser.png" width="240" height="auto">
+Recipe Page
+<img src="./read-me-images/recipe-page.png" width="240" height="auto">
+Recipe Form (Dynamic for Add and Edit)
+<img src="./read-me-images/recipe-form.png" width="240" height="auto">
+
