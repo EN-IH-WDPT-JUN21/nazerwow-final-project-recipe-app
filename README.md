@@ -87,8 +87,9 @@ Run Each Microservice Application
  Home Page
 
 <img src="./read-me-images/home-search.png" width="400" height="auto">
+
+Login / Sign up <br>
 <div>
-Login / Sign up 
 <img src="./read-me-images/login.png" width="240" height="auto"> <img src="./read-me-images/sign-up.png" width="240" height="auto">
 </div>
 Recipe Browser (Advanced Search)
