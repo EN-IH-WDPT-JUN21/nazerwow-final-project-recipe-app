@@ -61,10 +61,10 @@ class FavouriteControllerImplTest {
         MvcResult result = mockMvc.perform(get("/api/v1/favourites"))
                 .andExpect(status().isOk())
                 .andReturn();
-        assertTrue(result.getResponse().getContentAsString().contains("1"));
-        assertTrue(result.getResponse().getContentAsString().contains("2"));
-        assertTrue(result.getResponse().getContentAsString().contains("3"));
-        assertTrue(result.getResponse().getContentAsString().contains("4"));
+        assertTrue(result.getResponse().getContentAsString().contains("\"recipeId\":1"));
+        assertTrue(result.getResponse().getContentAsString().contains("\"recipeId\":2"));
+        assertTrue(result.getResponse().getContentAsString().contains("\"recipeId\":3"));
+        assertTrue(result.getResponse().getContentAsString().contains("\"recipeId\":4"));
     }
 
     @Test
@@ -72,10 +72,10 @@ class FavouriteControllerImplTest {
         MvcResult result = mockMvc.perform(get("/api/v1/favourites/" + testFav1.getId()))
                 .andExpect(status().isOk())
                 .andReturn();
-        assertTrue(result.getResponse().getContentAsString().contains("1"));
-        assertFalse(result.getResponse().getContentAsString().contains("2"));
-        assertFalse(result.getResponse().getContentAsString().contains("3"));
-        assertFalse(result.getResponse().getContentAsString().contains("4"));
+        assertTrue(result.getResponse().getContentAsString().contains("\"recipeId\":1"));
+        assertFalse(result.getResponse().getContentAsString().contains("\"recipeId\":2"));
+        assertFalse(result.getResponse().getContentAsString().contains("\"recipeId\":3"));
+        assertFalse(result.getResponse().getContentAsString().contains("\"recipeId\":4"));
     }
 
     @Test

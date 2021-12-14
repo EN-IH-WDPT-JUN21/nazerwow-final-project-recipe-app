@@ -50,7 +50,7 @@ class FavouritesServiceImplTest {
 
     @Test
     void findById() {
-        Favourite favourite = favouritesService.findById(1L);
+        Favourite favourite = favouritesService.findById(testFav1.getId());
         assertEquals(testFav1.getRecipeId(), favourite.getRecipeId());
         assertEquals(testFav1.getUserId(), favourite.getUserId());
     }
@@ -62,7 +62,7 @@ class FavouritesServiceImplTest {
 
     @Test
     void findByUserId() {
-        var repoSize = favouritesService.findByUserId(testFav1.getId()).size();
+        var repoSize = favouritesService.findByUserId(testFav1.getUserId()).size();
         assertEquals(2, repoSize);
     }
 

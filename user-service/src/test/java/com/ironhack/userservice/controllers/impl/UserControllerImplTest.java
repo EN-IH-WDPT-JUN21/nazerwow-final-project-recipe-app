@@ -143,6 +143,7 @@ class UserControllerImplTest {
     @Test
     void updateUser_Valid_CheckResponse() throws Exception {
         UserDTO userDTO = new UserDTO(
+                user1.getId(),
                 "newUser",
                 "newUsername",
                 "new@email.com",
@@ -152,7 +153,7 @@ class UserControllerImplTest {
                 List.of(Role.USER)
         );
         String body = objectMapper.writeValueAsString(userDTO);
-        MvcResult result = mockMvc.perform(put("/api/v1/users/" + user1.getId() + "/edit")
+        MvcResult result = mockMvc.perform(put("/api/v1/users/edit")
                         .content(body).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isAccepted())
                 .andReturn();
@@ -169,6 +170,7 @@ class UserControllerImplTest {
     @Test
     void updateUser_Valid_CheckRepoUpdated() throws Exception {
         UserDTO userDTO = new UserDTO(
+                user1.getId(),
                 "newUser",
                 "newUsername",
                 "new@email.com",
@@ -178,7 +180,7 @@ class UserControllerImplTest {
                 List.of(Role.USER)
         );
         String body = objectMapper.writeValueAsString(userDTO);
-        MvcResult result = mockMvc.perform(put("/api/v1/users/" + user1.getId() + "/edit")
+        MvcResult result = mockMvc.perform(put("/api/v1/users/edit")
                         .content(body).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isAccepted())
                 .andReturn();

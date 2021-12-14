@@ -190,6 +190,7 @@ class RecipeControllerImplTest {
     @Test
     void updateRecipe_Valid_CheckResponse() throws Exception {
         RecipeDTO recipeDTO = new RecipeDTO(
+                recipe1.getId(),
                 "Test Recipe3",
                 List.of(ingredient1),
                 List.of("MethodTest1", "MethodTest2"),
@@ -201,7 +202,7 @@ class RecipeControllerImplTest {
                 "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg"
         );
         String body = objectMapper.writeValueAsString(recipeDTO);
-        MvcResult result = mockMvc.perform(put("/api/v1/recipes/" + recipe1.getId())
+        MvcResult result = mockMvc.perform(put("/api/v1/recipes/edit")
                         .content(body).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isAccepted())
                 .andReturn();
@@ -216,6 +217,7 @@ class RecipeControllerImplTest {
     @Test
     void updateRecipe_Valid_CheckRepoUpdated() throws Exception {
         RecipeDTO recipeDTO = new RecipeDTO(
+                recipe1.getId(),
                 "Test Recipe3",
                 List.of(ingredient1),
                 List.of("MethodTest1", "MethodTest2"),
@@ -227,7 +229,7 @@ class RecipeControllerImplTest {
                 "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg"
         );
         String body = objectMapper.writeValueAsString(recipeDTO);
-        MvcResult result = mockMvc.perform(put("/api/v1/recipes/" + recipe1.getId())
+        MvcResult result = mockMvc.perform(put("/api/v1/recipes/edit")
                         .content(body).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isAccepted())
                 .andReturn();
