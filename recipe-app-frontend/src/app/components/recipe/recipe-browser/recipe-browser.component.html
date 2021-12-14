@@ -19,9 +19,13 @@
     <div *ngIf="filteredRecipeList.length > 0 && !loading">
         <p><app-recipe-list *ngIf="showList" [recipeList]="filteredRecipeList"></app-recipe-list></p>
     </div>
-    <div *ngIf="filteredRecipeList.length <= 0">
+    <div *ngIf="filteredRecipeList.length <= 0" class="center">
         <h1> Ooops... We don't have any of those recipes yet... </h1>
-        <h2 *ngIf="(authService.authState$ | async)?.isAuthenticated" (click)="loadAddForm()"> Why not add one for us??</h2>
+        <h2 *ngIf="(authService.authState$ | async)?.isAuthenticated" (click)="loadAddForm()"> <a> Why not add one for us?? </a></h2>
+         <p> 
+             <button *ngIf="showAddButton && (authService.authState$ | async)?.isAuthenticated" mat-fab color="primary"
+             (click)="loadAddForm()"><span class="add-button">+</span></button>
+            </p>
         
         <img class="img-fluid" src="https://c.tenor.com/LjhaLjAdrQgAAAAC/winnie-the-pooh-hungry.gif" alt="">
     </div>
