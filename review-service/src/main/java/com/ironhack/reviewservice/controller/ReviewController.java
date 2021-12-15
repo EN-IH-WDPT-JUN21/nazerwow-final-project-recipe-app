@@ -1,6 +1,7 @@
 package com.ironhack.reviewservice.controller;
 
 import com.ironhack.reviewservice.dao.Review;
+import com.ironhack.reviewservice.dto.ReviewResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,11 +13,11 @@ public interface ReviewController {
 
     @GetMapping("/recipeid/{recipeId}")
     @ResponseStatus(HttpStatus.OK)
-    List<Review> getByRecipeId(@PathVariable(name = "recipeId") Long recipeId);
+    List<ReviewResponse> getByRecipeId(@PathVariable(name = "recipeId") Long recipeId);
 
     @GetMapping("/userid/{userid}")
     @ResponseStatus(HttpStatus.OK)
-    List<Review> getByUserId(@PathVariable(name = "userId") Long userId);
+    List<ReviewResponse> getByUserId(@PathVariable(name = "userId") Long userId);
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)

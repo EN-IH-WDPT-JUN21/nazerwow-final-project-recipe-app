@@ -1,6 +1,7 @@
 package com.ironhack.reviewservice.service.impl;
 
 import com.ironhack.reviewservice.dao.Review;
+import com.ironhack.reviewservice.dto.ReviewResponse;
 import com.ironhack.reviewservice.repositories.ReviewRepository;
 import com.ironhack.reviewservice.service.ReviewService;
 import org.junit.jupiter.api.AfterEach;
@@ -47,14 +48,14 @@ class ReviewServiceImplTest {
 
     @Test
     void getByRecipeId() {
-        List<Review> reviewReturned = reviewService.getByRecipeId(review1.getRecipeId());
+        List<ReviewResponse> reviewReturned = reviewService.getByRecipeId(review1.getRecipeId());
         assertEquals(2, reviewReturned.size());
         assertEquals(review1.getContent(), reviewReturned.get(0).getContent());
     }
 
     @Test
     void getByUserId() {
-        List<Review> reviewsReturned = reviewService.getByUserId(review4.getUserId());
+        List<ReviewResponse> reviewsReturned = reviewService.getByUserId(review4.getUserId());
         assertEquals(2, reviewsReturned.size());
         assertEquals(review4.getContent(), reviewsReturned.get(0).getContent());
     }

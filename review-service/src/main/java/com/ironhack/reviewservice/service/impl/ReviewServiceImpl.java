@@ -1,6 +1,7 @@
 package com.ironhack.reviewservice.service.impl;
 
 import com.ironhack.reviewservice.dao.Review;
+import com.ironhack.reviewservice.dto.ReviewResponse;
 import com.ironhack.reviewservice.repositories.ReviewRepository;
 import com.ironhack.reviewservice.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,13 +19,13 @@ public class ReviewServiceImpl implements ReviewService {
     private ReviewRepository reviewRepository;
 
     @Override
-    public List<Review> getByRecipeId(Long recipeId) {
-        return reviewRepository.findByRecipeId(recipeId);
+    public List<ReviewResponse> getByRecipeId(Long recipeId) {
+        return reviewRepository.getReviewResponseByRecipeId(recipeId);
     }
 
     @Override
-    public List<Review> getByUserId(Long userId) {
-        return reviewRepository.findByUserId(userId);
+    public List<ReviewResponse> getByUserId(Long userId) {
+        return reviewRepository.getReviewResponseByUserId(userId);
     }
 
     @Override

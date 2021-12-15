@@ -2,6 +2,7 @@ package com.ironhack.reviewservice.controller.impl;
 
 import com.ironhack.reviewservice.controller.ReviewController;
 import com.ironhack.reviewservice.dao.Review;
+import com.ironhack.reviewservice.dto.ReviewResponse;
 import com.ironhack.reviewservice.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,16 +22,16 @@ public class ReviewControllerImpl implements ReviewController {
     private ReviewService reviewService;
 
     @Override
-    @GetMapping("/recipeid/{recipeId}")
+    @GetMapping("/recipe/{recipeId}")
     @ResponseStatus(HttpStatus.OK)
-    public List<Review> getByRecipeId(@PathVariable(name = "recipeId") Long recipeId){
+    public List<ReviewResponse> getByRecipeId(@PathVariable(name = "recipeId") Long recipeId){
         return reviewService.getByRecipeId(recipeId);
     }
 
     @Override
-    @GetMapping("/userid/{userid}")
+    @GetMapping("/user/{userid}")
     @ResponseStatus(HttpStatus.OK)
-    public List<Review> getByUserId(@PathVariable(name = "userId") Long userId){
+    public List<ReviewResponse> getByUserId(@PathVariable(name = "userId") Long userId){
         return reviewService.getByUserId(userId);
     }
 

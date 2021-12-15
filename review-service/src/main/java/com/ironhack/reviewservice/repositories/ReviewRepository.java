@@ -24,4 +24,12 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
             "WHERE review.recipe_id = :recipeId", nativeQuery = true)
     List<ReviewResponse> getReviewResponseByRecipeId(@Param("recipeId") Long recipeId);
 
+    @Query(value = "SELECT " +
+            " review.title, review.content, user.name, rating.rating " +
+            "FROM review " +
+            "LEFT JOIN user ON review.user_id = user.id " +
+            "LEFT JOIN rating ON review.rating_id = rating.id " +
+            "WHERE review.user_id = :userId", nativeQuery = true)
+    List<ReviewResponse> getReviewResponseByUserId(@Param("userId") Long userId);
+
 }
