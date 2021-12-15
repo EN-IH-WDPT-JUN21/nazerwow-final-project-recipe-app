@@ -7,10 +7,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="api-gateway" />
         <module name="rating-service" />
-        <module name="recipe-service" />
         <module name="favourites-service" />
+        <module name="review-service" />
+        <module name="api-gateway" />
+        <module name="recipe-service" />
         <module name="user-service" />
         <module name="discovery-service" />
       </profile>
@@ -22,6 +23,7 @@
       <module name="favourites-service" target="17" />
       <module name="rating-service" target="17" />
       <module name="recipe-service" target="17" />
+      <module name="review-service" target="17" />
       <module name="user-service" target="17" />
     </bytecodeTargetLevel>
   </component>
@@ -33,6 +35,7 @@
       <module name="favourites-service" options="-parameters" />
       <module name="rating-service" options="-parameters" />
       <module name="recipe-service" options="-parameters" />
+      <module name="review-service" options="-parameters" />
       <module name="user-service" options="-parameters" />
     </option>
   </component>
