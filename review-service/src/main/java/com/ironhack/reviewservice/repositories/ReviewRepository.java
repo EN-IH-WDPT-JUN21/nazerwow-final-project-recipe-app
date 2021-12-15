@@ -2,6 +2,7 @@ package com.ironhack.reviewservice.repositories;
 
 import com.ironhack.reviewservice.dao.Review;
 import com.ironhack.reviewservice.dto.ReviewResponse;
+import com.ironhack.reviewservice.dto.ReviewResponseDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

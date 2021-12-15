@@ -38,6 +38,8 @@ import { StarRatingComponent } from './components/rating/star-rating/star-rating
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { RecipeAccordionComponent } from './components/recipe/recipe-accordion/recipe-accordion.component';
 import { RatingCarouselGenericComponent } from './components/home-page/rating-carousel-generic/rating-carousel-generic.component';
+import { ReviewListComponent } from './components/review/review-list/review-list.component';
+import { ReviewListItemComponent } from './components/review/review-list-item/review-list-item.component';
 
 
 
@@ -68,7 +70,9 @@ import { RatingCarouselGenericComponent } from './components/home-page/rating-ca
     FavouritesToggleComponent,
     StarRatingComponent,
     RecipeAccordionComponent,
-    RatingCarouselGenericComponent
+    RatingCarouselGenericComponent,
+    ReviewListComponent,
+    ReviewListItemComponent,
   ],
   imports: [
     BrowserModule,

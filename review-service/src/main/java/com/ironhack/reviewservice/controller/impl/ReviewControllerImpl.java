@@ -29,7 +29,7 @@ public class ReviewControllerImpl implements ReviewController {
     }
 
     @Override
-    @GetMapping("/user/{userid}")
+    @GetMapping("/user/{userId}")
     @ResponseStatus(HttpStatus.OK)
     public List<ReviewResponse> getByUserId(@PathVariable(name = "userId") Long userId){
         return reviewService.getByUserId(userId);
@@ -39,9 +39,8 @@ public class ReviewControllerImpl implements ReviewController {
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Review getById(@PathVariable(name = "id") Long id){
-        return reviewService.getByid(id);
+        return reviewService.getById(id);
     }
-
 
 
 }

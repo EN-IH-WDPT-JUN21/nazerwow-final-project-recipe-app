@@ -11,5 +11,6 @@ public interface ReviewService {
 
     List<ReviewResponse> getByUserId(Long userId);
 
-    Review getByid(Long id);
+    Review getById(Long id);
+
 }

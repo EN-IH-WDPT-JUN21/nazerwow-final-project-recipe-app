@@ -62,12 +62,12 @@ class ReviewServiceImplTest {
 
     @Test
     void getByid() {
-        Review reviewReturned = reviewService.getByid(review1.getId());
+        Review reviewReturned = reviewService.getById(review1.getId());
         assertEquals(review1.getContent(), reviewReturned.getContent());
     }
 
     @Test
     void getByid_Throws() {
-        assertThrows(ResponseStatusException.class, () -> reviewService.getByid(review1.getId() + 65L));
+        assertThrows(ResponseStatusException.class, () -> reviewService.getById(review1.getId() + 65L));
     }
 }
