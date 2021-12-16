@@ -5,11 +5,19 @@ export interface ReviewDTO {
     recipeId: number;
     userId: number;
     ratingId:number;
+    createdDate?: Date;
+    editedDate?: Date;
 }
 
 export interface ReviewResponse {
+    id:number;
     title:string;
     content:string;
+    email: string;
     name: string;
-    rating: number
+    userId: number;
+    createdDate: Date;
+    editedDate: Date;
+    rating: number;
+    ratingId: number;
 }

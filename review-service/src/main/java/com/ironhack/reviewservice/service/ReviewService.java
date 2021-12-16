@@ -19,4 +19,6 @@ public interface ReviewService {
     Review addReview(ReviewDTO reviewDTO);
 
     void deleteReview(Long id);
+
+    boolean isPreviouslyReviewed(Long userId, Long recipeId);
 }

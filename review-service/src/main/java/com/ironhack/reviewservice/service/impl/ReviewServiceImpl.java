@@ -61,6 +61,12 @@ public class ReviewServiceImpl implements ReviewService {
         reviewRepository.delete(getById(id));
     }
 
+    @Override
+    public boolean isPreviouslyReviewed(Long userId, Long recipeId) {
+        Optional<Review> optionalReview = reviewRepository.findByUserIdAndRecipeId(userId, recipeId);
+        return optionalReview.isPresent();
+    }
+
 
     private Review createReviewFromDTO(ReviewDTO reviewDTO) {
         return new Review(

@@ -9,8 +9,10 @@ public interface ReviewResponse {
     String getContent();
     String getEmail();
     String getName();
+    Long getUserId();
     LocalDate getCreatedDate();
     LocalDate getEditedDate();
     double getRating();
+    Long getRatingId();
 
 }

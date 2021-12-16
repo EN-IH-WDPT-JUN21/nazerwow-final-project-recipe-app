@@ -40,6 +40,8 @@ import { RecipeAccordionComponent } from './components/recipe/recipe-accordion/r
 import { RatingCarouselGenericComponent } from './components/home-page/rating-carousel-generic/rating-carousel-generic.component';
 import { ReviewListComponent } from './components/review/review-list/review-list.component';
 import { ReviewListItemComponent } from './components/review/review-list-item/review-list-item.component';
+import { ReviewFormComponent } from './components/review/review-form/review-form.component';
+import { ConfirmComponent } from './components/dialogs/confirm/confirm.component';
 
 
 
@@ -73,6 +75,8 @@ import { ReviewListItemComponent } from './components/review/review-list-item/re
     RatingCarouselGenericComponent,
     ReviewListComponent,
     ReviewListItemComponent,
+    ReviewFormComponent,
+    ConfirmComponent,
   ],
   imports: [
     BrowserModule,

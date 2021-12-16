@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
 public interface ReviewController {
 
     @GetMapping("/recipe/{recipeId}")
@@ -34,4 +33,9 @@ public interface ReviewController {
     @DeleteMapping("/delete/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     void deleteReview(@PathVariable(name="id") Long id);
+
+    @GetMapping("/reviewed/{userId}/{recipeId}")
+    @ResponseStatus(HttpStatus.OK)
+    boolean previouslyReviewed(@PathVariable(name="userId") Long userId,
+                               @PathVariable(name="recipeId") Long recipeId);
 }

@@ -7,12 +7,11 @@ import com.ironhack.reviewservice.dto.ReviewResponse;
 import com.ironhack.reviewservice.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/api/v1/reviews")
 public class ReviewControllerImpl implements ReviewController {
 
@@ -59,6 +58,11 @@ public class ReviewControllerImpl implements ReviewController {
     @ResponseStatus(HttpStatus.ACCEPTED)
     public void deleteReview(Long id) {
         reviewService.deleteReview(id);
+    }
+
+    @Override
+    public boolean previouslyReviewed(Long userId, Long recipeId) {
+        return reviewService.isPreviouslyReviewed(userId,recipeId);
     }
 
 

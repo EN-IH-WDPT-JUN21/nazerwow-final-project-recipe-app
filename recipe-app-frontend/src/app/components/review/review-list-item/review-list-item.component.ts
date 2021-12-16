@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { ConfirmComponent } from './../../dialogs/confirm/confirm.component';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ReviewService } from './../../../services/review.service';
+import { RecipeDTO } from 'src/app/models/recipe.model';
+import { ReviewResponse } from './../../../models/review-model';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-review-list-item',
@@ -7,9 +13,57 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReviewListItemComponent implements OnInit {
 
-  constructor() { }
+  @Input()
+  review!:ReviewResponse
+
+  @Input()
+  loggedInEmail: string | undefined;
+
+  @Input()
+  recipe!:RecipeDTO;
+
+  ownReview: boolean = false;
+  editing: boolean = false;
+  confirmed: string = "no";
+
+  constructor(private reviewService:ReviewService, 
+    private snackBar: MatSnackBar, 
+    private dialog: MatDialog) { }
 
   ngOnInit(): void {
+    this.isOwnReview();
   }
 
+  isOwnReview(): void {
+    if(this.loggedInEmail?.trim().toLowerCase() == this.review.email.trim().toLowerCase()){
+      this.ownReview = true;
+    }
+  }
+
+  loadForm(): void {
+    this.editing = true;
+  }
+
+  delete(): void{
+    if(this.confirmed == "yes"){
+    this.reviewService.deleteReview(this.review.id).subscribe(result => {
+      this.snackBar.open("Review Deleted Successfully", "close")
+      window.location.reload();
+    }, 
+    error => {
+      this.snackBar.open("Error: Please try again", "close")
+    })
+  } else {
+
+  }
+}
+
+  confirm(): void {
+    const dialogRef = this.dialog.open(ConfirmComponent, {
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.confirmed = result;
+      this.delete();
+    });
+  }
 }

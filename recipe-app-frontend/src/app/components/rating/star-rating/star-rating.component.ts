@@ -52,6 +52,8 @@ export class StarRatingComponent implements OnInit {
           userId: this.loggedInUser.id
         }
         this.ratingService.rateRecipe(ratingDTO).subscribe(result => {
+          ratingDTO = result;
+          this.ratingOutput.emit(ratingDTO.id);
         })
     }
   }

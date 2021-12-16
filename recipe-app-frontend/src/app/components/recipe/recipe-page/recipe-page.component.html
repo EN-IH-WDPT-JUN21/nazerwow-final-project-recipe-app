@@ -4,16 +4,19 @@
             <button mat-raised-button color="primary" (click)="back()">Back</button>
         </div>
         <div *ngIf="userVerified" class="edit">
-            <button ml-auto  mat-raised-button color="primary" type="submit" (click)="loadAddForm()">Edit</button>
+            <button ml-auto  mat-raised-button color="primary" type="submit" (click)="loadAddForm()">Edit Recipe</button>
+            <button mat-raised-button color="warn" (click)="confirm()">Delete Recipe</button>
         </div>
     </div>
     <div class = "title-card">
         <app-recipe-card [recipe]="recipeDTO" [user]="user"></app-recipe-card>
     </div>
-    <div class = instructions-card>
+    <div class = "instructions-card">
         <app-recipe-instructions [recipe]="recipeDTO"></app-recipe-instructions>
     </div>
     <div *ngIf="userVerified" class="d-flex justify-content-end">
-        <button mat-raised-button color="warn" (click)="delete()">Delete</button>
+    </div>
+    <div class="reviews">
+        <app-review-list [recipe]="recipeDTO" [loggedInEmail]="loggedInEmail" [user]="user"></app-review-list>
     </div>
 </div>

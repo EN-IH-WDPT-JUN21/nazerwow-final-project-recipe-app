@@ -28,6 +28,7 @@ public class SecurityConfig {
                 .pathMatchers(HttpMethod.GET, "/api/v1/cuisines").permitAll()
                 .pathMatchers(HttpMethod.GET, "/api/v1/diets").permitAll()
                 .pathMatchers(HttpMethod.GET, "/api/v1/measurements").permitAll()
+                .pathMatchers(HttpMethod.GET, "/api/v1/reviews/**").permitAll()
                 .anyExchange().authenticated()
                 .and()
                 .oauth2Login()
