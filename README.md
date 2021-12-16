@@ -34,6 +34,7 @@ Our microservices include:
 - Favourites-Service
 - Ratings-Service
 - User-Service
+- Review-Service
 
 ## Getting started
 
