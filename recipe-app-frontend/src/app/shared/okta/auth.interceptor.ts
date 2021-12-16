@@ -25,7 +25,10 @@ export class AuthInterceptor implements HttpInterceptor {
 'http://localhost:8080/api/v1/users/edit',
 'http://localhost:8080/api/v1/recipes/add',
 'http://localhost:8080/api/v1/recipes/edit',
-'http://localhost:8080/api/v1/recipes/delete'
+'http://localhost:8080/api/v1/recipes/delete',
+'http://localhost:8080/api/v1/reviews/add',
+'http://localhost:8080/api/v1/reviews/edit',
+'http://localhost:8080/api/v1/reviews/delete'
 ];
     if (allowedOrigins.some(url => request.urlWithParams.includes(url))) {
       const accessToken = this.oktaAuth.getAccessToken();

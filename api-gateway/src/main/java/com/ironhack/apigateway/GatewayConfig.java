@@ -34,6 +34,9 @@ public class GatewayConfig {
                 .route(r -> r.path("/api/v1/users/**")
                         .filters(f -> f.filter(filterFactory.apply()))
                         .uri("lb://USER-SERVICE"))
+                .route(r -> r.path("/api/v1/reviews/**")
+                        .filters(f -> f.filter(filterFactory.apply()))
+                        .uri("lb://REVIEW-SERVICE"))
                 .build();
     }
 }

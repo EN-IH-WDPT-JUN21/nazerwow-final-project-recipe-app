@@ -33,7 +33,7 @@
         <p>
         <mat-form-field appearance="fill">
             <mat-label>bio</mat-label>
-            <textarea type="text" matInput formControlName="bio" placeholder="bio..."></textarea>
+            <textarea rows="5" type="text" matInput formControlName="bio" placeholder="bio..."></textarea>
             <mat-error *ngIf="bio.invalid && bio.touched">
                 Please enter a valid bio
             </mat-error>
