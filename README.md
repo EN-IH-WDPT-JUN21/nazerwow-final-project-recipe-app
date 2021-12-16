@@ -142,6 +142,18 @@ Generates, stores and updates SalesRep objects
 | /api/v1/favourites/remove | `PUT` | Remove From Favourites | `favouriteDTO=[favouriteDTO]`
 | /api/v1/favourites/top10 | `PUT` | Returns top 10 most favourited RecipeDTO | None
 
+### review-service
+Generates, stores and updates SalesRep objects
+
+| Endpoint | Method | Description | Path Params
+| :--- | :--- | :--- | :--- 
+| /api/v1/reviews/recipe/{recipeId} | `GET` | Get ReviewResponses by recipeId | `recipeId=[Long]`
+| /api/v1/reviews/user/{userId} | `GET` | Get ReviewResponses by userId | `userId=[Long]`
+| /api/v1/reviews/{id} | `GET` | Get Review by Id | `id=[Long]`
+| /api/v1/reviews/add | `POST` | Add Review | `reviewDTO=[ReviewDTO]`
+| /api/v1/reviews/edit | `PUT` | Edit Review | `reviewDTO=[ReviewDTO]`
+| /api/v1/reviews/delete/{id} | `PUT` | Delete Review | `id=[Long]`
+| /api/v1/reviews/reviewed/{userId}/{recipeId} | `GET` | Boolean returned for previously reviewed | `userId=[Long]` `recipeId=[Long]`
 
 
 
