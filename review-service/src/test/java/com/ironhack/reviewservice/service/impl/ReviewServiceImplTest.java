@@ -1,6 +1,7 @@
 package com.ironhack.reviewservice.service.impl;
 
 import com.ironhack.reviewservice.dao.Review;
+import com.ironhack.reviewservice.dto.ReviewDTO;
 import com.ironhack.reviewservice.dto.ReviewResponse;
 import com.ironhack.reviewservice.repositories.ReviewRepository;
 import com.ironhack.reviewservice.service.ReviewService;
@@ -69,5 +70,35 @@ class ReviewServiceImplTest {
     @Test
     void getByid_Throws() {
         assertThrows(ResponseStatusException.class, () -> reviewService.getById(review1.getId() + 65L));
+    }
+
+    @Test
+    void editReview() {
+        ReviewDTO reviewDTO = new ReviewDTO(review1.getId(), "NewTitle", "NewContent",
+                review1.getRecipeId(), review1.getUserId(), review1.getRatingId());
+        int repoSizeBefore = reviewRepository.findAll().size();
+        Review review = reviewService.editReview(reviewDTO);
+        int repoSizeAfter = reviewRepository.findAll().size();
+        assertEquals(repoSizeBefore, repoSizeAfter);
+        assertEquals(reviewDTO.getTitle(), review.getTitle());
+    }
+
+    @Test
+    void addReview() {
+        ReviewDTO reviewDTO = new ReviewDTO( "NewTitle", "NewContent",
+                10L, 10L, 10L);
+        int repoSizeBefore = reviewRepository.findAll().size();
+        Review review = reviewService.addReview(reviewDTO);
+        int repoSizeAfter = reviewRepository.findAll().size();
+        assertEquals(repoSizeBefore + 1, repoSizeAfter);
+        assertEquals(reviewDTO.getTitle(), review.getTitle());
+    }
+
+    @Test
+    void deleteReview() {
+        int repoSizeBefore = reviewRepository.findAll().size();
+        reviewService.deleteReview(review1.getId());
+        int repoSizeAfter = reviewRepository.findAll().size();
+        assertEquals(repoSizeBefore - 1, repoSizeAfter);
     }
 }

@@ -2,7 +2,6 @@ package com.ironhack.reviewservice.repositories;
 
 import com.ironhack.reviewservice.dao.Review;
 import com.ironhack.reviewservice.dto.ReviewResponse;
-import com.ironhack.reviewservice.dto.ReviewResponseDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -18,7 +17,7 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
 
 
     @Query(value = "SELECT " +
-            " review.title, review.content, user.name, rating.rating " +
+            " review.id, review.title, review.content, review.created_date, review.edited_date, user.email, user.name, rating.rating " +
             "FROM review " +
             "LEFT JOIN user ON review.user_id = user.id " +
             "LEFT JOIN rating ON review.rating_id = rating.id " +
@@ -26,7 +25,7 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
     List<ReviewResponse> getReviewResponseByRecipeId(@Param("recipeId") Long recipeId);
 
     @Query(value = "SELECT " +
-            " review.title, review.content, user.name, rating.rating " +
+            "review.id, review.title, review.content, review.created_date, review.edited_date, user.name, user.email, rating.rating " +
             "FROM review " +
             "LEFT JOIN user ON review.user_id = user.id " +
             "LEFT JOIN rating ON review.rating_id = rating.id " +
