@@ -90,7 +90,7 @@
                 <div *ngFor="let _ of method.controls; index as i">
                     <mat-form-field appearance="fill">
                         <mat-label>Step {{i + 1}}</mat-label>
-                        <textarea matInput [formControlName]="i" placeholder="step"></textarea>
+                        <textarea matInput rows="5" [formControlName]="i" placeholder="step"></textarea>
                         <mat-error *ngIf="method.invalid && method.touched">
                             Please enter at least 1 valid instruction
                         </mat-error>
