@@ -71,8 +71,12 @@ class RatingServiceImplTest {
 
     @Test
     void getAverageRatingForRecipe() {
-        var averageRating = ratingService.getAverageRatingForRecipe(rating3.getRecipeId());
-        assertEquals(3, averageRating);
+        ratingRepository.deleteAll();
+        rating3 = new Rating(2, 2L, 1L);
+        rating4 = new Rating(4, 2L, 3L);
+        ratingRepository.saveAll(List.of(rating3, rating4));
+        var averageRating = ratingService.getAverageRatingForRecipe(2L);
+        assertEquals((2+4)/2, averageRating);
     }
 
     @Test

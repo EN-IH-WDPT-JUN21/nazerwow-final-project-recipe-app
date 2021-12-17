@@ -70,7 +70,6 @@ class ReviewControllerImplTest {
         assertFalse(result.getResponse().getContentAsString().contains(review5.getTitle()));
         assertFalse(result.getResponse().getContentAsString().contains(review4.getTitle()));
         assertFalse(result.getResponse().getContentAsString().contains(review3.getTitle()));
-        assertEquals("Hello", result.getResponse().getContentAsString());
     }
 
     @Test
