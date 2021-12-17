@@ -51,7 +51,7 @@ https://github.com/EN-IH-WDPT-JUN21/nazerwow-final-project-recipe-app.git
 ```
 Or use the below commands to Set up database and the same login details as us to save changing this in all microservices 
 
-CREATE DATABASE pokeapp;
+CREATE DATABASE recipeapp;
 CREATE USER 'ironhack-user1'@'localhost' IDENTIFIED BY 'ironhack-user1';
 GRANT ALL PRIVILEGES ON *.* TO 'ironhack-user1'@'localhost';
 FLUSH PRIVILEGES;
