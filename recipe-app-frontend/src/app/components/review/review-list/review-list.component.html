@@ -13,7 +13,7 @@
     <p class="d-flex justify-content-center">
         <pagination-controls class="my-pagination" (pageChange)="handlePageChange($event)"></pagination-controls>
     </p>
-<div *ngIf="!previouslyReviewed">
+<div *ngIf="!previouslyReviewed && loggedInEmail != null">
     <app-review-form [recipe]="recipe"></app-review-form>
 </div>
 </mat-card>
